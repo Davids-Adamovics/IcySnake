@@ -21,7 +21,7 @@ public class register extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     	Scene myScene = FXMLLoader.load(getClass().getResource("primary.fxml"));
-        primaryStage.setTitle("SnakeGame");
+        primaryStage.setTitle("IcySnake");
         primaryStage.setScene(myScene);
         primaryStage.show();
 
