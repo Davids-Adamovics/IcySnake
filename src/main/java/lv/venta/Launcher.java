@@ -22,7 +22,7 @@ public class Launcher extends Application {
             register1.start(primaryStage);
 
             // prieks debug, ja nu gadijuma ir kluda, tad console to pazinos
-        } catch (Exception e) {
+        } catch (Exception e) { // new updae
             e.printStackTrace();
         }
     }

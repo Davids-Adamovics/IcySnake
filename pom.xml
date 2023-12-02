@@ -13,17 +13,17 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17</version> <!-- Update to the latest version of JavaFX -->
+            <version>21.0.1</version> <!-- Update to the latest version of JavaFX -->
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17</version> <!-- Update to the latest version of JavaFX -->
+            <version>21.0.1</version> <!-- Update to the latest version of JavaFX -->
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>17</version> <!-- Update to the latest version of JavaFX -->
+            <version>21.0.1</version> <!-- Update to the latest version of JavaFX -->
         </dependency>
     </dependencies>
     <build>
