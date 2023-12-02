@@ -22,7 +22,7 @@ public class backgroundMusic {
         Media sound = new Media(getClass().getResource("/" + randomMusicFile).toString());
         mediaPlayer = new MediaPlayer(sound);
         
-        
+        // asdadas
 
         // Set the volume
         mediaPlayer.setVolume(volume);

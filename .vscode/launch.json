@@ -10,7 +10,7 @@
             "request": "launch",
             "mainClass": "lv.venta/lv.venta.Launcher",
             "projectName": "icysnakee",
-            "vmArgs": "--module-path=C:/Users/dadam/Desktop/javafx-sdk-21.0.1/lib --add-modules=javafx.media,javafx.controls"
+            "vmArgs": "--module-path=C:/Users/dadam/Desktop/javafx-sdk-21.0.1/lib --add-modules=javafx.controls"
         }
     ]
 }
