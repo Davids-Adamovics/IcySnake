@@ -1,0 +1,16 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "lv.venta/lv.venta.Launcher",
+            "projectName": "icysnakee",
+            "vmArgs": "--module-path=C:/Users/dadam/Desktop/javafx-sdk-21.0.1/lib --add-modules=javafx.media,javafx.controls"
+        }
+    ]
+}
