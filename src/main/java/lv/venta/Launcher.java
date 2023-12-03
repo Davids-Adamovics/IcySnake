@@ -17,9 +17,9 @@ public class Launcher extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             // izveido jaunu register klasi
-            register register1 = new register();
+            startmenu startmenu1 = new startmenu();
             // palaiz izveidoto klasi
-            register1.start(primaryStage);
+            startmenu1.start(primaryStage);
 
             // prieks debug, ja nu gadijuma ir kluda, tad console to pazinos
         } catch (Exception e) { // new updae
