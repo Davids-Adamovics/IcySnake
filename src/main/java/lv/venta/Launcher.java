@@ -27,4 +27,3 @@ public class Launcher extends Application {
         }
     }
 }
-// comment

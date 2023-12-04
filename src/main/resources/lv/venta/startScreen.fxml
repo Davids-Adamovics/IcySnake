@@ -10,13 +10,12 @@
     <AnchorPane prefHeight="486.0" prefWidth="908.0">
       <children>
          <ImageView fitHeight="523.0" fitWidth="959.0" layoutX="-6.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
-    <image>
-        <Image url="@background2.gif" />
-    </image>
-</ImageView>
-
-         <Button fx:id="startButton" layoutX="363.0" layoutY="199.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" style="-fx-background-color: #FFFFFF; -fx-font: 20px &quot;Serif&quot;; -fx-text-fill: #8B4513;" styleClass="Button" text="START" />
-         <Button fx:id="optionsButton" layoutX="416.0" layoutY="279.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="29.0" prefWidth="93.0" style="-fx-background-color: #FFFFFF; -fx-font: 12px &quot;Serif&quot;;" styleClass="Button" text="OPTIONS" />
-         <Button fx:id="ExitButton" layoutX="416.0" layoutY="319.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="29.0" prefWidth="93.0" style="-fx-background-color: #FFFFFF; -fx-font: 12px &quot;Serif&quot;;" styleClass="Button" text="EXIT" />
+            <image>
+               <Image url="@background2.gif" />
+            </image>
+         </ImageView>
+         <Button fx:id="startButton" layoutX="363.0" layoutY="199.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" styleClass="Button" stylesheets="@application.css" text="START" />
+         <Button fx:id="optionsButton" layoutX="385.0" layoutY="282.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="OPTIONS" />
+         <Button fx:id="ExitButton" layoutX="384.0" layoutY="334.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="EXIT" />
       </children></AnchorPane>
 </Scene>

@@ -1,14 +1,14 @@
-.button {
+.Button {
     -fx-font: 22px "Serif";
     -fx-padding: 10;
-    -fx-background-color: #FFFFFF;
-    -fx-text-fill: #8B4513;
+    -fx-background-color: #8b8b8b;
+    -fx-text-fill: #ffffff;
 }
 
-.button:hover {
-    -fx-background-color: #3f3e3e; /* Darker color for hover effect */
+.Button:hover {
+    -fx-background-color: #5c5c5c; /* Darker color for hover effect */
 }
 
-.button:pressed {
-    -fx-background-color: #2c2c2c; /* Even darker color for pressed effect */
+.Button:pressed {
+    -fx-background-color: #4c4c4c; /* Even darker color for pressed effect */
 }
