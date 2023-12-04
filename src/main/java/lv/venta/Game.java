@@ -38,6 +38,9 @@ public class Game extends Application {
     static Random rand = new Random();
     static boolean gameStarted = false;
     static Image abols;
+    static Image banans;
+    static Image vinogas;
+    static Image zemene;
     static Image backgroundImage;
     static Image iconImage;
     static boolean gamePaused = false;
@@ -51,6 +54,9 @@ public class Game extends Application {
     public void start(Stage primaryStage) {
         try {
             abols = new Image(getClass().getResource("apple.png").toExternalForm());
+            banans = new Image(getClass().getResource("banana.png").toExternalForm());
+            vinogas = new Image(getClass().getResource("grapes.png").toExternalForm());
+            zemene = new Image(getClass().getResource("strawberry.png").toExternalForm());
             backgroundImage = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
 
