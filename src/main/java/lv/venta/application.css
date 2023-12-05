@@ -12,3 +12,11 @@
 .Button:pressed {
     -fx-background-color: #4c4c4c; /* Even darker color for pressed effect */
 }
+
+.ButtonSave {
+    -fx-font: 22px "Serif";
+    -fx-padding: 10;
+    -fx-background-color: #8b8b8b;
+    -fx-text-fill: #ffffff;
+    
+}

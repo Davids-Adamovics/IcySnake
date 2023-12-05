@@ -11,11 +11,11 @@
       <children>
          <ImageView fitHeight="523.0" fitWidth="959.0" layoutX="-6.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@snakebackground1.gif" />
+               <Image url="@background2.gif" />
             </image>
          </ImageView>
-         <Button fx:id="startButton" layoutX="149.0" layoutY="218.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" styleClass="Button" stylesheets="@application.css" text="START" />
-         <Button fx:id="optionsButton" layoutX="171.0" layoutY="292.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="OPTIONS" />
-         <Button fx:id="ExitButton" layoutX="171.0" layoutY="350.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="EXIT" />
+         <Button fx:id="startButton" layoutX="363.0" layoutY="199.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" styleClass="Button" stylesheets="@application.css" text="START" />
+         <Button fx:id="optionsButton" layoutX="385.0" layoutY="282.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="OPTIONS" />
+         <Button fx:id="ExitButton" layoutX="384.0" layoutY="334.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="EXIT" />
       </children></AnchorPane>
 </Scene>
