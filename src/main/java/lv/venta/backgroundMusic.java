@@ -10,7 +10,7 @@ public class backgroundMusic {
 
     private MediaPlayer mediaPlayer;
     private String[] musicFilePaths;
-    private double volume = 0.5; // Default volume value
+    private double volume = 0.5; // skaļums
 
     public backgroundMusic(String[] musicFilePaths) {
         this.musicFilePaths = musicFilePaths;
@@ -24,8 +24,8 @@ public class backgroundMusic {
         
 
 
-        // Set the volume
-        mediaPlayer.setVolume(volume);
+
+        //mediaPlayer.setVolume(volume);
 
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
@@ -37,16 +37,18 @@ public class backgroundMusic {
         return musicFilePaths[randomIndex];
     }
 
-    // New method to stop the music
+    // apstādina skaņu
     public void stopMusic() {
         mediaPlayer.stop();
     }
 
-    // New method to adjust the volume
+    // skaņas regulētājs
+    /* 
     public void setVolume(double volume) {
         this.volume = volume;
         if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume);
         }
     }
+    */
 }

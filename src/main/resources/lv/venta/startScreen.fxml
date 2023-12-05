@@ -9,13 +9,18 @@
 <Scene xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lv.venta.SecondaryController">
     <AnchorPane prefHeight="486.0" prefWidth="908.0">
       <children>
-         <ImageView fitHeight="523.0" fitWidth="959.0" layoutX="-6.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="523.0" fitWidth="914.0" layoutX="-6.0" layoutY="-37.0" pickOnBounds="true">
             <image>
-               <Image url="@background2.gif" />
+               <Image url="@background2.png" />
             </image>
          </ImageView>
-         <Button fx:id="startButton" layoutX="363.0" layoutY="199.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" styleClass="Button" stylesheets="@application.css" text="START" />
-         <Button fx:id="optionsButton" layoutX="385.0" layoutY="282.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="OPTIONS" />
-         <Button fx:id="ExitButton" layoutX="384.0" layoutY="334.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="EXIT" />
+         <Button fx:id="startButton" layoutX="353.0" layoutY="218.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" styleClass="Button" stylesheets="@application.css" text="START" />
+         <Button fx:id="optionsButton" layoutX="375.0" layoutY="292.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="OPTIONS" />
+         <Button fx:id="ExitButton" layoutX="375.0" layoutY="350.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="EXIT" />
+         <ImageView fitHeight="213.0" fitWidth="675.0" layoutX="149.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@startscreenlogo.png" />
+            </image>
+         </ImageView>
       </children></AnchorPane>
 </Scene>

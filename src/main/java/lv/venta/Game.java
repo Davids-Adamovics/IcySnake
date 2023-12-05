@@ -164,7 +164,7 @@ public class Game extends Application {
             snake.get(i).y = snake.get(i - 1).y;
         }
 
-        // Adjust the movement logic to keep the snake within bounds
+        // Gādā, ka čūska atrodas 
         switch (direction) {
             case up:
                 snake.get(0).y--;
