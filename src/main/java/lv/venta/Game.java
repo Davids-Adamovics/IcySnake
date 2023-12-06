@@ -1,5 +1,6 @@
 package lv.venta;
 
+//importi
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,26 +9,23 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import lv.venta.PrimaryController;
 
 public class Game extends Application {
 
+    //mainīgie
     static int speed = 5;
     static int foodX = 0;
     static int foodY = 0;
@@ -46,13 +44,14 @@ public class Game extends Application {
     static boolean gamePaused = false;
     static Stage pauseStage;
     private static backgroundMusic musicPlayer;
-
-    // Add a boolean to control whether to show instructions
     static boolean showInstructions = true;
+    private static boolean gameOverSoundPlayed = false;
+    private static boolean inGameOverState = false;
 
     
     public void start(Stage primaryStage) {
         try {
+            //mainīgie attēli
             abols = new Image(getClass().getResource("apple.png").toExternalForm());
             banans = new Image(getClass().getResource("banana.png").toExternalForm());
             vinogas = new Image(getClass().getResource("grapes.png").toExternalForm());
@@ -60,8 +59,12 @@ public class Game extends Application {
             backgroundImage = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
 
+            //mainīgie audio faili
+            musicPlayer = new backgroundMusic(new String[]{"game1.wav", "game4.wav"});
+            musicPlayer.BackgroundMusic(new String[]{"game1.wav", "game4.wav"}); // Call the method
             newFood();
 
+            //izveido canvas
             VBox vb = new VBox();
             Canvas canvas = new Canvas(500, 500);
 
@@ -97,10 +100,10 @@ public class Game extends Application {
                 }
             }.start();
 
-
+            //set scene
             Scene scene = new Scene(vb, 500, 500);
             
-
+            // start game ar SPACE
             scene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
                 if (key.getCode() == KeyCode.SPACE) {
                     if (!gameStarted) {
@@ -111,10 +114,10 @@ public class Game extends Application {
                         }
                     }
                 } else if (key.getCode() == KeyCode.ESCAPE) {
-                    // Pause the game when ESC is pressed
+                    // Pause game ar ESC
                     pauseGame(primaryStage);
                 } else {
-                    // WASD
+                    // WASD un bultinas
                     if (gameStarted) {
                         if (key.getCode() == KeyCode.W || key.getCode() == KeyCode.UP) {
                             direction = enumDirections.up;
@@ -129,10 +132,12 @@ public class Game extends Application {
                 }
             });
 
+            // cuskas kermenis
             snake.add(new SnakesBody(10, 10));
             snake.add(new SnakesBody(10, 10));
             snake.add(new SnakesBody(10, 10));
 
+            // scene regigesana
             primaryStage.setScene(scene);
             primaryStage.setTitle("SNAKE GAME");
             primaryStage.getIcons().add(iconImage);
@@ -151,67 +156,81 @@ public class Game extends Application {
 
     public static void tick(GraphicsContext gc) {
         if (gameOver) {
+            inGameOverState = true;
             gc.setFill(Color.RED);
-            gc.setFont(new Font("Old English Text MT", 50));
+            gc.setFont(new Font("Cascadia Mono", 50));
             gc.fillText("GAME OVER", 100, 250);
+            if (gameOverSoundPlayed){
+                backgroundMusic.playGameOverSound();
+                gameOverSoundPlayed = false;
+            }
+            //gameOverSoundPlayed = true;
+
             return;
         }
 
+        //background
         gc.drawImage(backgroundImage, 0, 0, 510, 510);
 
+        // čūskas ķermenis
         for (int i = snake.size() - 1; i >= 1; i--) {
+        // katrai čūskas daļai piešķir iepriekšējās daļas koordinātas
             snake.get(i).x = snake.get(i - 1).x;
             snake.get(i).y = snake.get(i - 1).y;
         }
+
 
         // Gādā, ka čūska atrodas 
         switch (direction) {
             case up:
                 snake.get(0).y--;
                 if (snake.get(0).y < 0) {
-                    snake.get(0).y = 0; // Limit to the top edge
+                    snake.get(0).y = 0; // augša
                 }
                 break;
             case down:
                 snake.get(0).y++;
                 if (snake.get(0).y >= 20) {
-                    snake.get(0).y = 19; // Limit to the bottom edge
+                    snake.get(0).y = 19; // apakša
                 }
                 break;
             case left:
                 snake.get(0).x--;
                 if (snake.get(0).x < 0) {
-                    snake.get(0).x = 0; // Limit to the left edge
+                    snake.get(0).x = 0; // kreisā mala
                 }
                 break;
             case right:
                 snake.get(0).x++;
                 if (snake.get(0).x >= 20) {
-                    snake.get(0).x = 19; // Limit to the right edge
+                    snake.get(0).x = 19; // labā mala
                 }
                 break;
         }
 
+        // ja galva saskaras ar edienu
         if (foodX == snake.get(0).x && foodY == snake.get(0).y) {
             snake.add(new SnakesBody(-1, -1));
             newFood();
         }
 
+        // ja čūska nomirst
         for (int i = 1; i < snake.size(); i++) {
             if (snake.get(0).x == snake.get(i).x && snake.get(0).y == snake.get(i).y) {
                 gameOver = true;
-                playGameOverSound();
+                stopBackgroundMusic();    
+                gameOverSoundPlayed = true;
+                                                                  
             }
         }
 
+        //score
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("", 30));
         gc.fillText("Score: " + (speed - 6), 10, 30);
         
         
-
-        
-
+        //cuskas kermena krasa atkariba no gender
         for (SnakesBody c : snake) {
             if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
                 gc.setFill(Color.LIGHTBLUE);
@@ -228,6 +247,7 @@ public class Game extends Application {
         gc.drawImage(abols, foodX * 25, foodY * 25, 25, 25);
     }
 
+    //pause
     private static void pauseGame(Stage primaryStage) {
         if (pauseStage == null) {
             pauseStage = new Stage();
@@ -239,7 +259,7 @@ public class Game extends Application {
             pauseBox.setPadding(new Insets(20));
             pauseBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
 
-            // Initially, show the first set of buttons
+            // original pogas
             showInitialButtons(pauseBox, primaryStage);
 
             Scene pauseScene = new Scene(pauseBox, 300, 300);
@@ -253,6 +273,7 @@ public class Game extends Application {
         pauseStage.show();
     }
     
+    //parada tikai original pogas
     private static void showInitialButtons(VBox pauseBox, Stage primaryStage) {
     	pauseBox.getChildren().clear();
         pauseBox.getChildren().addAll(
@@ -263,11 +284,16 @@ public class Game extends Application {
         );
     }
 
+    //aptur background music
+    public static void stopBackgroundMusic() {
+        backgroundMusic.stopMusic();
+    }
+
     private static void showNewButtons(VBox pauseBox, Stage primaryStage) {
-        // Clear the existing buttons and show the new set of buttons
+        // izdzes jaunas pogas
         pauseBox.getChildren().clear();
 
-        // Add new buttons
+        // izveido jaunas pogas
         pauseBox.getChildren().addAll(
                 createButton("Back", primaryStage, pauseBox),
                 createButton("NewOption1", primaryStage, pauseBox),
@@ -293,13 +319,13 @@ public class Game extends Application {
                         "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );"
         );
 
-        // Handle button actions based on text
+        // pogas pilda darbibu atkariba no teksta
         button.setOnAction(e -> handleButtonAction(text, primaryStage, pauseBox));
         return button;
     }
     
 
-
+    // pogu nosaukumi un funkciju izsauksana
     private static void handleButtonAction(String action, Stage primaryStage, VBox pauseBox) {
         switch (action) {
             case "Resume":
@@ -310,6 +336,7 @@ public class Game extends Application {
                 resetGame();
                 gamePaused = false;
                 pauseStage.hide();
+                
                 break;
             case "Options":
                 options(pauseBox, primaryStage);
@@ -319,7 +346,7 @@ public class Game extends Application {
                 pauseStage.hide();
                 break;
             case "Back":
-                // Show the initial set of buttons
+                // parada original pogas
                 showInitialButtons(pauseBox, primaryStage);
 
                 break;
@@ -333,23 +360,25 @@ public class Game extends Application {
     }
 
     private static void resetGame() {
-        // Reset game-related variables
+        // reset for new game
         speed = 5;
         gameOver = false;
         snake.clear();
         direction = enumDirections.left;
 
-        // Reset the snake to its initial state
+        // Reset cusku original laukuma
         snake.add(new SnakesBody(10, 10));
         snake.add(new SnakesBody(10, 10));
         snake.add(new SnakesBody(10, 10));
-
-        // Reset other necessary variables or game elements
         newFood();
+        gameOverSoundPlayed = false;
+
+        musicPlayer = new backgroundMusic(new String[]{"game1.wav", "game4.wav"});
+        musicPlayer.BackgroundMusic(new String[]{"game1.wav", "game4.wav"}); // Call the method
     }
     
     private static void options(VBox pauseBox, Stage primaryStage) {
-        // Clear existing buttons and show the new set of buttons
+
         showNewButtons(pauseBox, primaryStage);
     }
 
@@ -367,9 +396,9 @@ public class Game extends Application {
         return;
     }
 
-    private static void playGameOverSound() {
-        musicPlayer = new backgroundMusic(new String[]{"gamrOver.wav"});
-    }
+    //private static void playGameOverSound() {
+       // musicPlayer = new backgroundMusic(new String[]{"gamrOver.wav"});
+   // }
 
     public static void newFood() {
         start: while (true) {
@@ -379,9 +408,11 @@ public class Game extends Application {
             for (SnakesBody c : snake) {
                 if (c.x == foodX && c.y == foodY) {
                     continue start;
+                    
                 }
             }
             speed++;
+            backgroundMusic.playPickupSound();
             break;
         }
     }

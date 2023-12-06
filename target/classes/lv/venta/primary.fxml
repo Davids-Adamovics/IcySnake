@@ -22,7 +22,7 @@
          <TextField fx:id="ageInput" layoutX="387.0" layoutY="279.0" prefHeight="34.0" prefWidth="297.0" promptText="age 9+" />
          <RadioButton fx:id="malePick" layoutX="387.0" layoutY="360.0" mnemonicParsing="false" text="Male" />
          <RadioButton fx:id="femalePick" layoutX="461.0" layoutY="360.0" mnemonicParsing="false" text="Female" />
-         <Button fx:id="buttonSave" layoutX="395.0" layoutY="486.0" mnemonicParsing="false" onAction="#SwitchTogame" prefHeight="46.0" prefWidth="264.0" styleClass="Button" stylesheets="@../Documents/GitHub/IcySnakeee/src/main/java/lv/venta/application.css" text="Save" />
+         <Button fx:id="buttonSave" layoutX="395.0" layoutY="486.0" mnemonicParsing="false" onAction="#SwitchTogame" prefHeight="46.0" prefWidth="264.0" styleClass="Button" stylesheets="@application.css" text="Save" />
          <ImageView fitHeight="601.0" fitWidth="344.0" pickOnBounds="true">
             <image>
                <Image url="@registrationscreen.png" />

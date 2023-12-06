@@ -49,7 +49,6 @@ public class PrimaryController {
 			System.out.println("Player Information:");
 			System.out.println(currentPlayer);
 
-			musicPlayer = new backgroundMusic(new String[]{"game1.wav", "game2.wav", "game3.wav"});
 
 			
 			Game game = new Game();
