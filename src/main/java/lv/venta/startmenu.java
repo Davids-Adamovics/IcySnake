@@ -18,18 +18,14 @@ public class startmenu extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image iconImage = loadImage("logologo.png");
-        if (iconImage == null) {
-            System.err.println("Error loading icon image.");
-        }
+        
+        
 
         try {
             Scene myScene = FXMLLoader.load(getClass().getResource("startScreen.fxml"));
             primaryStage.setTitle("IcySnake");
             primaryStage.setScene(myScene);
-            if (iconImage != null) {
-                primaryStage.getIcons().add(iconImage);
-            }
+           
             primaryStage.show();
         } catch (IOException e) {
             // Handle FXML loading exception
