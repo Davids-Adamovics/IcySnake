@@ -22,13 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 public class Game extends Application {
 
-    //mainīgie
+    // mainīgie
     static int speed = 5;
     static int foodX = 0;
     static int foodY = 0;
+    static int barrierX = 0;
+    static int barrierY = 0;
     private static List<Stage> openStages = new ArrayList<>();
     static List<SnakesBody> snake = new ArrayList<>();
     static enumDirections direction = enumDirections.left;
@@ -39,6 +40,7 @@ public class Game extends Application {
     static Image banans;
     static Image vinogas;
     static Image zemene;
+    static Image barjera;
     static Image backgroundImage;
     static Image iconImage;
     static boolean gamePaused = false;
@@ -47,24 +49,26 @@ public class Game extends Application {
     static boolean showInstructions = true;
     private static boolean gameOverSoundPlayed = false;
     private static boolean inGameOverState = false;
+    private static Image currentFruit;
+    static Image currentBarrier;
 
-    
     public void start(Stage primaryStage) {
         try {
-            //mainīgie attēli
+            // mainīgie attēli
             abols = new Image(getClass().getResource("apple.png").toExternalForm());
             banans = new Image(getClass().getResource("banana.png").toExternalForm());
             vinogas = new Image(getClass().getResource("grapes.png").toExternalForm());
             zemene = new Image(getClass().getResource("strawberry.png").toExternalForm());
-            backgroundImage = new Image(getClass().getResource("background1.png").toExternalForm());
+            barjera = new Image(getClass().getResource("barrier.png").toExternalForm());
+            backgroundImage = new Image(getClass().getResource("background3.gif").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
 
-            //mainīgie audio faili
-            musicPlayer = new backgroundMusic(new String[]{"game1.wav", "game4.wav"});
-            musicPlayer.BackgroundMusic(new String[]{"game1.wav", "game4.wav"}); // Call the method
+            // mainīgie audio faili
+            musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" });
+            musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" }); // Call the method
             newFood();
 
-            //izveido canvas
+            // izveido canvas
             VBox vb = new VBox();
             Canvas canvas = new Canvas(500, 500);
 
@@ -79,7 +83,7 @@ public class Game extends Application {
                         if (showInstructions) {
                             drawInstructions(gc);
                         } else {
-                            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());  // Clear the canvas
+                            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); // Clear the canvas
                             gc.setFill(Color.BLACK);
                             gc.setFont(new Font("", 30));
                             gc.fillText("Press SPACE to Start", 100, 250);
@@ -100,9 +104,9 @@ public class Game extends Application {
                 }
             }.start();
 
-            //set scene
+            // set scene
             Scene scene = new Scene(vb, 500, 500);
-            
+
             // start game ar SPACE
             scene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
                 if (key.getCode() == KeyCode.SPACE) {
@@ -160,27 +164,26 @@ public class Game extends Application {
             gc.setFill(Color.RED);
             gc.setFont(new Font("Cascadia Mono", 50));
             gc.fillText("GAME OVER", 100, 250);
-            if (gameOverSoundPlayed){
+            if (gameOverSoundPlayed) {
                 backgroundMusic.playGameOverSound();
                 gameOverSoundPlayed = false;
             }
-            //gameOverSoundPlayed = true;
+            // gameOverSoundPlayed = true;
 
             return;
         }
 
-        //background
+        // background
         gc.drawImage(backgroundImage, 0, 0, 510, 510);
 
         // čūskas ķermenis
         for (int i = snake.size() - 1; i >= 1; i--) {
-        // katrai čūskas daļai piešķir iepriekšējās daļas koordinātas
+            // katrai čūskas daļai piešķir iepriekšējās daļas koordinātas
             snake.get(i).x = snake.get(i - 1).x;
             snake.get(i).y = snake.get(i - 1).y;
         }
 
-
-        // Gādā, ka čūska atrodas 
+        // Gādā, ka čūska atrodas
         switch (direction) {
             case up:
                 snake.get(0).y--;
@@ -218,19 +221,18 @@ public class Game extends Application {
         for (int i = 1; i < snake.size(); i++) {
             if (snake.get(0).x == snake.get(i).x && snake.get(0).y == snake.get(i).y) {
                 gameOver = true;
-                stopBackgroundMusic();    
+                stopBackgroundMusic();
                 gameOverSoundPlayed = true;
-                                                                  
+
             }
         }
 
-        //score
+        // score
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("", 30));
         gc.fillText("Score: " + (speed - 6), 10, 30);
-        
-        
-        //cuskas kermena krasa atkariba no gender
+
+        // cuskas kermena krasa atkariba no gender
         for (SnakesBody c : snake) {
             if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
                 gc.setFill(Color.LIGHTBLUE);
@@ -244,16 +246,18 @@ public class Game extends Application {
                 gc.fillRect(c.x * 25, c.y * 25, 25 - 2, 25 - 2);
             }
         }
-        Image[] fruits = {abols, banans, vinogas, zemene};
-        Random random = new Random();
+        gc.drawImage(currentFruit, foodX * 25, foodY * 25, 25, 25);
+        gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
 
-        // Generate a random index to select a fruit from the array
-        int randomIndex = random.nextInt(fruits.length);
-
-        gc.drawImage(fruits[randomIndex], foodX * 25, foodY * 25, 25, 25);
+        // Check if the snake head collides with the barrier
+        if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
+            gameOver = true;
+            stopBackgroundMusic();
+            gameOverSoundPlayed = true;
+        }
     }
 
-    //pause
+    // pause
     private static void pauseGame(Stage primaryStage) {
         if (pauseStage == null) {
             pauseStage = new Stage();
@@ -278,19 +282,18 @@ public class Game extends Application {
 
         pauseStage.show();
     }
-    
-    //parada tikai original pogas
+
+    // parada tikai original pogas
     private static void showInitialButtons(VBox pauseBox, Stage primaryStage) {
-    	pauseBox.getChildren().clear();
+        pauseBox.getChildren().clear();
         pauseBox.getChildren().addAll(
                 createButton("Resume", primaryStage, pauseBox),
                 createButton("Restart", primaryStage, pauseBox),
                 createButton("Options", primaryStage, pauseBox),
-                createButton("Quit", primaryStage, pauseBox)
-        );
+                createButton("Quit", primaryStage, pauseBox));
     }
 
-    //aptur background music
+    // aptur background music
     public static void stopBackgroundMusic() {
         backgroundMusic.stopMusic();
     }
@@ -304,10 +307,8 @@ public class Game extends Application {
                 createButton("Back", primaryStage, pauseBox),
                 createButton("NewOption1", primaryStage, pauseBox),
                 createButton("NewOption2", primaryStage, pauseBox),
-                createButton("NewOption3", primaryStage, pauseBox)
-        );
+                createButton("NewOption3", primaryStage, pauseBox));
     }
-
 
     private static Button createButton(String text, Stage primaryStage, VBox pauseBox) {
         Button button = new Button(text);
@@ -322,14 +323,12 @@ public class Game extends Application {
                         "-fx-font-weight: bold; " +
                         "-fx-font-size: 1.5em; " +
                         "-fx-text-fill: white; " +
-                        "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );"
-        );
+                        "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );");
 
         // pogas pilda darbibu atkariba no teksta
         button.setOnAction(e -> handleButtonAction(text, primaryStage, pauseBox));
         return button;
     }
-    
 
     // pogu nosaukumi un funkciju izsauksana
     private static void handleButtonAction(String action, Stage primaryStage, VBox pauseBox) {
@@ -342,7 +341,7 @@ public class Game extends Application {
                 resetGame();
                 gamePaused = false;
                 pauseStage.hide();
-                
+
                 break;
             case "Options":
                 options(pauseBox, primaryStage);
@@ -379,10 +378,10 @@ public class Game extends Application {
         newFood();
         gameOverSoundPlayed = false;
 
-        musicPlayer = new backgroundMusic(new String[]{"game1.wav", "game4.wav"});
-        musicPlayer.BackgroundMusic(new String[]{"game1.wav", "game4.wav"}); // Call the method
+        musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" });
+        musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" }); // Call the method
     }
-    
+
     private static void options(VBox pauseBox, Stage primaryStage) {
 
         showNewButtons(pauseBox, primaryStage);
@@ -392,8 +391,6 @@ public class Game extends Application {
 
     }
 
-    
-    
     private static void drawInstructions(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.setFont(new Font("", 20));
@@ -402,25 +399,46 @@ public class Game extends Application {
         return;
     }
 
-    //private static void playGameOverSound() {
-       // musicPlayer = new backgroundMusic(new String[]{"gamrOver.wav"});
-   // }
+    // private static void playGameOverSound() {
+    // musicPlayer = new backgroundMusic(new String[]{"gamrOver.wav"});
+    // }
 
     public static void newFood() {
         start: while (true) {
             foodX = rand.nextInt(18);
             foodY = rand.nextInt(18);
 
+            barrierX = rand.nextInt(18);
+            barrierY = rand.nextInt(18);
+    
             for (SnakesBody c : snake) {
                 if (c.x == foodX && c.y == foodY) {
                     continue start;
-                    
                 }
             }
+    
+            // Generate a new fruit type
+            currentFruit = generateNewFruit();
+    
+            // Generate a new barrier type
+            currentBarrier = generateNewBarrier();
+    
             speed++;
             backgroundMusic.playPickupSound();
             break;
         }
+    }
+    
+    // Method to generate a new barrier type
+    private static Image generateNewBarrier() {
+        return barjera;
+    }
+    // Method to generate a new fruit type
+    private static Image generateNewFruit() {
+        Image[] fruits = { abols, banans, vinogas, zemene };
+        Random random = new Random();
+        int randomIndex = random.nextInt(fruits.length);
+        return fruits[randomIndex];
     }
 
     public static void main(String[] args) {
