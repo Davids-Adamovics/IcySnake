@@ -244,7 +244,13 @@ public class Game extends Application {
                 gc.fillRect(c.x * 25, c.y * 25, 25 - 2, 25 - 2);
             }
         }
-        gc.drawImage(abols, foodX * 25, foodY * 25, 25, 25);
+        Image[] fruits = {abols, banans, vinogas, zemene};
+        Random random = new Random();
+
+        // Generate a random index to select a fruit from the array
+        int randomIndex = random.nextInt(fruits.length);
+
+        gc.drawImage(fruits[randomIndex], foodX * 25, foodY * 25, 25, 25);
     }
 
     //pause
