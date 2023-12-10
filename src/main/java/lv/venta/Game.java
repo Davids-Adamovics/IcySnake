@@ -51,6 +51,7 @@ public class Game extends Application {
     private static boolean inGameOverState = false;
     private static Image currentFruit;
     static Image currentBarrier;
+    Image headImage = Game.headImage();
 
     public void start(Stage primaryStage) {
         try {
@@ -97,10 +98,11 @@ public class Game extends Application {
                         return;
                     }
 
-                    if (now - lastTick > 1000000000 / speed) {
-                        lastTick = now;
-                        tick(gc);
-                    }
+                    if (now - lastTick > 700000000 / speed) {
+    lastTick = now;
+    tick(gc);
+}
+
                 }
             }.start();
 
@@ -233,19 +235,36 @@ public class Game extends Application {
         gc.fillText("Score: " + (speed - 6), 10, 30);
 
         // cuskas kermena krasa atkariba no gender
-        for (SnakesBody c : snake) {
+        // First, check if it's the head of the snake
+        SnakesBody head = snake.get(0);
+
+        // Use the custom image for the snake's head
+        // cuskas kermena krasa atkariba no gender
+        // First, check if it's the head of the snake
+
+        // Use the custom image for the snake's head
+        gc.drawImage(headImage(), head.x * 25, head.y * 25, 30, 30);
+
+        // Rest of the snake's body
+        for (int i = 1; i < snake.size(); i++) {
+            SnakesBody bodyPart = snake.get(i);
+            double circleRadius = 12.5; // Adjust the radius as needed
+            double circleCenterX = bodyPart.x * 25 + 12.5; // Adjust the center position as needed
+            double circleCenterY = bodyPart.y * 25 + 12.5; // Adjust the center position as needed
+
             if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
                 gc.setFill(Color.LIGHTBLUE);
-                gc.fillRect(c.x * 25, c.y * 25, 25 - 1, 25 - 1);
-                gc.setFill(Color.LIGHTBLUE);
-                gc.fillRect(c.x * 25, c.y * 25, 25 - 2, 25 - 2);
             } else {
                 gc.setFill(Color.PINK);
-                gc.fillRect(c.x * 25, c.y * 25, 25 - 1, 25 - 1);
-                gc.setFill(Color.PINK);
-                gc.fillRect(c.x * 25, c.y * 25, 25 - 2, 25 - 2);
             }
+
+            gc.setStroke(Color.rgb(0, 0, 0, 0.5)); // Adjust the darkness of the stroke
+
+            gc.setLineWidth(1.0); // Adjust the line width as needed
+            gc.fillOval(circleCenterX - circleRadius, circleCenterY - circleRadius, 2 * circleRadius,
+                    2 * circleRadius);
         }
+
         gc.drawImage(currentFruit, foodX * 25, foodY * 25, 25, 25);
         gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
 
@@ -410,35 +429,48 @@ public class Game extends Application {
 
             barrierX = rand.nextInt(18);
             barrierY = rand.nextInt(18);
-    
+
             for (SnakesBody c : snake) {
                 if (c.x == foodX && c.y == foodY) {
                     continue start;
                 }
             }
-    
+
             // Generate a new fruit type
             currentFruit = generateNewFruit();
-    
+
             // Generate a new barrier type
             currentBarrier = generateNewBarrier();
-    
+
             speed++;
             backgroundMusic.playPickupSound();
             break;
         }
     }
-    
+
     // Method to generate a new barrier type
     private static Image generateNewBarrier() {
         return barjera;
     }
+
     // Method to generate a new fruit type
     private static Image generateNewFruit() {
         Image[] fruits = { abols, banans, vinogas, zemene };
         Random random = new Random();
         int randomIndex = random.nextInt(fruits.length);
         return fruits[randomIndex];
+    }
+
+    public static Image headImage() {
+        String headFileName;
+
+        if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
+            headFileName = "head.png"; // Replace with the actual file name for male head
+        } else {
+            headFileName = "head.png"; // Replace with the actual file name for female head
+        }
+
+        return new Image(Game.class.getResource(headFileName).toExternalForm());
     }
 
     public static void main(String[] args) {
