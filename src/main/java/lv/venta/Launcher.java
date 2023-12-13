@@ -3,8 +3,7 @@ package lv.venta;
 //importi
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lv.venta.register;
-
+//aha mans komentars-alekss
 //extends application, lai varetu izmantot javafx
 public class Launcher extends Application {
 
@@ -22,7 +21,7 @@ public class Launcher extends Application {
             startmenu1.start(primaryStage);
 
             // prieks debug, ja nu gadijuma ir kluda, tad console to pazinos
-        } catch (Exception e) { // new updae
+        } catch (Exception e) { // new update
             e.printStackTrace();
         }
     }
