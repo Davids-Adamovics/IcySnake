@@ -57,9 +57,21 @@ public class Game extends Application {
     static Image currentBarrier;
     Image headImage = Game.headImage();
     static int counter = 0;
+    
+    public void restart() {
+        resetGame();
+        gamePaused=false;
+        gameOver=false;
+        gameOverSoundPlayed=false;
+        inGameOverState=false;
+        gameStarted=true;
+        showInstructions=false;
 
+    }
+    
     public void start(Stage primaryStage) {
         try {
+     
             // mainīgie attēli
             abols = new Image(getClass().getResource("apple.png").toExternalForm());
             banans = new Image(getClass().getResource("banana.png").toExternalForm());
@@ -128,7 +140,10 @@ public class Game extends Application {
                 } else if (key.getCode() == KeyCode.ESCAPE) {
                     // Pause game ar ESC
                     pauseGame(primaryStage);
+                }else if (key.getCode()==KeyCode.R) {
+                    resetGame();
                 } else {
+                	
                     // WASD un bultinas
                     if (gameStarted) {
                         if (key.getCode() == KeyCode.W || key.getCode() == KeyCode.UP) {
