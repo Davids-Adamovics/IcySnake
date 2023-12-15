@@ -230,14 +230,11 @@ public class Game extends Application {
             newFood();
             counter += 1;
             Random random = new Random();
-            int x = random.nextInt(1) + 1; // Generate a random integer between 1 and 4 (inclusive)
+            int x = random.nextInt(1) + 1; // 1-4
 
-            // Add the following variables at the beginning of your class
             long slowMotionStartTime = 0;
             boolean isInSlowMotion = false;
 
-
-            // Inside your update logic or wherever appropriate
             if (x == 1 && !isInSlowMotion) {
                 isInSlowMotion = true;
                 speed -= 3;
@@ -246,14 +243,21 @@ public class Game extends Application {
                 gc.setFont(new Font("Cascadia Mono", 50));
                 gc.fillText("slow motion", 100, 250);
                 System.out.println("slow motion");
-            }
 
-            if (isInSlowMotion && System.currentTimeMillis() - slowMotionStartTime > 1000) {
-                System.out.println("test - Current Time: " + System.currentTimeMillis());
-                isInSlowMotion = false;
-                speed += 3; // Restore the original speed
+                for (int i = 1; i <= 5; i++) {
+                    System.out.println(i);
+                    try {
+                        Thread.sleep(1000); // Sleep for 1000 milliseconds (1 second)
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (i == 5) {
+                        System.out.println("test - Current Time: " + System.currentTimeMillis());
+                        isInSlowMotion = false;
+                        speed += 3; // Restore the original speed
+                    }
+                }
             }
-            
 
             if (x == 2) {
                 counter += 5;

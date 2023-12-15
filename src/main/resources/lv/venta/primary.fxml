@@ -20,8 +20,8 @@
          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#40321a73" height="601.0" layoutX="343.0" stroke="TRANSPARENT" strokeType="INSIDE" width="368.0" />
          <TextField fx:id="usernameInput" layoutX="389.0" layoutY="207.0" prefHeight="35.0" prefWidth="294.0" promptText="username" />
          <TextField fx:id="ageInput" layoutX="387.0" layoutY="279.0" prefHeight="34.0" prefWidth="297.0" promptText="age 9+" />
-         <RadioButton fx:id="malePick" layoutX="387.0" layoutY="360.0" mnemonicParsing="false" text="Male" />
-         <RadioButton fx:id="femalePick" layoutX="461.0" layoutY="360.0" mnemonicParsing="false" text="Female" />
+         <RadioButton fx:id="malePick" layoutX="450.0" layoutY="360.0" mnemonicParsing="false" text="Male" />
+         <RadioButton fx:id="femalePick" layoutX="540.0" layoutY="360.0" mnemonicParsing="false" text="Female" />
          <Button fx:id="buttonSave" layoutX="395.0" layoutY="486.0" mnemonicParsing="false" onAction="#SwitchTogame" prefHeight="46.0" prefWidth="264.0" styleClass="Button" stylesheets="@application.css" text="Save" />
          <ImageView fitHeight="601.0" fitWidth="344.0" pickOnBounds="true">
             <image>
