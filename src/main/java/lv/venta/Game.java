@@ -28,6 +28,8 @@ public class Game extends Application {
     static int speed = 5;
     static int foodX = 0;
     static int foodY = 0;
+    static int powerUpX = 0;
+    static int powerUpY = 0;
     static int barrierX = 0;
     static int barrierY = 0;
     private static List<Stage> openStages = new ArrayList<>();
@@ -41,6 +43,7 @@ public class Game extends Application {
     static Image vinogas;
     static Image zemene;
     static Image barjera;
+    static Image powerup;
     static Image backgroundImage;
     static Image iconImage;
     static boolean gamePaused = false;
@@ -50,8 +53,10 @@ public class Game extends Application {
     private static boolean gameOverSoundPlayed = false;
     private static boolean inGameOverState = false;
     private static Image currentFruit;
+    private static Image currentPowerUp;
     static Image currentBarrier;
     Image headImage = Game.headImage();
+    static int counter = 0;
 
     public void start(Stage primaryStage) {
         try {
@@ -63,6 +68,7 @@ public class Game extends Application {
             barjera = new Image(getClass().getResource("barrier.png").toExternalForm());
             backgroundImage = new Image(getClass().getResource("background3.gif").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
+            powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
 
             // mainīgie audio faili
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" });
@@ -71,7 +77,7 @@ public class Game extends Application {
 
             // izveido canvas
             VBox vb = new VBox();
-            Canvas canvas = new Canvas(500, 500);
+            Canvas canvas = new Canvas(650, 650);
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
             vb.getChildren().add(canvas);
@@ -99,15 +105,15 @@ public class Game extends Application {
                     }
 
                     if (now - lastTick > 700000000 / speed) {
-    lastTick = now;
-    tick(gc);
-}
+                        lastTick = now;
+                        tick(gc);
+                    }
 
                 }
             }.start();
 
             // set scene
-            Scene scene = new Scene(vb, 500, 500);
+            Scene scene = new Scene(vb, 650, 650);
 
             // start game ar SPACE
             scene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
@@ -147,10 +153,10 @@ public class Game extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("SNAKE GAME");
             primaryStage.getIcons().add(iconImage);
-            primaryStage.setMinWidth(500);
-            primaryStage.setMaxWidth(500);
-            primaryStage.setMinHeight(500);
-            primaryStage.setMaxHeight(500);
+            primaryStage.setMinWidth(650);
+            primaryStage.setMaxWidth(650);
+            primaryStage.setMinHeight(650);
+            primaryStage.setMaxHeight(650);
             primaryStage.centerOnScreen();
             primaryStage.show();
             openStages.add(primaryStage);
@@ -176,7 +182,7 @@ public class Game extends Application {
         }
 
         // background
-        gc.drawImage(backgroundImage, 0, 0, 510, 510);
+        gc.drawImage(backgroundImage, 0, 0, 650, 650);
 
         // čūskas ķermenis
         for (int i = snake.size() - 1; i >= 1; i--) {
@@ -195,8 +201,8 @@ public class Game extends Application {
                 break;
             case down:
                 snake.get(0).y++;
-                if (snake.get(0).y >= 20) {
-                    snake.get(0).y = 19; // apakša
+                if (snake.get(0).y >= 25) {
+                    snake.get(0).y = 24; // apakša
                 }
                 break;
             case left:
@@ -207,8 +213,8 @@ public class Game extends Application {
                 break;
             case right:
                 snake.get(0).x++;
-                if (snake.get(0).x >= 20) {
-                    snake.get(0).x = 19; // labā mala
+                if (snake.get(0).x >= 25) {
+                    snake.get(0).x = 24; // labā mala
                 }
                 break;
         }
@@ -217,6 +223,46 @@ public class Game extends Application {
         if (foodX == snake.get(0).x && foodY == snake.get(0).y) {
             snake.add(new SnakesBody(-1, -1));
             newFood();
+            counter += 1;
+        }
+        if (powerUpX == snake.get(0).x && powerUpY == snake.get(0).y) {
+            snake.add(new SnakesBody(-1, -1));
+            newFood();
+            counter += 1;
+            Random random = new Random();
+            int x = random.nextInt(1) + 1; // Generate a random integer between 1 and 4 (inclusive)
+
+            // Add the following variables at the beginning of your class
+            long slowMotionStartTime = 0;
+            boolean isInSlowMotion = false;
+
+
+            // Inside your update logic or wherever appropriate
+            if (x == 1 && !isInSlowMotion) {
+                isInSlowMotion = true;
+                speed -= 3;
+                slowMotionStartTime = System.currentTimeMillis();
+                gc.setFill(Color.RED);
+                gc.setFont(new Font("Cascadia Mono", 50));
+                gc.fillText("slow motion", 100, 250);
+                System.out.println("slow motion");
+            }
+
+            if (isInSlowMotion && System.currentTimeMillis() - slowMotionStartTime > 1000) {
+                System.out.println("test - Current Time: " + System.currentTimeMillis());
+                isInSlowMotion = false;
+                speed += 3; // Restore the original speed
+            }
+            
+
+            if (x == 2) {
+                counter += 5;
+                speed++;
+                gc.setFill(Color.RED);
+                gc.setFont(new Font("Cascadia Mono", 50));
+                gc.fillText("+5 points", 100, 250);
+                System.out.println("+5 points");
+            }
         }
 
         // ja čūska nomirst
@@ -232,17 +278,12 @@ public class Game extends Application {
         // score
         gc.setFill(Color.WHITE);
         gc.setFont(new Font("", 30));
-        gc.fillText("Score: " + (speed - 6), 10, 30);
+        gc.fillText("Score: " + counter, 10, 30);
 
         // cuskas kermena krasa atkariba no gender
         // First, check if it's the head of the snake
         SnakesBody head = snake.get(0);
 
-        // Use the custom image for the snake's head
-        // cuskas kermena krasa atkariba no gender
-        // First, check if it's the head of the snake
-
-        // Use the custom image for the snake's head
         gc.drawImage(headImage(), head.x * 25, head.y * 25, 30, 30);
 
         // Rest of the snake's body
@@ -264,7 +305,7 @@ public class Game extends Application {
             gc.fillOval(circleCenterX - circleRadius, circleCenterY - circleRadius, 2 * circleRadius,
                     2 * circleRadius);
         }
-
+        gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 25, 25);
         gc.drawImage(currentFruit, foodX * 25, foodY * 25, 25, 25);
         gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
 
@@ -394,7 +435,8 @@ public class Game extends Application {
         snake.add(new SnakesBody(10, 10));
         snake.add(new SnakesBody(10, 10));
         snake.add(new SnakesBody(10, 10));
-        newFood();
+        counter -= (counter + 1);
+        counter += 1;
         gameOverSoundPlayed = false;
 
         musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" });
@@ -424,11 +466,14 @@ public class Game extends Application {
 
     public static void newFood() {
         start: while (true) {
-            foodX = rand.nextInt(18);
-            foodY = rand.nextInt(18);
+            foodX = rand.nextInt(24);
+            foodY = rand.nextInt(24);
 
-            barrierX = rand.nextInt(18);
-            barrierY = rand.nextInt(18);
+            powerUpX = rand.nextInt(24);
+            powerUpY = rand.nextInt(24);
+
+            barrierX = rand.nextInt(24);
+            barrierY = rand.nextInt(24);
 
             for (SnakesBody c : snake) {
                 if (c.x == foodX && c.y == foodY) {
@@ -439,10 +484,12 @@ public class Game extends Application {
             // Generate a new fruit type
             currentFruit = generateNewFruit();
 
+            currentPowerUp = generateNewPowerUp();
+
             // Generate a new barrier type
             currentBarrier = generateNewBarrier();
 
-            speed++;
+            speed += 0.7;
             backgroundMusic.playPickupSound();
             break;
         }
@@ -451,6 +498,10 @@ public class Game extends Application {
     // Method to generate a new barrier type
     private static Image generateNewBarrier() {
         return barjera;
+    }
+
+    private static Image generateNewPowerUp() {
+        return powerup;
     }
 
     // Method to generate a new fruit type
