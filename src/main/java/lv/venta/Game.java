@@ -52,6 +52,17 @@ public class Game extends Application {
     private static Image currentFruit;
     static Image currentBarrier;
     Image headImage = Game.headImage();
+    
+    public void restart() {
+    	resetGame();
+    	gamePaused=false;
+    	gameOver=false;
+    	gameOverSoundPlayed=false;
+    	inGameOverState=false;
+    	gameStarted=true;
+    	showInstructions=false;
+    	
+    }
 
     public void start(Stage primaryStage) {
         try {
@@ -122,6 +133,8 @@ public class Game extends Application {
                 } else if (key.getCode() == KeyCode.ESCAPE) {
                     // Pause game ar ESC
                     pauseGame(primaryStage);
+                }else if (key.getCode()==KeyCode.R) {
+                	resetGame();
                 } else {
                     // WASD un bultinas
                     if (gameStarted) {

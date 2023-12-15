@@ -3,8 +3,7 @@ package lv.venta;
 //importi
 import javafx.application.Application;
 import javafx.stage.Stage;
-//aha mans komentars-alekss
-//aha2
+
 //extends application, lai varetu izmantot javafx
 public class Launcher extends Application {
 
