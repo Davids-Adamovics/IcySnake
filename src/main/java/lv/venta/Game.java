@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Game extends Application {
-
+//1
     // mainīgie
     static int speed = 5;
     static int foodX = 0;
