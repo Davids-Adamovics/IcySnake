@@ -4,7 +4,9 @@ package lv.venta;
 //       imports           //
 //=========================//
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,8 +35,12 @@ public class Game extends Application {
 //       mainīgie          //
 //=========================//
     static int speed = 5;
-    static int foodX = 0;
-    static int foodY = 0;
+    static int food1X = 0;
+    static int food1Y = 0;
+    static int food2X = 0;
+    static int food2Y = 0;
+    static int food3X = 0;
+    static int food3Y = 0;
     static int powerUpX = 0;
     static int powerUpY = 0;
     static int counter = 0;
@@ -61,7 +67,9 @@ public class Game extends Application {
     static Image iconImage;
     static Image currentBarrier;
     private static Image currentPowerUp;
-    private static Image currentFruit;
+    private static Image currentFruit1;
+    private static Image currentFruit2;
+    private static Image currentFruit3;
     Image headImage = Game.headImage();
 
     static enumDirections direction = enumDirections.left;
@@ -242,7 +250,7 @@ public class Game extends Application {
                 //=====================//
                 //         food        //
                 //=====================//
-        if (foodX == snake.get(0).x && foodY == snake.get(0).y) { //food
+        if (food1X == snake.get(0).x && food1Y == snake.get(0).y || food2X == snake.get(0).x && food2Y == snake.get(0).y || food3X == snake.get(0).x && food3Y == snake.get(0).y) { //food
             snake.add(new SnakesBody(-1, -1));
             newFood();
             counter += 1;
@@ -257,19 +265,28 @@ public class Game extends Application {
                 //      power ups       //
                 //=====================//
             if (x == 1) {
-                speed -= 3;
-                gc.setFill(Color.RED);
-                gc.setFont(new Font("Cascadia Mono", 50));
-                gc.fillText("slow motion", 180, 300);      // SLOW MOTION
-                System.out.println("slow motion");
+    speed -= 3;
+    gc.setFill(Color.RED);
+    gc.setFont(new Font("Cascadia Mono", 50));
+    gc.fillText("slow motion", 180, 300); // SLOW MOTION
+    System.out.println("slow motion");
 
-                PauseTransition pause = new PauseTransition(Duration.seconds(5));
-                pause.setOnFinished(event -> {
-                    System.out.println("Five seconds have passed! Now do something.");
-                    speed += 3;
-                });
-                pause.play();
-            }
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+        // This code will run every second
+        for (int i = 0; i < 5; i++) {
+            newFood();
+            speed--;
+        }
+    }));
+    
+    timeline.setCycleCount(5);
+    timeline.setOnFinished(event -> {
+        System.out.println("Five seconds have passed! Now do something.");
+        speed += 3;
+    });
+
+    timeline.play();
+}
 
             if (x == 2) {
                 counter += 5;
@@ -340,7 +357,9 @@ public class Game extends Application {
         //      powerup, ediens, barjera          //
         //=======================================//
         gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 40, 35);
-        gc.drawImage(currentFruit, foodX * 25, foodY * 25, 25, 25);
+        gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
+        gc.drawImage(currentFruit2, food2X * 25, food2Y * 25, 25, 25);
+        gc.drawImage(currentFruit3, food3X * 25, food3Y * 25, 25, 25);
         gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
       
     }
@@ -465,7 +484,7 @@ public class Game extends Application {
         snake.add(new SnakesBody(10, 10));        // Reset cusku original laukuma
         snake.add(new SnakesBody(10, 10));        // Reset cusku original laukuma
         snake.add(new SnakesBody(10, 10));        // Reset cusku original laukuma
-        counter -= (counter + 1);
+        counter -= counter;
         gameOverSoundPlayed = false;
 
         musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" });
@@ -495,8 +514,14 @@ public class Game extends Application {
     //==========================================//
     public static void newFood() {
         start: while (true) {
-            foodX = rand.nextInt(24);
-            foodY = rand.nextInt(24);
+            food1X = rand.nextInt(24);
+            food1Y = rand.nextInt(24);
+
+            food2X = rand.nextInt(24);
+            food2Y = rand.nextInt(24);
+
+            food2X = rand.nextInt(24);
+            food2Y = rand.nextInt(24);
 
             powerUpX = rand.nextInt(24);
             powerUpY = rand.nextInt(24);
@@ -505,15 +530,17 @@ public class Game extends Application {
             barrierY = rand.nextInt(24);
 
             for (SnakesBody c : snake) {
-                if (c.x == foodX && c.y == foodY) {
+                if (c.x == food1X && c.y == food1Y || c.x == food2X && c.y == food2Y || c.x == food2X && c.y == food2Y) {
                     continue start;
                 }
             }
-            currentFruit = generateNewFruit();                //spawn kadu no objektiem
+            currentFruit1 = generateNewFruit(); 
+            currentFruit2 = generateNewFruit();
+            currentFruit3 = generateNewFruit();               //spawn kadu no objektiem
             currentPowerUp = generateNewPowerUp();            //spawn kadu no objektiem
             currentBarrier = generateNewBarrier();            //spawn kadu no objektiem
         
-            speed += 0.7;  //speed
+            speed ++;  //speed
             backgroundMusic.playPickupSound();   //background music
             break;
         }
@@ -538,8 +565,7 @@ public class Game extends Application {
     //==========================================//
     private static Image generateNewFruit() {
         Image[] fruits = { abols, banans, vinogas, zemene };
-        Random random = new Random();
-        int randomIndex = random.nextInt(fruits.length);
+        int randomIndex = rand.nextInt(fruits.length);
         return fruits[randomIndex];
     }
 
