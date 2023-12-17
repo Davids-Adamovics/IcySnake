@@ -6,9 +6,9 @@
 }
 
 .Button:hover {
-    -fx-background-color: #969494; /* Darker color for hover effect */
+    -fx-background-color: #969494; 
 }
 
 .Button:pressed {
-    -fx-background-color: #4c4c4c; /* Even darker color for pressed effect */
+    -fx-background-color: #4c4c4c; 
 }
