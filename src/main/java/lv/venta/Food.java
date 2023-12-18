@@ -7,20 +7,20 @@ public class Food {
     // spawn food, powerup, barrier
     public static void newFood() {
         start: while (true) {
-            Game.food1X = Game.rand.nextInt(24);
-            Game.food1Y = Game.rand.nextInt(24);
+            Game.food1X = Game.rand.nextInt(23);
+            Game.food1Y = Game.rand.nextInt(19) + 2; // Adjusted range for food1
 
-            Game.food2X = Game.rand.nextInt(24);
-            Game.food2Y = Game.rand.nextInt(24);
+            Game.food2X = Game.rand.nextInt(23);
+            Game.food2Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.food2X = Game.rand.nextInt(24);
-            Game.food2Y = Game.rand.nextInt(24);
+            Game.food3X = Game.rand.nextInt(23);
+            Game.food3Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.powerUpX = Game.rand.nextInt(24);
-            Game.powerUpY = Game.rand.nextInt(24);
+            Game.powerUpX = Game.rand.nextInt(23);
+            Game.powerUpY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.barrierX = Game.rand.nextInt(24);
-            Game.barrierY = Game.rand.nextInt(24);
+            Game.barrierX = Game.rand.nextInt(23);
+            Game.barrierY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
             for (SnakesBody c : Game.snake) {
                 if (c.x == Game.food1X && c.y == Game.food1Y || c.x == Game.food2X && c.y == Game.food2Y

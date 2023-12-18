@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -39,10 +40,11 @@ public class GameOptions {
 
     // Instrukcijas pirms spēles
     static void drawInstructions(GraphicsContext gc) {
-        gc.setFill(Color.BLACK);
-        gc.setFont(new Font("", 20));
-        gc.fillText("Use AWSD or arrows to move", 180, 300);
-        gc.fillText("Press SPACE to go to the next page", 180, 330);
+        gc.setFill(Color.web("#4f5450"));
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+        gc.setFont(customFont);
+        gc.fillText("Use AWSD or arrows to move", 60, 250);
+        gc.fillText("Press SPACE to go to the next page", 60, 280);
         return;
     }
 
@@ -79,12 +81,18 @@ public class GameOptions {
     public static Image headImage() {
         String headFileName;
 
-        if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
-            headFileName = "head.png"; // male galva
-        } else {
-            headFileName = "head.png"; // female galva
+        if (Game.direction == Game.direction.up){
+            headFileName = "headUp.png";
         }
-        
+        else if (Game.direction == Game.direction.left){
+            headFileName = "headLeft.png";
+        }
+        else if (Game.direction == Game.direction.right){
+            headFileName = "headRight.png";
+        }
+        else {
+            headFileName = "headDown.png";
+        }
 
         return new Image(Game.class.getResource(headFileName).toExternalForm());
     }
