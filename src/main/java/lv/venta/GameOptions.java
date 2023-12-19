@@ -79,7 +79,7 @@ public class GameOptions {
 
     // cuskas galvas custom attēls
     public static Image headImage() {
-        String headFileName;
+        String headFileName = "headUp.png";
 
         if (Game.direction == Game.direction.up){
             headFileName = "headUp.png";
