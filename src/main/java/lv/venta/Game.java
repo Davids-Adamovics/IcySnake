@@ -37,6 +37,7 @@ public class Game extends Application {
     static int counter = 0;
     static int barrierX = 0;
     static int barrierY = 0;
+    static int highScore = 0;
 
     static List<Stage> openStages = new ArrayList<>();
     static List<SnakesBody> snake = new ArrayList<>();
@@ -52,6 +53,7 @@ public class Game extends Application {
     static Image banans;
     static Image vinogas;
     static Image zemene;
+    static Image kronis;
     static Image barjera;
     static Image powerup;
     static Image backgroundImage;
@@ -80,6 +82,7 @@ public class Game extends Application {
             backgroundImage = new Image(getClass().getResource("g1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
+            kronis = new Image(getClass().getResource("crown.png").toExternalForm());
 
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
@@ -136,7 +139,7 @@ public class Game extends Application {
                     }
                 } else if (key.getCode() == KeyCode.ESCAPE) { // Pause game ar ESC
                     pauseGame(primaryStage);
-                } else if (key.getCode() == KeyCode.R) { // Restart game ar R
+                } else if (key.getCode() == KeyCode.P || key.getCode() == KeyCode.R) { // Restart game ar R
                     resetGame();
                 } else {
                     if (gameStarted) {
@@ -193,14 +196,45 @@ public class Game extends Application {
         if (gameOver) {
             inGameOverState = true;
 
-            Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
-            gc.setFont(customFont);
-            gc.setFill(Color.RED);
-            gc.fillText("GAME OVER", 140, 290);
+
+            gc.setFill(Color.web("#5ac3d1", 0.1)); // fonta krasa un caurspidigums
+            gc.fillRect(0, 0, 590, 590);    // game over fons
+
+            // Fonti
+            Font HEADER = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 80);
+            Font POINTS = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
+            Font INFO = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+            
+            
+            gc.setGlobalAlpha(0.3); //caurspīdīgums
+
+            //gameover
+            gc.setFont(HEADER);
+            gc.setFill(Color.WHITE);
+            gc.fillText("GAME OVER", 60, 100);
+
+            //info
+            gc.setFont(INFO);
+            gc.fillText("Press \"r\" or \"p\"  to restart", 100, 350);
+            
+            //punkti
+            gc.setFont(POINTS);
+            gc.fillText(Integer.toString(counter), 170, 260, 35);
+            gc.fillText(Integer.toString(highScore), 420, 260, 35);
+            
+            //atteli
+            gc.drawImage(abols, 110, 220, 55, 55);
+            gc.drawImage(kronis, 350, 220, 55, 55);
+
+            gc.setGlobalAlpha(1.0); // reset caurspīdīgums
 
             if (gameOverSoundPlayed) {
                 backgroundMusic.playGameOverSound();
                 gameOverSoundPlayed = false;
+                if (counter > highScore) {
+                    highScore = counter;
+                }
+
             }
             return;
         }
@@ -337,30 +371,29 @@ public class Game extends Application {
         // ========================//
 
         SnakesBody head = snake.get(0);
-double headSize = 25;
-double cornerRadius = 10; // Adjust this value to control the roundness
+        double headSize = 25;
+        double cornerRadius = 10; // Adjust this value to control the roundness
 
-gc.drawImage(headImage(), head.x * 25, head.y * 25, headSize, headSize);
+        gc.drawImage(headImage(), head.x * 25, head.y * 25, headSize, headSize);
 
-for (int i = 1; i < snake.size(); i++) {
-    SnakesBody bodyPart = snake.get(i);
-    double partSize = 25;
-    double bodyPartX = bodyPart.x * 25;
-    double bodyPartY = bodyPart.y * 25;
+        for (int i = 1; i < snake.size(); i++) {
+            SnakesBody bodyPart = snake.get(i);
+            double partSize = 25;
+            double bodyPartX = bodyPart.x * 25;
+            double bodyPartY = bodyPart.y * 25;
 
-    if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
-        gc.setFill(Color.web("#289c24"));
-    } else {
-        gc.setFill(Color.PINK);
-    }
+            if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
+                gc.setFill(Color.web("#289c24"));
+            } else {
+                gc.setFill(Color.PINK);
+            }
 
-    double rectWidth = partSize;
-    double rectHeight = partSize;
+            double rectWidth = partSize;
+            double rectHeight = partSize;
 
-    // Draw filled rounded rectangle (tube)
-    gc.fillRoundRect(bodyPartX, bodyPartY, rectWidth, rectHeight, cornerRadius, cornerRadius);
-}
-
+            // Draw filled rounded rectangle (tube)
+            gc.fillRoundRect(bodyPartX, bodyPartY, rectWidth, rectHeight, cornerRadius, cornerRadius);
+        }
 
         // =========================//
         // powerup, ediens, barjera //

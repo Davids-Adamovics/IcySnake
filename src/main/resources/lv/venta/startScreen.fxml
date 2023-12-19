@@ -15,7 +15,7 @@
             </image>
          </ImageView>
          <Button fx:id="startButton" layoutX="353.0" layoutY="218.0" mnemonicParsing="false" onAction="#openRegister" prefHeight="65.0" prefWidth="199.0" styleClass="Button" stylesheets="@application.css" text="START" />
-         <Button fx:id="optionsButton" layoutX="375.0" layoutY="292.0" mnemonicParsing="false" onAction="#openOptions" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="OPTIONS" />
+         <Button fx:id="CreditsButton" layoutX="375.0" layoutY="292.0" mnemonicParsing="false" onAction="#openCredits" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="CREDITS" />
          <Button fx:id="ExitButton" layoutX="375.0" layoutY="350.0" mnemonicParsing="false" onAction="#exitOut" prefHeight="45.0" prefWidth="155.0" styleClass="Button" stylesheets="@application.css" text="EXIT" />
          <ImageView fitHeight="213.0" fitWidth="675.0" layoutX="149.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
             <image>

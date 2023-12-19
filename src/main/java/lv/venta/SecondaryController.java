@@ -1,11 +1,18 @@
 package lv.venta;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
-
 
 public class SecondaryController {
 
@@ -13,7 +20,7 @@ public class SecondaryController {
     private Button startButton;
 
     @FXML
-    private Button optionsButton;
+    private Button createButton;
 
     @FXML
     private Button exitButton;
@@ -32,16 +39,19 @@ public class SecondaryController {
         }
     }
 
-    public void openOptions(ActionEvent event) {
-        // Implement the logic to open the options screen here
-        System.out.println("Options button clicked");
+    public void openCredits(ActionEvent event) throws Exception {
+        credits credits1 = new credits();
+
+        Stage creditsStage = new Stage();
+        credits1.start(creditsStage);
+
+
     }
 
     public void exitOut(ActionEvent event) {
-        // Implement the logic to exit the application here
-        System.out.println("Exit button clicked");
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
 }
