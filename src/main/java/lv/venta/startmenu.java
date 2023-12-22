@@ -25,6 +25,7 @@ public class startmenu extends Application {
             Scene myScene = FXMLLoader.load(getClass().getResource("startScreen.fxml"));
             primaryStage.setTitle("IcySnake");
             primaryStage.setScene(myScene);
+
            
             primaryStage.show();
         } catch (IOException e) {

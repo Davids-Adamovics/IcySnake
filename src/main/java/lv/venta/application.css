@@ -12,3 +12,15 @@
 .Button:pressed {
     -fx-background-color: #4c4c4c; 
 }
+
+/* Set background color */
+.anchor-pane {
+    -fx-background-color: #abcdef; /* Replace with your desired color */
+}
+
+/* Set background image */
+.anchor-pane {
+    -fx-background-image: url('background3.png'); /* Replace with your image file path */
+    -fx-background-size: cover; /* Adjust as needed, 'cover' will maintain the aspect ratio and cover the entire pane */
+}
+
