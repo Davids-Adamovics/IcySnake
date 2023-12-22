@@ -13,9 +13,17 @@
     -fx-background-color: #28565f; 
 }
 
-/* Set background image */
 .anchor-pane {
-    -fx-background-image: url('background3.png'); /* Replace with your image file path */
-    -fx-background-size: cover; /* Adjust as needed, 'cover' will maintain the aspect ratio and cover the entire pane */
+    -fx-background-image: url('background3.png'); 
+    -fx-background-size: cover; 
 }
+
+/* styles.css */
+.transparent-background {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 10;
+}
+
+
+
 

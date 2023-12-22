@@ -101,12 +101,14 @@ public class Game extends Application {
                         if (showInstructions) {
                             drawInstructions(gc);
                         } else {
-                            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                            gc.setFill(Color.web("#4f5450"));
+                            //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                            gc.setFill(Color.web("#88b5d1")); 
+                            gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+                            gc.setFill(Color.web("#ffffff"));
                             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30);
                             gc.setFont(customFont);
                             gc.fillText("Press SPACE to Start", 115, 290);
-                        }
+                        }//s
                         return;
                     }
 
@@ -405,7 +407,7 @@ public class Game extends Application {
         gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
 
     }
-
+    
     // pause game
     private static void pauseGame(Stage primaryStage) {
         GameOptions.pauseGame(primaryStage);

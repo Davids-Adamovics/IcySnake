@@ -28,7 +28,7 @@ public class GameOptions {
             pauseBox.setPadding(new Insets(20));
             pauseBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
             Buttons.showInitialButtons(pauseBox, primaryStage);
-            Scene pauseScene = new Scene(pauseBox, 300, 300);
+            Scene pauseScene = new Scene(pauseBox, 590, 590);
             Game.pauseStage.setScene(pauseScene);
 
             Game.gamePaused = true;
@@ -40,7 +40,9 @@ public class GameOptions {
 
     // Instrukcijas pirms spēles
     static void drawInstructions(GraphicsContext gc) {
-        gc.setFill(Color.web("#4f5450"));
+        gc.setFill(Color.web("#88b5d1")); // Dark gray background color
+        gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        gc.setFill(Color.web("#ffffff"));
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
         gc.setFont(customFont);
         gc.fillText("Use AWSD or arrows to move", 60, 250);
