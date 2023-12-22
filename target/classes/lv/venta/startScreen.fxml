@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <Scene xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lv.venta.SecondaryController">
-    <AnchorPane prefHeight="800.0" prefWidth="1000.0" styleClass="anchor-pane" stylesheets="@application.css">
+    <AnchorPane prefHeight="650.0" prefWidth="900.0" styleClass="anchor-pane" stylesheets="@application.css">
       <children>
          <!-- <ImageView fitHeight="523.0" fitWidth="914.0" layoutX="-6.0" layoutY="-37.0" pickOnBounds="true">
             <image>

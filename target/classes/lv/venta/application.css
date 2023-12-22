@@ -1,21 +1,16 @@
 .Button {
     -fx-font: 22px "Serif";
     -fx-padding: 10;
-    -fx-background-color: #ececec;
-    -fx-text-fill: #595858;
+    -fx-background-color: #3db2c7;
+    -fx-text-fill: #ffffff;
 }
 
 .Button:hover {
-    -fx-background-color: #969494; 
+    -fx-background-color: #287f8f; 
 }
 
 .Button:pressed {
-    -fx-background-color: #4c4c4c; 
-}
-
-/* Set background color */
-.anchor-pane {
-    -fx-background-color: #abcdef; /* Replace with your desired color */
+    -fx-background-color: #28565f; 
 }
 
 /* Set background image */

@@ -33,6 +33,9 @@ public class SecondaryController {
             Stage primaryStage = new Stage();
             register1.start(primaryStage);
 
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
             // For debugging purposes, print the stack trace in case of an exception
         } catch (Exception e) { // new update
             e.printStackTrace();
@@ -53,5 +56,7 @@ public class SecondaryController {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }
+
+
 
 }

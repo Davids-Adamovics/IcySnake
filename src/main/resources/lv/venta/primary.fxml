@@ -17,7 +17,7 @@
 <Scene xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lv.venta.PrimaryController">
     <AnchorPane prefHeight="590.0" prefWidth="701.0">
       <children>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#40321a73" height="601.0" layoutX="343.0" stroke="TRANSPARENT" strokeType="INSIDE" width="368.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#accbfc" height="601.0" layoutX="343.0" stroke="TRANSPARENT" strokeType="INSIDE" width="368.0" />
          <TextField fx:id="usernameInput" layoutX="389.0" layoutY="207.0" prefHeight="35.0" prefWidth="294.0" promptText="username" />
          <TextField fx:id="ageInput" layoutX="387.0" layoutY="279.0" prefHeight="34.0" prefWidth="297.0" promptText="age 9+" />
          <RadioButton fx:id="malePick" layoutX="450.0" layoutY="360.0" mnemonicParsing="false" text="Male" />
@@ -34,24 +34,25 @@
             </font>
             <fill>
                <LinearGradient endX="0.6098484414996523" endY="1.0" startY="1.0">
-                  <stops>
-                     <Stop>
-                        <color>
-                           <Color red="0.1943809539079666" green="0.12999999523162842" blue="0.25999999046325684" />
-                        </color>
-                     </Stop>
-                     <Stop offset="0.02555393967861111">
-                        <color>
-                           <Color red="1.0" green="1.0" blue="1.0" />
-                        </color>
-                     </Stop>
-                     <Stop offset="1.0">
-                        <color>
-                           <Color />
-                        </color>
-                     </Stop>
-                  </stops>
-               </LinearGradient>
+   <stops>
+      <Stop>
+         <color>
+            <Color red="0.1943809539079666" green="0.12999999523162842" blue="0.25999999046325684" />
+         </color>
+      </Stop>
+      <Stop offset="0.02555393967861111">
+         <color>
+            <Color red="1.0" green="1.0" blue="1.0" />
+         </color>
+      </Stop>
+      <Stop offset="1.0">
+         <color>
+            <Color red="0.0" green="0.0" blue="0.17" /> <!-- Adjust the blue value here -->
+         </color>
+      </Stop>
+   </stops>
+</LinearGradient>
+
             </fill>
          </Text>
          <ImageView fitHeight="472.0" fitWidth="353.0" layoutX="80.0" layoutY="-11.0" pickOnBounds="true">
