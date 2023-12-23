@@ -3,15 +3,21 @@ package lv.venta;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import java.util.Random;
 
 public class backgroundMusic {
 
     private static MediaPlayer mediaPlayer;
     private String[] musicFilePaths;
-    private static double volume = 0.3; // Default volume
+    static double volume = 1;
 
     public backgroundMusic(String[] strings) {
+        musicFilePaths = strings;
+    }
+
+    public static void updateVolume() {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume);
+        }
     }
 
     public void BackgroundMusic(String[] musicFilePathsInput) {
@@ -48,13 +54,11 @@ public class backgroundMusic {
         gameOverSoundPlayer.setVolume(volume * 0.5);
         gameOverSoundPlayer.setCycleCount(1);
         gameOverSoundPlayer.play();
-        //gameOverSoundPlayer.stop();
-        
     }
 
     private String getRandomMusicFile() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(musicFilePaths.length);
-        return musicFilePaths[randomIndex];
+        // Your logic to get a random music file path
+        // For now, using the first path in the array
+        return musicFilePaths[0];
     }
 }

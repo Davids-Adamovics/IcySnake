@@ -296,6 +296,7 @@ public class Game extends Application {
             // ==========//
             // power ups //
             // ==========//
+            
             if (x == 1) {
                 speed -= 3;
                 gc.setFill(Color.RED);
@@ -321,6 +322,7 @@ public class Game extends Application {
                 timeline.play();
             }
 
+           
             if (x == 2) {
                 counter += 5;
                 speed++;
