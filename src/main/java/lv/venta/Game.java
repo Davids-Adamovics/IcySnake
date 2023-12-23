@@ -56,7 +56,8 @@ public class Game extends Application {
     static Image kronis;
     static Image barjera;
     static Image powerup;
-    static Image backgroundImage;
+    static Image backgroundImage1;
+    static Image backgroundImage2;
     static Image iconImage;
     static Image currentBarrier;
     static Image currentPowerUp;
@@ -69,7 +70,13 @@ public class Game extends Application {
     static backgroundMusic musicPlayer;
     static Random rand = new Random();
     static Stage pauseStage;
-
+    public static Color snakeColor = Color.GREEN;
+    
+public static Image BackgroundsImage = backgroundImage2;
+static {
+    // Initialize BackgroundsImage with backgroundImage2
+    BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
+}
     public void start(Stage primaryStage) {
         try {
 
@@ -79,11 +86,11 @@ public class Game extends Application {
             vinogas = new Image(getClass().getResource("grapes.png").toExternalForm());
             zemene = new Image(getClass().getResource("strawberry.png").toExternalForm());
             barjera = new Image(getClass().getResource("barrier.png").toExternalForm());
-            backgroundImage = new Image(getClass().getResource("g1.png").toExternalForm());
+            backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
+            backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
             kronis = new Image(getClass().getResource("crown.png").toExternalForm());
-
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
             newFood();
@@ -140,6 +147,7 @@ public class Game extends Application {
                         }
                     }
                 } else if (key.getCode() == KeyCode.ESCAPE) { // Pause game ar ESC
+                    gamePaused = true;
                     pauseGame(primaryStage);
                 } else if (key.getCode() == KeyCode.P || key.getCode() == KeyCode.R) { // Restart game ar R
                     resetGame();
@@ -241,7 +249,7 @@ public class Game extends Application {
             return;
         }
 
-        gc.drawImage(backgroundImage, 0, 0, 600, 600); // background
+        gc.drawImage(BackgroundsImage, 0, 0, 600, 600); // background
 
         for (int i = snake.size() - 1; i >= 1; i--) { // čūskas ķermenis
             snake.get(i).x = snake.get(i - 1).x; // katrai čūskas daļai piešķir iepriekšējās daļas koordinātas (Izņemot
@@ -261,8 +269,8 @@ public class Game extends Application {
                 break;
             case down:
                 snake.get(0).y++;
-                if (snake.get(0).y >= 23) {
-                    snake.get(0).y = 22; // apakša
+                if (snake.get(0).y >= 22) {
+                    snake.get(0).y = 21; // apakša
                 }
                 break;
             case left:
@@ -386,11 +394,9 @@ public class Game extends Application {
             double bodyPartX = bodyPart.x * 25;
             double bodyPartY = bodyPart.y * 25;
 
-            if (PrimaryController.currentPlayer.getgender() == enumGender.male) {
-                gc.setFill(Color.web("#289c24"));
-            } else {
-                gc.setFill(Color.PINK);
-            }
+            gc.setFill(snakeColor);
+
+
 
             double rectWidth = partSize;
             double rectHeight = partSize;
