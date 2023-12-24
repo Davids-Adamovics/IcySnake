@@ -3,7 +3,7 @@
 .idea/
 
 # Compiled Java classes and JAR files
-/target/
+#/target/
 /bin/
 /out/
 

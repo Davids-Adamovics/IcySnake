@@ -3,14 +3,14 @@
 .idea/
 
 # Compiled Java classes and JAR files
-/target/
+#/target/
 /bin/
 /out/
 
 # Maven files
 /.mvn/
 pom.xml
-target/
+#target/
 
 # Eclipse files
 .project
