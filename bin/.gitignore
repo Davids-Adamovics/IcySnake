@@ -1,1 +1,24 @@
+# IDE and editor files
+.vscode/
+.idea/
+
+# Compiled Java classes and JAR files
 /target/
+/bin/
+/out/
+
+# Maven files
+/.mvn/
+pom.xml
+
+# Eclipse files
+.project
+.classpath
+.settings/
+
+# Git files
+.gitattributes
+.gitignore
+
+# Miscellaneous
+README.md
