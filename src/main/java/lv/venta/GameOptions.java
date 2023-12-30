@@ -16,7 +16,7 @@ import javafx.stage.StageStyle;
 
 public class GameOptions {
 
-    //pause speli
+    // pause speli
     static void pauseGame(Stage primaryStage) {
         if (Game.pauseStage == null) { // ja pause ekrans jau nepastāv, tad to izveido
             Game.pauseStage = new Stage();
@@ -50,7 +50,7 @@ public class GameOptions {
         return;
     }
 
-    //reset speli
+    // reset speli
     static void resetGame() {
         Game.speed = 5;
         Game.gameOver = false;
@@ -67,7 +67,7 @@ public class GameOptions {
         Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
     }
 
-    //restart ar r
+    // restart ar r
     public void restart() {
         resetGame();
         Game.gamePaused = false;
@@ -83,16 +83,13 @@ public class GameOptions {
     public static Image headImage() {
         String headFileName = "headUp.png";
 
-        if (Game.direction == Game.direction.up){
+        if (Game.direction == Game.direction.up) {
             headFileName = "headUp.png";
-        }
-        else if (Game.direction == Game.direction.left){
+        } else if (Game.direction == Game.direction.left) {
             headFileName = "headLeft.png";
-        }
-        else if (Game.direction == Game.direction.right){
+        } else if (Game.direction == Game.direction.right) {
             headFileName = "headRight.png";
-        }
-        else {
+        } else {
             headFileName = "headDown.png";
         }
 
