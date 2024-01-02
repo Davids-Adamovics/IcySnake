@@ -10,7 +10,7 @@
 # Maven files
 /.mvn/
 pom.xml
-#target/
+target/
 
 # Eclipse files
 .project
