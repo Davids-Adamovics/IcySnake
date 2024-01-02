@@ -50,7 +50,7 @@ public class PrimaryController {
 			System.out.println(currentPlayer);
 
 
-			
+			backgroundMusic.PlayButtonSound();
 			Game game = new Game();
 			Stage gameStage = new Stage();
 			game.start(gameStage);

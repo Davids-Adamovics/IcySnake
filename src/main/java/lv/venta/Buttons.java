@@ -35,36 +35,67 @@ public class Buttons {
             case "Resume":
                 Game.gamePaused = false;
                 Game.pauseStage.hide();
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Restart":
                 Game.resetGame();
                 Game.gamePaused = false;
                 Game.pauseStage.hide();
-
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Options":
                 Game.options(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Quit":
                 Game.closeAllStages();
                 Game.pauseStage.hide();
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Back":
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Change Skin":
                 changeColor(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Change Map":
                 changeMap(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Blue":
                 Game.BackgroundsImage = Game.backgroundImage2;
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                backgroundMusic.PlayButtonSound();
                 break;
             case "Yellow":
                 Game.BackgroundsImage = Game.backgroundImage1;
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Change Music":
+                changeMusic(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Music one":
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" }); // play game 1
+                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Music two":
+                Game.musicPlayer.BackgroundMusic(new String[] { "game4.wav" }); // play game 4
+                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Music three":
+                Game.musicPlayer.BackgroundMusic(new String[] { "game2.wav" }); // play game 2
+                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Leaderboard":
+                showLeaderboard(primaryStage, pauseBox);
+                backgroundMusic.PlayButtonSound();
                 break;
         }
     }
