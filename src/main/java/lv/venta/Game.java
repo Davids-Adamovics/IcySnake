@@ -150,7 +150,8 @@ static {
                     gamePaused = true;
                     pauseGame(primaryStage);
                 } else if (key.getCode() == KeyCode.P || key.getCode() == KeyCode.R) { // Restart game ar R
-                    resetGame();
+                    backgroundMusic.stopMusic();
+                	resetGame();
                 } else {
                     if (gameStarted) {
                         // WASD un bultinas

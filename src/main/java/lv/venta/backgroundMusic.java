@@ -7,6 +7,8 @@ import javafx.util.Duration;
 public class backgroundMusic {
 
     private static MediaPlayer mediaPlayer;
+    private static MediaPlayer menuSong;
+    
     private String[] musicFilePaths;
     static double volume = 1;
 
@@ -26,20 +28,40 @@ public class backgroundMusic {
     }
 
     private void playRandomMusic() {
+    	
+    	stopMusic();
+
         String randomMusicFile = getRandomMusicFile();
         Media sound = new Media(getClass().getResource(randomMusicFile).toString());
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setVolume(volume);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
+       
     }
 
     public static void stopMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
+        if (menuSong != null) {
+            menuSong.stop();
+        }
     }
     
+    
+    public static void playMenuMusic() {
+        // menu music
+
+     
+        Media sound = new Media(backgroundMusic.class.getResource("game3.wav").toString());
+        menuSong = new MediaPlayer(sound);
+        menuSong.setVolume(volume * 0.2);
+        menuSong.play();
+        
+    }
+    
+   
     public static void PlayButtonSound() {
     	Media sound = new Media(backgroundMusic.class.getResource("buttonSound.wav").toString());
         MediaPlayer buttonSoundPlayed = new MediaPlayer(sound);
@@ -57,6 +79,8 @@ public class backgroundMusic {
     }
 
     public static void playGameOverSound() {
+    	stopMusic();
+
         Media sound = new Media(backgroundMusic.class.getResource("gameOver.wav").toString());
         MediaPlayer gameOverSoundPlayer = new MediaPlayer(sound);
         gameOverSoundPlayer.setVolume(volume * 0.5);

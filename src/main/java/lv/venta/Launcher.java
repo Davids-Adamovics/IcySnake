@@ -3,7 +3,7 @@ package lv.venta;
 //importi
 import javafx.application.Application;
 import javafx.stage.Stage;
-//aha mans komentars-alekss
+
 //extends application, lai varetu izmantot javafx
 public class Launcher extends Application {
 
@@ -15,6 +15,8 @@ public class Launcher extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
+        	
+        	backgroundMusic.playMenuMusic();
             // izveido jaunu register klasi
             startmenu startmenu1 = new startmenu();
             // palaiz izveidoto klasi

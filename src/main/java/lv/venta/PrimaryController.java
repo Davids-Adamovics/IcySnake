@@ -2,6 +2,8 @@ package lv.venta;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -39,7 +41,8 @@ public class PrimaryController {
 	
 	public void SwitchTogame(ActionEvent event) throws IOException {
 		try {
-
+			backgroundMusic.stopMusic();
+			
 			String username = usernameInput.getText();
 			byte age = Byte.parseByte(ageInput.getText());
 			enumGender gender = malePick.isSelected() ? enumGender.male : enumGender.female;
@@ -49,22 +52,30 @@ public class PrimaryController {
 			System.out.println("Player Information:");
 			System.out.println(currentPlayer);
 
-
+			
 			backgroundMusic.PlayButtonSound();
+			
+			
+			
 			Game game = new Game();
 			Stage gameStage = new Stage();
 			game.start(gameStage);
 			
-
+			
+			
 			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			currentStage.close();
+			
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	   // Getter method for currentPlayer
     public player getCurrentPlayer() {
-        return currentPlayer;
+    	return currentPlayer;
+        
     }
 
 	
