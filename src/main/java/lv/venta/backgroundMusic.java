@@ -39,7 +39,15 @@ public class backgroundMusic {
             mediaPlayer.stop();
         }
     }
-
+    
+    public static void PlayButtonSound() {
+    	Media sound = new Media(backgroundMusic.class.getResource("buttonSound.wav").toString());
+        MediaPlayer buttonSoundPlayed = new MediaPlayer(sound);
+        buttonSoundPlayed.setVolume(volume * 0.5);
+        buttonSoundPlayed.setCycleCount(1);
+        buttonSoundPlayed.play();
+    }
+    
     public static void playPickupSound() {
         // Pickup sound
         Media sound = new Media(backgroundMusic.class.getResource("pickupsound.wav").toString());

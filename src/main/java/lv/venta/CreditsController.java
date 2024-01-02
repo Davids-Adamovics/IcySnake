@@ -14,6 +14,7 @@ public class CreditsController {
 
     @FXML
     public void goBack(ActionEvent event) {
+    	backgroundMusic.PlayButtonSound();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }

@@ -27,6 +27,7 @@ public class SecondaryController {
 
     public void openRegister(ActionEvent event) throws IOException {
         try {
+        	backgroundMusic.PlayButtonSound();
             // Create a new Register object
             register register1 = new register();
             // Start the created object
@@ -43,6 +44,7 @@ public class SecondaryController {
     }
 
     public void openCredits(ActionEvent event) throws Exception {
+    	backgroundMusic.PlayButtonSound();
         credits credits1 = new credits();
 
         Stage creditsStage = new Stage();
@@ -52,7 +54,7 @@ public class SecondaryController {
     }
 
     public void exitOut(ActionEvent event) {
-
+    	backgroundMusic.PlayButtonSound();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }
