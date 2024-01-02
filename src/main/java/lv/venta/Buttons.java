@@ -106,13 +106,39 @@ public class Buttons {
                 createButton("Resume", primaryStage, pauseBox),
                 createButton("Restart", primaryStage, pauseBox),
                 createButton("Options", primaryStage, pauseBox),
+                createButton("Leaderboard", primaryStage, pauseBox),
                 createButton("Quit", primaryStage, pauseBox));
     }
 
-    static void showNewButtons(VBox pauseBox, Stage primaryStage) {
-        pauseBox.getChildren().clear(); // Clear existing elements
+    static void showLeaderboard(Stage primaryStage, VBox pauseBox) {
+        pauseBox.getChildren().clear();
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+        Label valueLabel = new Label("Top 5 Leaderboard");
+        valueLabel.setFont(customFont);
+        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setAlignment(Pos.CENTER);
 
-        // Add new elements with proper formatting
+        Label place1 = new Label("\nBest score: " + Game.highScore);
+        place1.setFont(customFont);
+        place1.setTextFill(Color.web("#4682b4"));
+        place1.setAlignment(Pos.CENTER);
+
+        Label place2 = new Label("Last attempt: " + Game.counter);
+        place2.setFont(customFont);
+        place2.setTextFill(Color.web("#4682b4"));
+        place2.setAlignment(Pos.CENTER);
+
+        pauseBox.getChildren().addAll(
+                valueLabel,
+                place1,
+                place2,
+                createButton("Back", primaryStage, pauseBox));
+    }
+
+    static void showNewButtons(VBox pauseBox, Stage primaryStage) {
+        pauseBox.getChildren().clear(); // izdes esc/pause menu pogas
+
+        // Options pogas
         pauseBox.getChildren().addAll(
                 createSlider("", primaryStage, pauseBox),
                 createButton("Change Map", primaryStage, pauseBox),
@@ -121,6 +147,7 @@ public class Buttons {
                 createButton("Back", primaryStage, pauseBox));
     }
 
+    // volume slider
     static Slider createSlider(String text, Stage primaryStage, VBox pauseBox) {
         Slider slider = new Slider(0, 100, 90);
         slider.setMaxWidth(150);
@@ -171,9 +198,34 @@ public class Buttons {
     static void changeMap(VBox pauseBox, Stage primaryStage) {
         pauseBox.getChildren().clear();
 
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+        Label valueLabel = new Label("Change the map");
+        valueLabel.setFont(customFont);
+        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setAlignment(Pos.CENTER);
+
         pauseBox.getChildren().addAll(
+                valueLabel,
                 createButton("Blue", primaryStage, pauseBox),
                 createButton("Yellow", primaryStage, pauseBox),
+                createButton("Back", primaryStage, pauseBox));
+
+    }
+
+    static void changeMusic(VBox pauseBox, Stage primaryStage) {
+        pauseBox.getChildren().clear();
+
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+        Label valueLabel = new Label("Background Music");
+        valueLabel.setFont(customFont);
+        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setAlignment(Pos.CENTER);
+
+        pauseBox.getChildren().addAll(
+                valueLabel,
+                createButton("Music one", primaryStage, pauseBox),
+                createButton("Music two", primaryStage, pauseBox),
+                createButton("Music three", primaryStage, pauseBox),
                 createButton("Back", primaryStage, pauseBox));
 
     }
