@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -10,57 +13,77 @@
 <Scene xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lv.venta.CreditsController">
     <AnchorPane prefHeight="576.0" prefWidth="459.0">
       <children>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d2e9ff" height="578.0" stroke="BLACK" strokeType="INSIDE" width="460.0" />
-         <Text layoutX="167.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREDITS">
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d1117" height="578.0" stroke="BLACK" strokeType="INSIDE" width="460.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#575757" height="95.0" layoutX="-1.0" layoutY="316.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="116.0" layoutY="198.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+         <Text fill="WHITE" layoutX="140.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dāvids Adamovičs" wrappingWidth="169.02587890625">
+            <font>
+               <Font size="21.0" />
+            </font>
+         </Text>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#838383" height="68.0" layoutX="-3.0" layoutY="413.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+         <Text fill="WHITE" layoutX="145.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alekss Grečuhins" wrappingWidth="158.02587890625">
+            <font>
+               <Font size="21.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="162.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oskars Valters" wrappingWidth="132.02587890625">
+            <font>
+               <Font size="21.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="122.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game logic, Graphics, Testing/Debugging, Optimization, Project Management, UI/UX Design, Documentation" textAlignment="CENTER" wrappingWidth="205.02587890625">
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Text>
+         <Button layoutX="136.0" layoutY="495.0" mnemonicParsing="false" onAction="#goBack" prefHeight="45.0" prefWidth="208.0" styleClass="CreditsButton" text="BACK">
+            <stylesheets>
+               <URL value="@application.css" />
+            </stylesheets></Button>
+         <Text fill="WHITE" layoutX="121.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound Effects, Testing, Game functions" textAlignment="CENTER" wrappingWidth="205.02587890625">
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="125.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Testing" textAlignment="CENTER" wrappingWidth="205.02587890625">
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="153.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Lead Programmer, Head master)" wrappingWidth="119.02587890625">
+            <font>
+               <Font name="System Italic" size="10.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="151.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Programmer)" wrappingWidth="77.02587890625">
+            <font>
+               <Font name="System Italic" size="12.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="150.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Programmer)" wrappingWidth="77.02587890625">
+            <font>
+               <Font name="System Italic" size="12.0" />
+            </font>
+         </Text>
+         <ImageView fitHeight="100.0" fitWidth="121.0" layoutX="28.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@qrCode.png" />
+            </image>
+         </ImageView>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="579.0" layoutX="452.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="21.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="579.0" layoutX="-4.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="21.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="13.0" layoutX="12.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="456.0" />
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#363636" height="13.0" layoutX="11.0" layoutY="566.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="456.0" />
+         <Text fill="WHITE" layoutX="167.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREDITS">
             <font>
                <Font name="Haettenschweiler" size="51.0" />
             </font>
          </Text>
-         <Text layoutX="143.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dāvids Adamovičs" wrappingWidth="169.02587890625">
-            <font>
-               <Font size="21.0" />
-            </font>
-         </Text>
-         <Text layoutX="150.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alekss Grečuhins" wrappingWidth="158.02587890625">
-            <font>
-               <Font size="21.0" />
-            </font>
-         </Text>
-         <Text layoutX="162.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oskars Valters" wrappingWidth="132.02587890625">
-            <font>
-               <Font size="21.0" />
-            </font>
-         </Text>
-         <Text layoutX="125.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game logic, Graphics, Testing/Debugging, Optimization, Project Management, UI/UX Design, Documentation" textAlignment="CENTER" wrappingWidth="205.02587890625">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </Text>
-         <Text layoutX="139.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Lead Programmer, Head master)" wrappingWidth="176.02587890625">
-            <font>
-               <Font name="System Italic" size="12.0" />
-            </font>
-         </Text>
-         <Text layoutX="189.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Programmer)" wrappingWidth="77.02587890625">
-            <font>
-               <Font name="System Italic" size="12.0" />
-            </font>
-         </Text>
-         <Text layoutX="189.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Programmer)" wrappingWidth="77.02587890625">
-            <font>
-               <Font name="System Italic" size="12.0" />
-            </font>
-         </Text>
-         <Button fx:id="BackButton" layoutX="189.0" layoutY="505.0" mnemonicParsing="false" onAction="#goBack" styleClass="Button" stylesheets="@application.css" text="BACK" />
-         <Text layoutX="124.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound Effects, Testing, Game functions" textAlignment="CENTER" wrappingWidth="205.02587890625">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </Text>
-         <Text layoutX="124.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Testing" textAlignment="CENTER" wrappingWidth="205.02587890625">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </Text>
+         <ImageView fitHeight="106.0" fitWidth="123.0" layoutX="309.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@githubUsers.png" />
+            </image>
+         </ImageView>
       </children></AnchorPane>
 </Scene>

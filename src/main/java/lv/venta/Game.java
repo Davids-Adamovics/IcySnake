@@ -34,6 +34,10 @@ public class Game extends Application {
     static int food3Y = 0;
     static int powerUpX = 0;
     static int powerUpY = 0;
+    static int plus5X = 0;
+    static int plus5Y = 0;
+    static int bombX = 0;
+    static int bombY = 0;
     static int counter = 0;
     static int barrierX = 0;
     static int barrierY = 0;
@@ -48,6 +52,7 @@ public class Game extends Application {
     static boolean showInstructions = true;
     static boolean gameOverSoundPlayed = false;
     static boolean inGameOverState = false;
+    static boolean powerUpPlayed = true;
 
     static Image abols;
     static Image banans;
@@ -56,11 +61,15 @@ public class Game extends Application {
     static Image kronis;
     static Image barjera;
     static Image powerup;
+    static Image bomb;
+    static Image plus5;
     static Image backgroundImage1;
     static Image backgroundImage2;
     static Image iconImage;
     static Image currentBarrier;
     static Image currentPowerUp;
+    static Image currentBomb;
+    static Image currentPlus5;
     static Image currentFruit1;
     static Image currentFruit2;
     static Image currentFruit3;
@@ -69,14 +78,17 @@ public class Game extends Application {
     static enumDirections direction = enumDirections.left;
     static backgroundMusic musicPlayer;
     static Random rand = new Random();
+    static Random random = new Random();
     static Stage pauseStage;
     public static Color snakeColor = Color.GREEN;
-    
-public static Image BackgroundsImage = backgroundImage2;
-static {
-    // Initialize BackgroundsImage with backgroundImage2
-    BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
-}
+
+    public static Image BackgroundsImage = backgroundImage2;
+    public static int willBarrierSpawn = 0;
+    static {
+        // Initialize BackgroundsImage with backgroundImage2
+        BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
+    }
+
     public void start(Stage primaryStage) {
         try {
 
@@ -90,6 +102,8 @@ static {
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
+            bomb = new Image(getClass().getResource("bomb.png").toExternalForm());
+            plus5 = new Image(getClass().getResource("plus5.png").toExternalForm());
             kronis = new Image(getClass().getResource("crown.png").toExternalForm());
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
@@ -108,14 +122,14 @@ static {
                         if (showInstructions) {
                             drawInstructions(gc);
                         } else {
-                            //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                            gc.setFill(Color.web("#88b5d1")); 
+                            // gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                            gc.setFill(Color.web("#88b5d1"));
                             gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
                             gc.setFill(Color.web("#ffffff"));
                             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30);
                             gc.setFont(customFont);
                             gc.fillText("Press SPACE to Start", 115, 290);
-                        }//s
+                        } // s
                         return;
                     }
 
@@ -133,7 +147,6 @@ static {
             }.start();
 
             Scene scene = new Scene(vb, 590, 590); // set scene
-
             // =========//
             // KEYBINDS //
             // =========//
@@ -151,7 +164,7 @@ static {
                     pauseGame(primaryStage);
                 } else if (key.getCode() == KeyCode.P || key.getCode() == KeyCode.R) { // Restart game ar R
                     backgroundMusic.stopMusic();
-                	resetGame();
+                    resetGame();
                 } else {
                     if (gameStarted) {
                         // WASD un bultinas
@@ -207,33 +220,31 @@ static {
         if (gameOver) {
             inGameOverState = true;
 
-
             gc.setFill(Color.web("#5ac3d1", 0.1)); // fonta krasa un caurspidigums
-            gc.fillRect(0, 0, 590, 590);    // game over fons
+            gc.fillRect(0, 0, 590, 590); // game over fons
 
             // Fonti
             Font HEADER = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 80);
             Font POINTS = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
             Font INFO = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
-            
-            
-            gc.setGlobalAlpha(0.3); //caurspīdīgums
 
-            //gameover
+            gc.setGlobalAlpha(0.3); // caurspīdīgums
+
+            // gameover
             gc.setFont(HEADER);
             gc.setFill(Color.WHITE);
             gc.fillText("GAME OVER", 60, 100);
 
-            //info
+            // info
             gc.setFont(INFO);
             gc.fillText("Press \"r\" or \"p\"  to restart", 100, 350);
-            
-            //punkti
+
+            // punkti
             gc.setFont(POINTS);
             gc.fillText(Integer.toString(counter), 170, 260, 35);
             gc.fillText(Integer.toString(highScore), 420, 260, 35);
-            
-            //atteli
+
+            // atteli
             gc.drawImage(abols, 110, 220, 55, 55);
             gc.drawImage(kronis, 350, 220, 55, 55);
 
@@ -288,67 +299,84 @@ static {
                 break;
         }
 
-        // food
         if (food1X == snake.get(0).x && food1Y == snake.get(0).y || food2X == snake.get(0).x && food2Y == snake.get(0).y
                 || food3X == snake.get(0).x && food3Y == snake.get(0).y) { // food
             snake.add(new SnakesBody(-1, -1));
             newFood();
             counter += 1;
         }
+
+        // ==========//
+        // power up //
+        // ==========//
+
         if (powerUpX == snake.get(0).x && powerUpY == snake.get(0).y) { // power up
             snake.add(new SnakesBody(-1, -1));
             newFood();
             counter += 1;
-            Random random = new Random();
-            int x = random.nextInt(2) + 1; // 1-4 power ups
+
+            gc.setFill(Color.RED);
+            Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
+            gc.setFont(customFont);
+            gc.fillText("FAKE POWER UP HAHA", 140, 290); // FAKE POWER UP
+            System.out.println("FAKE POWER UP HAHA");
+            counter -= 2;
+
+        }
+        if (bombX == snake.get(0).x && bombY == snake.get(0).y) { // power up
+            snake.add(new SnakesBody(-1, -1));
+            newFood();
+            counter += 1;
 
             // ==========//
-            // power ups //
+            // bomb //
             // ==========//
-            
-            if (x == 1) {
-                speed -= 3;
-                gc.setFill(Color.RED);
-                Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
-                gc.setFont(customFont);
-                gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
-                System.out.println("-3 speed / mix");
 
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-                    // This code will run every second
-                    for (int i = 0; i < 5; i++) {
+            speed -= 3;
+            gc.setFill(Color.RED);
+            Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
+            gc.setFont(customFont);
+            gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
+            System.out.println("-3 speed / mix");
+
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+                // This code will run every second
+                for (int i = 0; i < 5; i++) {
+                    if (gameOver == false) {
                         newFood();
                         speed--;
                     }
-                }));
+                }
+            }));
 
-                timeline.setCycleCount(5);
-                timeline.setOnFinished(event -> {
-                    System.out.println("Five seconds have passed!");
-                    speed += 3;
-                });
+            timeline.setCycleCount(5);
+            timeline.setOnFinished(event -> {
+                System.out.println("Five seconds have passed!");
+                powerUpPlayed = true;
+                speed += 3;
+            });
 
-                timeline.play();
-            }
+            timeline.play();
 
-           
-            if (x == 2) {
-                counter += 5;
-                speed++;
-                gc.setFill(Color.RED);
-                Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
-                gc.setFont(customFont);
-                gc.fillText("+5 points", 140, 290);
-                System.out.println("+5 points");
-            }
-            if (x == 3) {
-                gc.setFill(Color.RED);
-                Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
-                gc.setFont(customFont);
-                gc.fillText("FAKE POWER UP HAHA", 140, 290); // FAKE POWER UP
-                System.out.println("FAKE POWER UP HAHA");
-                counter -= 2;
-            }
+        }
+        if (plus5X == snake.get(0).x && plus5Y == snake.get(0).y) { // power up
+            snake.add(new SnakesBody(-1, -1));
+            newFood();
+            counter += 1;
+
+            // ======//
+            // plus5 //
+            // ======//
+
+            counter += 5;
+            speed += 0.1;
+            gc.setFill(Color.RED);
+            Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
+            gc.setFont(customFont);
+            gc.fillText("+5 points", 140, 290);
+            System.out.println("+5 points");
+            powerUpPlayed = true;
+
         }
         // ========//
         // barrier //
@@ -370,7 +398,11 @@ static {
 
         // Set the background rectangle color and size
         Canvas canvas = new Canvas(590, 50);
-        gc.setFill(Color.web("#0097B2"));
+        if (Buttons.color == 0) {
+            gc.setFill(Color.web("#0097B2"));
+        } else if (Buttons.color == 1) {
+            gc.setFill(Color.web("#8EA60F"));
+        }
         gc.fillRect(0, 0, canvas.getWidth(), 50);
 
         // Set the text color, font, and draw the score text
@@ -397,8 +429,6 @@ static {
 
             gc.setFill(snakeColor);
 
-
-
             double rectWidth = partSize;
             double rectHeight = partSize;
 
@@ -410,13 +440,16 @@ static {
         // powerup, ediens, barjera //
         // =========================//
         gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 25, 25);
+        gc.drawImage(currentPlus5, plus5X * 25, plus5Y * 25, 25, 25);
+        gc.drawImage(currentBomb, bombX * 25, bombY * 25, 25, 25);
         gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
         gc.drawImage(currentFruit2, food2X * 25, food2Y * 25, 25, 25);
         gc.drawImage(currentFruit3, food3X * 25, food3Y * 25, 25, 25);
-        gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
-
+        if (willBarrierSpawn == 1) {
+            gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
+        }
     }
-    
+
     // pause game
     private static void pauseGame(Stage primaryStage) {
         GameOptions.pauseGame(primaryStage);
@@ -482,6 +515,14 @@ static {
     // izveido jaunu power up
     static Image generateNewPowerUp() {
         return powerup;
+    }
+
+    static Image generateNewBomb() {
+        return bomb;
+    }
+
+    static Image generateNewPlus5() {
+        return plus5;
     }
 
     // izveido jaunu augli

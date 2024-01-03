@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 public class Buttons {
 
+    public static int color = 0;
+
     static Button createButton(String text, Stage primaryStage, VBox pauseBox) {
         Button button = new Button(text);
         button.setStyle(
@@ -66,13 +68,16 @@ public class Buttons {
                 break;
             case "Blue":
                 Game.BackgroundsImage = Game.backgroundImage2;
-                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+                showInitialButtons(pauseBox, primaryStage); // restore original buttons
                 backgroundMusic.PlayButtonSound();
+                color = 0;
                 break;
+
             case "Yellow":
                 Game.BackgroundsImage = Game.backgroundImage1;
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
                 backgroundMusic.PlayButtonSound();
+                color = 1;
                 break;
             case "Change Music":
                 changeMusic(pauseBox, primaryStage);

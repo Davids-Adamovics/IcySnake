@@ -13,6 +13,23 @@
     -fx-background-color: #28565f; 
 }
 
+.CreditsButton {
+    -fx-font: 22px "Serif";
+    -fx-padding: 10;
+    -fx-background-color: #859294;
+    -fx-text-fill: #ffffff;
+}
+
+.CreditsButton:hover {
+    -fx-background-color: #515252; 
+}
+
+.CreditsButton:pressed {
+    -fx-background-color: #383838; 
+}
+
+
+
 .anchor-pane {
     -fx-background-image: url('background3.png'); 
     -fx-background-size: cover; 
