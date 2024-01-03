@@ -18,12 +18,13 @@ public class SecondaryController {
 
     @FXML
     private Button startButton;
-
+    
     @FXML
     private Button createButton;
 
     @FXML
     private Button exitButton;
+    
 
     public void openRegister(ActionEvent event) throws IOException {
         try {
@@ -52,6 +53,7 @@ public class SecondaryController {
 
 
     }
+
 
     public void exitOut(ActionEvent event) {
     	backgroundMusic.PlayButtonSound();

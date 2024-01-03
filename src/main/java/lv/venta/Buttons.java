@@ -94,7 +94,7 @@ public class Buttons {
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Music three":
-                Game.musicPlayer.BackgroundMusic(new String[] { "game2.wav" }); // play game 2
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" }); // play game 2
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
                 backgroundMusic.PlayButtonSound();
                 break;

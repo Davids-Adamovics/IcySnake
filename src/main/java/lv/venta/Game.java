@@ -381,6 +381,9 @@ public class Game extends Application {
         // ========//
         // barrier //
         // ========//
+        if(willBarrierSpawn==1) {
+        	
+   
         if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
             gameOver = true;
             stopBackgroundMusic();
@@ -392,7 +395,7 @@ public class Game extends Application {
                 gameOver = true;
                 stopBackgroundMusic();
                 gameOverSoundPlayed = true;
-
+            }
             }
         }
 
