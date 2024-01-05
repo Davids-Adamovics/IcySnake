@@ -10,7 +10,7 @@
 # Maven files
 /.mvn/
 pom.xml
-target/
+
 
 # Eclipse files
 .project
@@ -23,4 +23,4 @@ target/
 
 # Miscellaneous
 README.md
-/target/
+
