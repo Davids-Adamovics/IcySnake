@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class Buttons {
 
     public static int color = 0;
+   
 
     static Button createButton(String text, Stage primaryStage, VBox pauseBox) {
         Button button = new Button(text);
@@ -85,16 +86,19 @@ public class Buttons {
                 break;
             case "Music one":
                 Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" }); // play game 1
+                Game.currentMusicPreference = 1;
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Music two":
                 Game.musicPlayer.BackgroundMusic(new String[] { "game4.wav" }); // play game 4
+                Game.currentMusicPreference = 2;
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Music three":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" }); // play game 2
+                Game.currentMusicPreference = 3;
                 showInitialButtons(pauseBox, primaryStage); // parada original pogas
                 backgroundMusic.PlayButtonSound();
                 break;

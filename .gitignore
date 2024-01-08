@@ -24,3 +24,4 @@ pom.xml
 # Miscellaneous
 README.md
 
+/target/

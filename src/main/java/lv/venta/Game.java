@@ -84,6 +84,9 @@ public class Game extends Application {
 
     public static Image BackgroundsImage = backgroundImage2;
     public static int willBarrierSpawn = 0;
+    
+    public static int currentMusicPreference = 0;
+    
     static {
         // Initialize BackgroundsImage with backgroundImage2
         BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
@@ -321,6 +324,8 @@ public class Game extends Application {
             gc.fillText("FAKE POWER UP HAHA", 140, 290); // FAKE POWER UP
             System.out.println("FAKE POWER UP HAHA");
             counter -= 2;
+            
+            backgroundMusic.playStarSound();
 
         }
         if (bombX == snake.get(0).x && bombY == snake.get(0).y) { // power up
@@ -338,6 +343,8 @@ public class Game extends Application {
             gc.setFont(customFont);
             gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
             System.out.println("-3 speed / mix");
+            
+            backgroundMusic.playBombSound();
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
                 // This code will run every second
@@ -376,6 +383,8 @@ public class Game extends Application {
             gc.fillText("+5 points", 140, 290);
             System.out.println("+5 points");
             powerUpPlayed = true;
+            
+            backgroundMusic.playCoinSound();
 
         }
         // ========//
@@ -388,6 +397,7 @@ public class Game extends Application {
             gameOver = true;
             stopBackgroundMusic();
             gameOverSoundPlayed = true;
+            backgroundMusic.playBarrierSound();
         }
 
         for (int i = 1; i < snake.size(); i++) { // ja čūska saskarās ar savu ķermeni
@@ -493,6 +503,24 @@ public class Game extends Application {
     // reset game
     static void resetGame() {
         GameOptions.resetGame();
+        backgroundMusic.stopMusic();
+        
+        switch (Game.currentMusicPreference) {
+        case 1:
+            Game.musicPlayer.BackgroundMusic(new String[]{"game1.wav"});
+            break;
+        case 2:
+            Game.musicPlayer.BackgroundMusic(new String[]{"game4.wav"});
+            break;
+        case 3:
+            Game.musicPlayer.BackgroundMusic(new String[]{"gameYeat.wav"});
+            break;
+   
+        default:
+            
+            Game.musicPlayer.BackgroundMusic(new String[]{"game1.wav"});
+            break;
+    }
     }
 
     // Options
