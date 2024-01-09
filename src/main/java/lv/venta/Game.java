@@ -403,6 +403,7 @@ public class Game extends Application {
                 gameOverSoundPlayed = true;
                 backgroundMusic.playBarrierSound();
             }
+        }
 
             for (int i = 1; i < snake.size(); i++) { // ja čūska saskarās ar savu ķermeni
                 if (snake.get(0).x == snake.get(i).x && snake.get(0).y == snake.get(i).y) {
@@ -411,7 +412,6 @@ public class Game extends Application {
                     gameOverSoundPlayed = true;
                 }
             }
-        }
 
         // Set the background rectangle color and size
         Canvas canvas = new Canvas(590, 50);

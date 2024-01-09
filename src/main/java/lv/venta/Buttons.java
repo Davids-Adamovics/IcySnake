@@ -106,6 +106,10 @@ public class Buttons {
                 showLeaderboard(primaryStage, pauseBox);
                 backgroundMusic.PlayButtonSound();
                 break;
+            case "Tutorial":
+            	showTutorial(primaryStage, pauseBox);
+            	backgroundMusic.PlayButtonSound();
+            	break;
         }
     }
 
@@ -116,7 +120,9 @@ public class Buttons {
                 createButton("Restart", primaryStage, pauseBox),
                 createButton("Options", primaryStage, pauseBox),
                 createButton("Leaderboard", primaryStage, pauseBox),
+                createButton("Tutorial", primaryStage, pauseBox),
                 createButton("Quit", primaryStage, pauseBox));
+        
     }
 
     static void showLeaderboard(Stage primaryStage, VBox pauseBox) {
@@ -238,4 +244,27 @@ public class Buttons {
                 createButton("Back", primaryStage, pauseBox));
 
     }
+    
+    static void showTutorial(VBox pauseBox, Stage primaryStage) {
+    	pauseBox.getChildren().clear();
+    	
+    	Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+        Label valueLabel = new Label("Info panel");
+        valueLabel.setFont(customFont);
+        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setAlignment(Pos.CENTER);
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 10);
+        Label powerUpInfo = new Label("Power ups");
+        Label powerUpInfoBomb = new Label("Bomb\nCrown");
+        Label powerUpInfoCrown = new Label("Crown");
+        Label powerUpInfoPlus5 = new Label("Plus 5");
+        Label powerUpInfoBarrier = new Label("Barrier");
+        Label powerUpInfoFruits = new Label("Fruits");
+        
+        
+        pauseBox.getChildren().addAll(
+                valueLabel,
+                createButton("Back", primaryStage, pauseBox));
+    }
+    
 }
