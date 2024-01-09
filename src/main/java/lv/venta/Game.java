@@ -10,6 +10,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -93,18 +95,21 @@ public class Game extends Application {
         try {
 
             // Mainigie/base canvas //
-            abols = new Image(getClass().getResource("apple.png").toExternalForm());
-            banans = new Image(getClass().getResource("banana.png").toExternalForm());
-            vinogas = new Image(getClass().getResource("grapes.png").toExternalForm());
-            zemene = new Image(getClass().getResource("strawberry.png").toExternalForm());
-            barjera = new Image(getClass().getResource("barrier.png").toExternalForm());
+            Image asdImage = new Image(getClass().getResource("utilStileSheet.png").toExternalForm());
+
+            // Crop the portions for different images
+            banans = cropImage(asdImage, 0, 0, 250, 250);
+            zemene = cropImage(asdImage, 0, 316, 350, 350);
+            vinogas = cropImage(asdImage, 0, 690, 350, 350);
+            barjera = cropImage(asdImage, 460, 0, 250, 250);
+            kronis = cropImage(asdImage, 420, 350, 350, 350);
+            abols = cropImage(asdImage, 460, 760, 250, 265);
+            plus5 = cropImage(asdImage, 950, 70, 150, 150);
+            bomb = cropImage(asdImage, 950, 0430, 150, 150);
+            powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
-            powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
-            bomb = new Image(getClass().getResource("bomb.png").toExternalForm());
-            plus5 = new Image(getClass().getResource("plus5.png").toExternalForm());
-            kronis = new Image(getClass().getResource("crown.png").toExternalForm());
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
             newFood();
@@ -381,13 +386,13 @@ public class Game extends Application {
         // ========//
         // barrier //
         // ========//
-        if(willBarrierSpawn==1) {
-        	
-   
-        if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
-            gameOver = true;
-            stopBackgroundMusic();
-            gameOverSoundPlayed = true;
+
+        if (willBarrierSpawn == 1) {
+            if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
+                gameOver = true;
+                stopBackgroundMusic();
+                gameOverSoundPlayed = true;
+            }
         }
 
         for (int i = 1; i < snake.size(); i++) { // ja čūska saskarās ar savu ķermeni
@@ -395,7 +400,6 @@ public class Game extends Application {
                 gameOver = true;
                 stopBackgroundMusic();
                 gameOverSoundPlayed = true;
-            }
             }
         }
 
@@ -526,6 +530,12 @@ public class Game extends Application {
 
     static Image generateNewPlus5() {
         return plus5;
+    }
+
+    private Image cropImage(Image image, int x, int y, int width, int height) {
+        PixelReader pixelReader = image.getPixelReader();
+        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);
+        return croppedImage;
     }
 
     // izveido jaunu augli
