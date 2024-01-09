@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -107,8 +108,12 @@ public class Buttons {
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Tutorial":
-            	showTutorial(primaryStage, pauseBox);
+            	showTutorial(pauseBox, primaryStage);
             	backgroundMusic.PlayButtonSound();
+            	break;
+            case "Achivements":
+                showAchivements(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
             	break;
         }
     }
@@ -118,9 +123,10 @@ public class Buttons {
         pauseBox.getChildren().addAll(
                 createButton("Resume", primaryStage, pauseBox),
                 createButton("Restart", primaryStage, pauseBox),
-                createButton("Options", primaryStage, pauseBox),
-                createButton("Leaderboard", primaryStage, pauseBox),
                 createButton("Tutorial", primaryStage, pauseBox),
+                createButton("Leaderboard", primaryStage, pauseBox),
+                createButton("Achivements", primaryStage, pauseBox),
+                createButton("Options", primaryStage, pauseBox),
                 createButton("Quit", primaryStage, pauseBox));
         
     }
@@ -248,23 +254,86 @@ public class Buttons {
     static void showTutorial(VBox pauseBox, Stage primaryStage) {
     	pauseBox.getChildren().clear();
     	
-    	Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+    	Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
+        Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 10);
         Label valueLabel = new Label("Info panel");
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#4682b4"));
         valueLabel.setAlignment(Pos.CENTER);
-        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 10);
-        Label powerUpInfo = new Label("Power ups");
-        Label powerUpInfoBomb = new Label("Bomb\nCrown");
-        Label powerUpInfoCrown = new Label("Crown");
-        Label powerUpInfoPlus5 = new Label("Plus 5");
-        Label powerUpInfoBarrier = new Label("Barrier");
-        Label powerUpInfoFruits = new Label("Fruits");
+
+        Label powerUpInfo = new Label("Bomb - Mixes the fruits for 5s while slowing the speed by -3\n"+
+        "+5 - Adds +5 points to the counter\n"+
+        "Star - removes -2 points from the counter\n"+
+        "Fruit - adds +1 to the counter and +1 speed\n"+
+        "Barrier - Ends the game");
+        powerUpInfo.setFont(customFont1);
         
         
         pauseBox.getChildren().addAll(
                 valueLabel,
+                powerUpInfo,
+
                 createButton("Back", primaryStage, pauseBox));
     }
+
+
+    static void showAchivements(VBox pauseBox, Stage primaryStage) {
+        pauseBox.getChildren().clear();
+    
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 40);
+        Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 20);
+        Label valueLabel = new Label("Achivements");
+        valueLabel.setFont(customFont);
+        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setAlignment(Pos.CENTER);
+    
+        ImageView i1 = new ImageView(Game.Achivement1);
+        ImageView i2 = new ImageView(Game.Achivement2);  // Add this line
+        ImageView i3 = new ImageView(Game.Achivement3);  // Add this line
+    
+        // Set the size and coordinates for the first image
+        i1.setFitWidth(64);
+        i1.setFitHeight(64);
+        i1.setTranslateX(-180);
+        i1.setTranslateY(-120);
+    
+        // Set the size and coordinates for the second image
+        i2.setFitWidth(64);
+        i2.setFitHeight(64);
+        i2.setTranslateX(-180);  // Adjust X-coordinate as needed
+        i2.setTranslateY(-70);  // Adjust Y-coordinate as needed
+    
+        // Set the size and coordinates for the third image
+        i3.setFitWidth(64);
+        i3.setFitHeight(64);
+        i3.setTranslateX(-180);  // Adjust X-coordinate as needed
+        i3.setTranslateY(-20);  // Adjust Y-coordinate as needed
+    
+        Label Achivement1 = new Label("Reach 100 points");
+        Label Achivement2 = new Label("Dodge 20 Barriersss");
+        Label Achivement3 = new Label("Claim 10 Bombs durring a game");
+
+        Achivement1.setTranslateX(0);
+        Achivement1.setTranslateY(20);
+        Achivement2.setTranslateX(0);
+        Achivement2.setTranslateY(120);
+        Achivement3.setTranslateX(50);
+        Achivement3.setTranslateY(220);
+        Achivement1.setFont(customFont1);
+        Achivement2.setFont(customFont1);
+        Achivement3.setFont(customFont1);
+    
+        pauseBox.getChildren().addAll(
+            valueLabel,
+            Achivement1,
+            Achivement2,
+            Achivement3,
+            i1,
+            i2,
+            i3,
+            createButton("Back", primaryStage, pauseBox)
+    );
+    }
+    
     
 }

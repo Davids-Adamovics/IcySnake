@@ -64,6 +64,9 @@ public class Game extends Application {
     static Image barjera;
     static Image powerup;
     static Image bomb;
+    static Image Achivement1;
+    static Image Achivement2;
+    static Image Achivement3;
     static Image plus5;
     static Image backgroundImage1;
     static Image backgroundImage2;
@@ -115,6 +118,10 @@ public class Game extends Application {
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
+            Achivement1 = new Image(getClass().getResource("Achivement1.png").toExternalForm());
+            Achivement2 = new Image(getClass().getResource("Achivement2.png").toExternalForm());
+            Achivement3 = new Image(getClass().getResource("Achivement3.png").toExternalForm());
+
             newFood();
 
             VBox vb = new VBox(); // izveido main canvas, scene pamats
@@ -405,13 +412,13 @@ public class Game extends Application {
             }
         }
 
-            for (int i = 1; i < snake.size(); i++) { // ja čūska saskarās ar savu ķermeni
-                if (snake.get(0).x == snake.get(i).x && snake.get(0).y == snake.get(i).y) {
-                    gameOver = true;
-                    stopBackgroundMusic();
-                    gameOverSoundPlayed = true;
-                }
+        for (int i = 1; i < snake.size(); i++) { // ja čūska saskarās ar savu ķermeni
+            if (snake.get(0).x == snake.get(i).x && snake.get(0).y == snake.get(i).y) {
+                gameOver = true;
+                stopBackgroundMusic();
+                gameOverSoundPlayed = true;
             }
+        }
 
         // Set the background rectangle color and size
         Canvas canvas = new Canvas(590, 50);
