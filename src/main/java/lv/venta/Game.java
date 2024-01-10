@@ -10,6 +10,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -62,6 +64,9 @@ public class Game extends Application {
     static Image barjera;
     static Image powerup;
     static Image bomb;
+    static Image Achivement1;
+    static Image Achivement2;
+    static Image Achivement3;
     static Image plus5;
     static Image backgroundImage1;
     static Image backgroundImage2;
@@ -84,9 +89,9 @@ public class Game extends Application {
 
     public static Image BackgroundsImage = backgroundImage2;
     public static int willBarrierSpawn = 0;
-    
+
     public static int currentMusicPreference = 0;
-    
+
     static {
         // Initialize BackgroundsImage with backgroundImage2
         BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
@@ -96,20 +101,27 @@ public class Game extends Application {
         try {
 
             // Mainigie/base canvas //
-            abols = new Image(getClass().getResource("apple.png").toExternalForm());
-            banans = new Image(getClass().getResource("banana.png").toExternalForm());
-            vinogas = new Image(getClass().getResource("grapes.png").toExternalForm());
-            zemene = new Image(getClass().getResource("strawberry.png").toExternalForm());
-            barjera = new Image(getClass().getResource("barrier.png").toExternalForm());
+            Image asdImage = new Image(getClass().getResource("utilStileSheet.png").toExternalForm());
+
+            // Crop the portions for different images
+            banans = cropImage(asdImage, 0, 0, 250, 250);
+            zemene = cropImage(asdImage, 0, 316, 350, 350);
+            vinogas = cropImage(asdImage, 0, 690, 350, 350);
+            barjera = cropImage(asdImage, 460, 0, 250, 250);
+            kronis = cropImage(asdImage, 420, 350, 350, 350);
+            abols = cropImage(asdImage, 460, 760, 250, 265);
+            plus5 = cropImage(asdImage, 950, 70, 150, 150);
+            bomb = cropImage(asdImage, 950, 0430, 150, 150);
+            powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
-            powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
-            bomb = new Image(getClass().getResource("bomb.png").toExternalForm());
-            plus5 = new Image(getClass().getResource("plus5.png").toExternalForm());
-            kronis = new Image(getClass().getResource("crown.png").toExternalForm());
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
+            Achivement1 = new Image(getClass().getResource("Achivement1.png").toExternalForm());
+            Achivement2 = new Image(getClass().getResource("Achivement2.png").toExternalForm());
+            Achivement3 = new Image(getClass().getResource("Achivement3.png").toExternalForm());
+
             newFood();
 
             VBox vb = new VBox(); // izveido main canvas, scene pamats
@@ -324,7 +336,7 @@ public class Game extends Application {
             gc.fillText("FAKE POWER UP HAHA", 140, 290); // FAKE POWER UP
             System.out.println("FAKE POWER UP HAHA");
             counter -= 2;
-            
+
             backgroundMusic.playStarSound();
 
         }
@@ -343,7 +355,7 @@ public class Game extends Application {
             gc.setFont(customFont);
             gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
             System.out.println("-3 speed / mix");
-            
+
             backgroundMusic.playBombSound();
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -383,21 +395,21 @@ public class Game extends Application {
             gc.fillText("+5 points", 140, 290);
             System.out.println("+5 points");
             powerUpPlayed = true;
-            
+
             backgroundMusic.playCoinSound();
 
         }
         // ========//
         // barrier //
         // ========//
-        if(willBarrierSpawn==1) {
-        	
-   
-        if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
-            gameOver = true;
-            stopBackgroundMusic();
-            gameOverSoundPlayed = true;
-            backgroundMusic.playBarrierSound();
+        if (willBarrierSpawn == 1) {
+
+            if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
+                gameOver = true;
+                stopBackgroundMusic();
+                gameOverSoundPlayed = true;
+                backgroundMusic.playBarrierSound();
+            }
         }
 
         for (int i = 1; i < snake.size(); i++) { // ja čūska saskarās ar savu ķermeni
@@ -405,7 +417,6 @@ public class Game extends Application {
                 gameOver = true;
                 stopBackgroundMusic();
                 gameOverSoundPlayed = true;
-            }
             }
         }
 
@@ -504,23 +515,23 @@ public class Game extends Application {
     static void resetGame() {
         GameOptions.resetGame();
         backgroundMusic.stopMusic();
-        
+
         switch (Game.currentMusicPreference) {
-        case 1:
-            Game.musicPlayer.BackgroundMusic(new String[]{"game1.wav"});
-            break;
-        case 2:
-            Game.musicPlayer.BackgroundMusic(new String[]{"game4.wav"});
-            break;
-        case 3:
-            Game.musicPlayer.BackgroundMusic(new String[]{"gameYeat.wav"});
-            break;
-   
-        default:
-            
-            Game.musicPlayer.BackgroundMusic(new String[]{"game1.wav"});
-            break;
-    }
+            case 1:
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                break;
+            case 2:
+                Game.musicPlayer.BackgroundMusic(new String[] { "game4.wav" });
+                break;
+            case 3:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" });
+                break;
+
+            default:
+
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                break;
+        }
     }
 
     // Options
@@ -546,6 +557,12 @@ public class Game extends Application {
     // izveido jaunu power up
     static Image generateNewPowerUp() {
         return powerup;
+    }
+
+    private Image cropImage(Image image, int x, int y, int width, int height) {
+        PixelReader pixelReader = image.getPixelReader();
+        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);
+        return croppedImage;
     }
 
     static Image generateNewBomb() {
