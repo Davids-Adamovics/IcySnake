@@ -79,28 +79,28 @@ public class backgroundMusic {
 
     public static void playStarSound() {
         // Star powerUp sound
-        Media sound = new Media(backgroundMusic.class.getResource("").toString());
+        Media sound = new Media(backgroundMusic.class.getResource("starSound2.wav").toString());
         MediaPlayer starSoundPlayer = new MediaPlayer(sound);
         starSoundPlayer.setVolume(volume * 0.5);
         starSoundPlayer.play();
     }
     public static void playBombSound() {
         // Bomb powerUp sound
-        Media sound = new Media(backgroundMusic.class.getResource("").toString());
+        Media sound = new Media(backgroundMusic.class.getResource("bombSound.wav").toString());
         MediaPlayer bombSoundPlayer = new MediaPlayer(sound);
         bombSoundPlayer.setVolume(volume * 0.5);
         bombSoundPlayer.play();
     }
     public static void playCoinSound() {
         // coin powerUp sound
-        Media sound = new Media(backgroundMusic.class.getResource("").toString());
+        Media sound = new Media(backgroundMusic.class.getResource("coinSound.wav").toString());
         MediaPlayer coinSoundPlayer = new MediaPlayer(sound);
         coinSoundPlayer.setVolume(volume * 0.5);
         coinSoundPlayer.play();
     }
     public static void playBarrierSound() {
         // barrier hit sound
-        Media sound = new Media(backgroundMusic.class.getResource("").toString());
+        Media sound = new Media(backgroundMusic.class.getResource("barrierSound.wav").toString());
         MediaPlayer barrierSoundPlayer = new MediaPlayer(sound);
         barrierSoundPlayer.setVolume(volume * 0.5);
         barrierSoundPlayer.play();
