@@ -15,6 +15,9 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class SecondaryController {
+	
+	@FXML
+	private Button optionsButton;
 
     @FXML
     private Button startButton;
@@ -25,6 +28,7 @@ public class SecondaryController {
     @FXML
     private Button exitButton;
     
+  
 
     public void openRegister(ActionEvent event) throws IOException {
         try {
@@ -53,6 +57,7 @@ public class SecondaryController {
 
 
     }
+   
 
 
     public void exitOut(ActionEvent event) {
@@ -60,6 +65,13 @@ public class SecondaryController {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }
+    public void openOptions(ActionEvent event) {
+    
+        backgroundMusic.PlayButtonSound();
+       
+    }
+
+ 
 
 
 

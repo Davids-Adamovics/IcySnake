@@ -64,6 +64,9 @@ public class Game extends Application {
     static Image barjera;
     static Image powerup;
     static Image bomb;
+    static Image Achivement1;
+    static Image Achivement2;
+    static Image Achivement3;
     static Image plus5;
     static Image backgroundImage1;
     static Image backgroundImage2;
@@ -86,6 +89,9 @@ public class Game extends Application {
 
     public static Image BackgroundsImage = backgroundImage2;
     public static int willBarrierSpawn = 0;
+
+    public static int currentMusicPreference = 0;
+
     static {
         // Initialize BackgroundsImage with backgroundImage2
         BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
@@ -112,6 +118,10 @@ public class Game extends Application {
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
             musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
             musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
+            Achivement1 = new Image(getClass().getResource("Achivement1.png").toExternalForm());
+            Achivement2 = new Image(getClass().getResource("Achivement2.png").toExternalForm());
+            Achivement3 = new Image(getClass().getResource("Achivement3.png").toExternalForm());
+
             newFood();
 
             VBox vb = new VBox(); // izveido main canvas, scene pamats
@@ -327,6 +337,8 @@ public class Game extends Application {
             System.out.println("FAKE POWER UP HAHA");
             counter -= 2;
 
+            backgroundMusic.playStarSound();
+
         }
         if (bombX == snake.get(0).x && bombY == snake.get(0).y) { // power up
             snake.add(new SnakesBody(-1, -1));
@@ -343,6 +355,8 @@ public class Game extends Application {
             gc.setFont(customFont);
             gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
             System.out.println("-3 speed / mix");
+
+            backgroundMusic.playBombSound();
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
                 // This code will run every second
@@ -382,16 +396,19 @@ public class Game extends Application {
             System.out.println("+5 points");
             powerUpPlayed = true;
 
+            backgroundMusic.playCoinSound();
+
         }
         // ========//
         // barrier //
         // ========//
-
         if (willBarrierSpawn == 1) {
+
             if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
                 gameOver = true;
                 stopBackgroundMusic();
                 gameOverSoundPlayed = true;
+                backgroundMusic.playBarrierSound();
             }
         }
 
@@ -497,6 +514,24 @@ public class Game extends Application {
     // reset game
     static void resetGame() {
         GameOptions.resetGame();
+        backgroundMusic.stopMusic();
+
+        switch (Game.currentMusicPreference) {
+            case 1:
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                break;
+            case 2:
+                Game.musicPlayer.BackgroundMusic(new String[] { "game4.wav" });
+                break;
+            case 3:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" });
+                break;
+
+            default:
+
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                break;
+        }
     }
 
     // Options
@@ -524,18 +559,18 @@ public class Game extends Application {
         return powerup;
     }
 
+    private Image cropImage(Image image, int x, int y, int width, int height) {
+        PixelReader pixelReader = image.getPixelReader();
+        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);
+        return croppedImage;
+    }
+
     static Image generateNewBomb() {
         return bomb;
     }
 
     static Image generateNewPlus5() {
         return plus5;
-    }
-
-    private Image cropImage(Image image, int x, int y, int width, int height) {
-        PixelReader pixelReader = image.getPixelReader();
-        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);
-        return croppedImage;
     }
 
     // izveido jaunu augli
