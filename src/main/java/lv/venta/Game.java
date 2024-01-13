@@ -42,8 +42,9 @@ public class Game extends Application {
     static int bombY = 0;
     static int counter = 0;
     static int barrierX = 0;
-    static int barrierY = 0;
+    static int barrierY = 2;
     static int highScore = 0;
+    static int bombsClaimedCounter = 0;
 
     static List<Stage> openStages = new ArrayList<>();
     static List<SnakesBody> snake = new ArrayList<>();
@@ -355,6 +356,7 @@ public class Game extends Application {
             gc.setFont(customFont);
             gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
             System.out.println("-3 speed / mix");
+            bombsClaimedCounter++;
 
             backgroundMusic.playBombSound();
 
@@ -402,7 +404,7 @@ public class Game extends Application {
         // ========//
         // barrier //
         // ========//
-        if (willBarrierSpawn == 1) {
+        if (willBarrierSpawn == 1 && Buttons.dificulty == 2) {
 
             if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
                 gameOver = true;
@@ -463,14 +465,19 @@ public class Game extends Application {
         // =========================//
         // powerup, ediens, barjera //
         // =========================//
-        gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 25, 25);
-        gc.drawImage(currentPlus5, plus5X * 25, plus5Y * 25, 25, 25);
-        gc.drawImage(currentBomb, bombX * 25, bombY * 25, 25, 25);
-        gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
-        gc.drawImage(currentFruit2, food2X * 25, food2Y * 25, 25, 25);
-        gc.drawImage(currentFruit3, food3X * 25, food3Y * 25, 25, 25);
-        if (willBarrierSpawn == 1) {
-            gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 25);
+        if (Buttons.dificulty == 2) {
+            gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 25, 25);
+            gc.drawImage(currentPlus5, plus5X * 25, plus5Y * 25, 25, 25);
+            gc.drawImage(currentBomb, bombX * 25, bombY * 25, 25, 25);
+            gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
+            gc.drawImage(currentFruit2, food2X * 25, food2Y * 25, 25, 25);
+            gc.drawImage(currentFruit3, food3X * 25, food3Y * 25, 25, 25);
+            if (willBarrierSpawn == 1) {
+                gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 23);
+            }
+        }
+        else {
+            gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
         }
     }
 

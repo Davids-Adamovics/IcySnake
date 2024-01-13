@@ -5,31 +5,37 @@ import java.util.Random;
 import javafx.scene.image.Image;
 
 public class Food {
+    static int barriersDodgedCounter = 0;
 
     // spawn food, powerup, barrier
     public static void newFood() {
         start: while (true) {
-            Game.food1X = Game.rand.nextInt(23);
-            Game.food1Y = Game.rand.nextInt(19) + 2; // Adjusted range for food1
+            if (Buttons.dificulty == 2) {
+                Game.food1X = Game.rand.nextInt(23);
+                Game.food1Y = Game.rand.nextInt(19) + 2; // Adjusted range for food1
 
-            Game.food2X = Game.rand.nextInt(23);
-            Game.food2Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.food2X = Game.rand.nextInt(23);
+                Game.food2Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.food3X = Game.rand.nextInt(23);
-            Game.food3Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.food3X = Game.rand.nextInt(23);
+                Game.food3Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.powerUpX = Game.rand.nextInt(23);
-            Game.powerUpY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.powerUpX = Game.rand.nextInt(23);
+                Game.powerUpY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.bombX = Game.rand.nextInt(23);
-            Game.bombY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.bombX = Game.rand.nextInt(23);
+                Game.bombY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
 
-            Game.plus5X = Game.rand.nextInt(23);
-            Game.plus5Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
-            
-            if (Game.willBarrierSpawn == 1) {
-                Game.barrierX = Game.rand.nextInt(23);
-                Game.barrierY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.plus5X = Game.rand.nextInt(23);
+                Game.plus5Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                if (Game.willBarrierSpawn == 1) {
+                    Game.barrierX = Game.rand.nextInt(23);
+                    Game.barrierY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                }
+            }
+            else{
+                Game.food1X = Game.rand.nextInt(23);
+                Game.food1Y = Game.rand.nextInt(19) + 2; // Adjusted range for food1
             }
 
             for (SnakesBody c : Game.snake) {
@@ -38,6 +44,7 @@ public class Food {
                     continue start;
                 }
             }
+            if(Buttons.dificulty == 2){
             Game.willBarrierSpawn = Game.random.nextInt(3) + 1;
             Game.currentFruit1 = Game.generateNewFruit();
             Game.currentFruit2 = Game.generateNewFruit();
@@ -49,9 +56,15 @@ public class Food {
             if (Game.willBarrierSpawn == 1) {
                 Game.currentBarrier = Game.generateNewBarrier(); // spawn kadu no objektiem
                 System.out.println("Barrier spawned");
+                barriersDodgedCounter++;
+
             } else {
                 System.out.println("Barrier not spawned!");
             }
+        }
+        else{
+            Game.currentFruit1 = Game.generateNewFruit();
+        }
             Game.speed++; // speed
             backgroundMusic.playPickupSound(); // background music
             break;
