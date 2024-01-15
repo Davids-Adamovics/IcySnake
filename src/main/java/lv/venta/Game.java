@@ -475,8 +475,7 @@ public class Game extends Application {
             if (willBarrierSpawn == 1) {
                 gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 23);
             }
-        }
-        else {
+        } else {
             gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
         }
     }
@@ -525,13 +524,34 @@ public class Game extends Application {
 
         switch (Game.currentMusicPreference) {
             case 1:
-                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameCrazy.wav" });
                 break;
             case 2:
-                Game.musicPlayer.BackgroundMusic(new String[] { "game4.wav" });
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameGopnik.wav" });
                 break;
             case 3:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" });
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameGTA.wav" });
+                break;
+            case 4:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameHz.wav" });
+                break;
+            case 5:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameMario.wav" });
+                break;
+            case 6:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gamePain.wav" });
+                break;
+            case 7:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameRa.wav" });
+                break;
+            case 8:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameRave.wav" });
+                break;
+            case 9:
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameUzi.wav" });
+                break;
+            case 10:
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
                 break;
 
             default:

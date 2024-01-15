@@ -53,7 +53,7 @@ public class backgroundMusic {
     public static void playMenuMusic() {
         // menu music
 
-        Media sound = new Media(backgroundMusic.class.getResource("game3.wav").toString());
+        Media sound = new Media(backgroundMusic.class.getResource("gameHz.wav").toString());
         menuSong = new MediaPlayer(sound);
         menuSong.setVolume(volume * 0.2);
         menuSong.play();

@@ -1,5 +1,8 @@
 package lv.venta;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -85,19 +88,59 @@ public class Buttons {
                 changeMusic(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Music one":
-                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" }); // play game 1
-                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+            case "Tropical":
+                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Music two":
-                Game.musicPlayer.BackgroundMusic(new String[] { "game4.wav" }); // play game 4
-                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+            case "Crazy":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameCrazy.wav" });
+                showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Music three":
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" }); // play game 2
-                showInitialButtons(pauseBox, primaryStage); // parada original pogas
+            case "Gopnik":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameGopnik.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "GTA":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameGTA.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Blue Ark":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameHz.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Yeat":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Mario":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameMario.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Pain":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gamePain.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Ra":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameRa.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Rave":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameRave.wav" });
+                showInitialButtons(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Uzi":
+                Game.musicPlayer.BackgroundMusic(new String[] { "gameUzi.wav" });
+                showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Leaderboard":
@@ -131,6 +174,7 @@ public class Buttons {
     }
 
     static void showInitialButtons(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
         pauseBox.getChildren().addAll(
                 createButton("Resume", primaryStage, pauseBox),
@@ -144,11 +188,12 @@ public class Buttons {
     }
 
     static void showLeaderboard(Stage primaryStage, VBox pauseBox) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
         Label valueLabel = new Label("Top 5 Leaderboard");
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
         Label place1 = new Label("\nBest score: " + Game.highScore);
@@ -169,6 +214,7 @@ public class Buttons {
     }
 
     static void showNewButtons(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear(); // izdes esc/pause menu pogas
 
         // Options pogas
@@ -189,7 +235,7 @@ public class Buttons {
         Label valueLabel = new Label("Volume: " + (int) slider.getValue() + "%");
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -215,12 +261,13 @@ public class Buttons {
     }
 
     static void changeColor(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
         Label valueLabel = new Label("Snakes Color");
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
         pauseBox.getChildren().addAll(
@@ -230,12 +277,13 @@ public class Buttons {
     }
 
     static void changeMap(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
         Label valueLabel = new Label("Change the map");
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
         pauseBox.getChildren().addAll(
@@ -247,31 +295,55 @@ public class Buttons {
     }
 
     static void changeMusic(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
 
-        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
         Label valueLabel = new Label("Background Music");
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
+
+        List<Button> leftButtons = Arrays.asList(
+                createButton("Crazy", primaryStage, pauseBox),
+                createButton("Gopnik", primaryStage, pauseBox),
+                createButton("GTA", primaryStage, pauseBox),
+                createButton("Blue Ark", primaryStage, pauseBox),
+                createButton("Yeat", primaryStage, pauseBox));
+
+        List<Button> rightButtons = Arrays.asList(
+                createButton("Mario", primaryStage, pauseBox),
+                createButton("Pain", primaryStage, pauseBox),
+                createButton("Ra", primaryStage, pauseBox),
+                createButton("Rave", primaryStage, pauseBox),
+                createButton("Uzi", primaryStage, pauseBox),
+                createButton("Tropical", primaryStage, pauseBox));
+
+        HBox leftButtonBox = new HBox(10, leftButtons.toArray(new Button[0]));
+        HBox rightButtonBox = new HBox(10, rightButtons.toArray(new Button[0]));
+
+        leftButtonBox.setAlignment(Pos.CENTER);
+        rightButtonBox.setAlignment(Pos.CENTER);
+
+        VBox backButtonBox = new VBox(10, createButton("Back", primaryStage, pauseBox));
+        backButtonBox.setAlignment(Pos.CENTER); // Center the "Back" button horizontally
 
         pauseBox.getChildren().addAll(
                 valueLabel,
-                createButton("Music one", primaryStage, pauseBox),
-                createButton("Music two", primaryStage, pauseBox),
-                createButton("Music three", primaryStage, pauseBox),
-                createButton("Back", primaryStage, pauseBox));
-
+                leftButtonBox,
+                rightButtonBox,
+                backButtonBox);
     }
 
     static void showTutorial(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
         Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 10);
         Label valueLabel = new Label("Info panel");
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
         Label powerUpInfo = new Label("Bomb - Mixes the fruits for 5s while slowing the speed by -3\n" +
@@ -289,13 +361,14 @@ public class Buttons {
     }
 
     static void showAchivements(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 40);
         Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 20);
         Label valueLabel = new Label("Achivements");
         valueLabel.setFont(customFont);
-        valueLabel.setTextFill(Color.web("#4682b4"));
+        valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
         ImageView i1 = new ImageView(Game.Achivement1);
@@ -355,12 +428,20 @@ public class Buttons {
     }
 
     static void changeDificulty(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
         pauseBox.getChildren().clear();
 
         pauseBox.getChildren().addAll(
                 createButton("Retro", primaryStage, pauseBox),
                 createButton("Power up", primaryStage, pauseBox),
                 createButton("Back", primaryStage, pauseBox));
+    }
+
+    // Helper method to set background image for VBox
+    private static void setPauseBoxBackground(VBox pauseBox, String backgroundImage) {
+        String imageUrl = Buttons.class.getResource(backgroundImage).toExternalForm();
+        pauseBox.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
+                "-fx-background-size: cover;");
     }
 
 }
