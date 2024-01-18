@@ -180,7 +180,7 @@ public class Buttons {
         pauseBox.getChildren().addAll(
                 createButton("Resume", primaryStage, pauseBox),
                 createButton("Restart", primaryStage, pauseBox),
-                createButton("Tutorial", primaryStage, pauseBox),
+                createButton("Info", primaryStage, pauseBox),
                 createButton("Leaderboard", primaryStage, pauseBox),
                 createButton("Achivements", primaryStage, pauseBox),
                 createButton("Options", primaryStage, pauseBox),
@@ -446,7 +446,17 @@ public class Buttons {
         
         pauseBox.getChildren().addAll(
                 valueLabel,
-                powerUpInfo,
+
+                apple,
+                bomba, 
+                pluss5,
+                star,
+                barrier,
+                abols,
+                bomb,
+                plus5,
+                powerup,
+                barjera,
 
                 createButton("Back", primaryStage, pauseBox));
     }
@@ -498,7 +508,7 @@ public class Buttons {
         Label Achivement1 = new Label("Reach 100 points");
         Label Achivement2 = new Label("Dodge 20 Barriers");
         Label Achivement3 = new Label("Claim 10 Bombs");
-
+//asdasdasd
         Achivement1.setTranslateX(0);
         Achivement1.setTranslateY(20);
         Achivement2.setTranslateX(0);
