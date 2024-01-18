@@ -147,11 +147,19 @@ public class Buttons {
                 showLeaderboard(primaryStage, pauseBox);
                 backgroundMusic.PlayButtonSound();
                 break;
+<<<<<<< Updated upstream
             case "Tutorial":
                 showTutorial(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Achivements":
+=======
+            case "Info":
+            	showTutorial(pauseBox, primaryStage);
+            	backgroundMusic.PlayButtonSound();
+            	break;
+            case "Achievements":
+>>>>>>> Stashed changes
                 showAchivements(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
@@ -179,9 +187,9 @@ public class Buttons {
         pauseBox.getChildren().addAll(
                 createButton("Resume", primaryStage, pauseBox),
                 createButton("Restart", primaryStage, pauseBox),
-                createButton("Tutorial", primaryStage, pauseBox),
+                createButton("Info", primaryStage, pauseBox),
                 createButton("Leaderboard", primaryStage, pauseBox),
-                createButton("Achivements", primaryStage, pauseBox),
+                createButton("Achievements", primaryStage, pauseBox),
                 createButton("Options", primaryStage, pauseBox),
                 createButton("Quit", primaryStage, pauseBox));
 
@@ -334,6 +342,7 @@ public class Buttons {
                 rightButtonBox,
                 backButtonBox);
     }
+<<<<<<< Updated upstream
 
     static void showTutorial(VBox pauseBox, Stage primaryStage) {
         setPauseBoxBackground(pauseBox, "background1.png");
@@ -341,10 +350,19 @@ public class Buttons {
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
         Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 10);
+=======
+    // info
+    static void showTutorial(VBox pauseBox, Stage primaryStage) {
+    	pauseBox.getChildren().clear();
+    	
+    	Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 40);
+        Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 20);
+>>>>>>> Stashed changes
         Label valueLabel = new Label("Info panel");
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
+<<<<<<< Updated upstream
 
         Label powerUpInfo = new Label("Bomb - Mixes the fruits for 5s while slowing the speed by -3\n" +
                 "+5 - Adds +5 points to the counter\n" +
@@ -353,10 +371,123 @@ public class Buttons {
                 "Barrier - Ends the game");
         powerUpInfo.setFont(customFont1);
 
+=======
+        
+        // Imports images into the Info panel section
+        ImageView apple = new ImageView(Game.abols);
+        //ImageView banana = new ImageView(Game.banans);
+        //ImageView grapes = new ImageView(Game.vinogas);
+        //ImageView strawberry = new ImageView(Game.zemene);
+        ImageView bomba = new ImageView(Game.bomb);
+        ImageView pluss5 = new ImageView(Game.plus5);
+        ImageView star = new ImageView(Game.powerup);
+        ImageView barrier = new ImageView(Game.barjera);
+        
+        // Set the size and coordinates for an apple image
+        apple.setFitWidth(40);
+        apple.setFitHeight(40);
+        apple.setTranslateX(-230);	// Adjust X-coordinate as needed
+        apple.setTranslateY(-200);	// Adjust Y-coordinate as needed
+    
+        // Set the size and coordinates for the banana image
+        //banana.setFitWidth(40);
+        //banana.setFitHeight(40);
+        //banana.setTranslateX(-190);  // Adjust X-coordinate as needed
+        //banana.setTranslateY(-200);  // Adjust Y-coordinate as needed
+    
+        // Set the size and coordinates for the grapes image
+        //grapes.setFitWidth(40);
+        //grapes.setFitHeight(40);
+        //grapes.setTranslateX(-150);  // Adjust X-coordinate as needed
+        //grapes.setTranslateY(-200);  // Adjust Y-coordinate as needed
+        
+        // Set the size and coordinates for the strawberry image
+        //strawberry.setFitWidth(40);
+        //strawberry.setFitHeight(40);
+        //strawberry.setTranslateX(-110);  // Adjust X-coordinate as needed
+        //strawberry.setTranslateY(-200);  // Adjust Y-coordinate as needed
+        
+        
+        // Set the size and coordinates for the bomb image
+        bomba.setFitWidth(40);
+        bomba.setFitHeight(40);
+        bomba.setTranslateX(-190);  // Adjust X-coordinate as needed
+        bomba.setTranslateY(-160);  // Adjust Y-coordinate as needed
+        
+        // Set the size and coordinates for the plus5 image
+        pluss5.setFitWidth(40);
+        pluss5.setFitHeight(40);
+        pluss5.setTranslateX(-190);  // Adjust X-coordinate as needed
+        pluss5.setTranslateY(-120);  // Adjust Y-coordinate as needed
+        
+        // Set the size and coordinates for the star image
+        star.setFitWidth(40);
+        star.setFitHeight(40);
+        star.setTranslateX(-230);  // Adjust X-coordinate as needed
+        star.setTranslateY(-200);  // Adjust Y-coordinate as needed
+        
+        // Set the size and coordinates for the barrier image
+        barrier.setFitWidth(40);
+        barrier.setFitHeight(40);
+        barrier.setTranslateX(-190);  // Adjust X-coordinate as needed
+        barrier.setTranslateY(-40);  // Adjust Y-coordinate as needed
+        
+        // Adds informational text to each image
+        Label abols = new Label("					Adds +1 point to the counter" + '\n' +
+        						"					Adds +1 speed to the Snake");
+        //Label banans = new Label("");
+        //Label vinogas = new Label("");
+        //Label zemene = new Label("");
+        Label bomb = new Label("					Mixes the fruits for 5s" + '\n' + 
+        					   "					While slowing the speed by -3");
+        Label plus5 = new Label("					Adds +5 points to the counter");
+        Label powerup = new Label("					Removes -2 points from the counter");
+        Label barjera = new Label("					Ends the game");
+        
+        //abols.setTranslateX(0);
+        //abols.setTranslateY(60);
+        //banans.setTranslateY(20);
+        //banans.setTranslateX(10);
+        //vinogas.setTranslateX(40);
+        //vinogas.setTranslateY(10);
+        //zemene.setTranslateX(60);
+        //zemene.setTranslateY(10);
+        //bomb.setTranslateX(0);
+        //bomb.setTranslateY(60);
+        //plus5.setTranslateX(0);
+        //plus5.setTranslateY(60);
+        //powerup.setTranslateX(0);
+        //powerup.setTranslateY(60);
+        //barjera.setTranslateX(0);
+        //barjera.setTranslateY(60);
+        abols.setFont(customFont1);
+        //banans.setFont(customFont1);
+        //vinogas.setFont(customFont1);
+        //zemene.setFont(customFont1);
+        bomb.setFont(customFont1);
+        plus5.setFont(customFont1);
+        powerup.setFont(customFont1);
+        barjera.setFont(customFont1);
+        
+>>>>>>> Stashed changes
         pauseBox.getChildren().addAll(
                 valueLabel,
-                powerUpInfo,
-
+                abols,
+                //banans,
+                //vinogas,
+                //zemene,
+                bomb,
+                plus5,
+           //     powerup,
+           //     barjera,
+                apple,
+                //banana,
+                //grapes,
+                //strawberry,
+                bomba,
+                pluss5,
+           //     star,
+             //   barrier,
                 createButton("Back", primaryStage, pauseBox));
     }
 
@@ -366,11 +497,16 @@ public class Buttons {
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 40);
         Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 20);
-        Label valueLabel = new Label("Achivements");
+        Label valueLabel = new Label("Achievements");
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
+<<<<<<< Updated upstream
 
+=======
+        
+        // Imports images into the Achievements section
+>>>>>>> Stashed changes
         ImageView i1 = new ImageView(Game.Achivement1);
         ImageView i2 = new ImageView(Game.Achivement2); // Add this line
         ImageView i3 = new ImageView(Game.Achivement3); // Add this line
@@ -395,6 +531,7 @@ public class Buttons {
 
         i3.setFitWidth(64);
         i3.setFitHeight(64);
+<<<<<<< Updated upstream
         i3.setTranslateX(-180);
         i3.setTranslateY(-20);
         i3.setOpacity(0.3);
@@ -402,6 +539,12 @@ public class Buttons {
             i3.setOpacity(1);
         }
 
+=======
+        i3.setTranslateX(-180);  // Adjust X-coordinate as needed
+        i3.setTranslateY(-20);  // Adjust Y-coordinate as needed
+        
+        // Adds informational text to each image
+>>>>>>> Stashed changes
         Label Achivement1 = new Label("Reach 100 points");
         Label Achivement2 = new Label("Dodge 20 Barriers");
         Label Achivement3 = new Label("Claim 10 Bombs");
