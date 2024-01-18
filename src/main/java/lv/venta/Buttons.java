@@ -147,11 +147,19 @@ public class Buttons {
                 showLeaderboard(primaryStage, pauseBox);
                 backgroundMusic.PlayButtonSound();
                 break;
+<<<<<<< Updated upstream
+            case "Tutorial":
+                showTutorial(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
+            case "Achivements":
+=======
             case "Info":
             	showTutorial(pauseBox, primaryStage);
             	backgroundMusic.PlayButtonSound();
             	break;
             case "Achievements":
+>>>>>>> Stashed changes
                 showAchivements(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
@@ -334,18 +342,36 @@ public class Buttons {
                 rightButtonBox,
                 backButtonBox);
     }
+<<<<<<< Updated upstream
 
+    static void showTutorial(VBox pauseBox, Stage primaryStage) {
+        setPauseBoxBackground(pauseBox, "background1.png");
+        pauseBox.getChildren().clear();
+
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
+        Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 10);
+=======
     // info
     static void showTutorial(VBox pauseBox, Stage primaryStage) {
     	pauseBox.getChildren().clear();
     	
     	Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 40);
         Font customFont1 = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 20);
-
+>>>>>>> Stashed changes
         Label valueLabel = new Label("Info panel");
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
+<<<<<<< Updated upstream
+
+        Label powerUpInfo = new Label("Bomb - Mixes the fruits for 5s while slowing the speed by -3\n" +
+                "+5 - Adds +5 points to the counter\n" +
+                "Star - removes -2 points from the counter\n" +
+                "Fruit - adds +1 to the counter and +1 speed\n" +
+                "Barrier - Ends the game");
+        powerUpInfo.setFont(customFont1);
+
+=======
         
         // Imports images into the Info panel section
         ImageView apple = new ImageView(Game.abols);
@@ -443,6 +469,7 @@ public class Buttons {
         powerup.setFont(customFont1);
         barjera.setFont(customFont1);
         
+>>>>>>> Stashed changes
         pauseBox.getChildren().addAll(
                 valueLabel,
                 abols,
@@ -474,9 +501,12 @@ public class Buttons {
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
+<<<<<<< Updated upstream
 
+=======
+        
         // Imports images into the Achievements section
-
+>>>>>>> Stashed changes
         ImageView i1 = new ImageView(Game.Achivement1);
         ImageView i2 = new ImageView(Game.Achivement2); // Add this line
         ImageView i3 = new ImageView(Game.Achivement3); // Add this line
@@ -501,12 +531,20 @@ public class Buttons {
 
         i3.setFitWidth(64);
         i3.setFitHeight(64);
+<<<<<<< Updated upstream
+        i3.setTranslateX(-180);
+        i3.setTranslateY(-20);
+        i3.setOpacity(0.3);
+        if (Game.bombsClaimedCounter > 10) {
+            i3.setOpacity(1);
+        }
 
+=======
         i3.setTranslateX(-180);  // Adjust X-coordinate as needed
         i3.setTranslateY(-20);  // Adjust Y-coordinate as needed
         
         // Adds informational text to each image
-
+>>>>>>> Stashed changes
         Label Achivement1 = new Label("Reach 100 points");
         Label Achivement2 = new Label("Dodge 20 Barriers");
         Label Achivement3 = new Label("Claim 10 Bombs");
