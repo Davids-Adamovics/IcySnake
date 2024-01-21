@@ -23,6 +23,7 @@
          <RadioButton fx:id="malePick" layoutX="450.0" layoutY="360.0" mnemonicParsing="false" text="Male" />
          <RadioButton fx:id="femalePick" layoutX="540.0" layoutY="360.0" mnemonicParsing="false" text="Female" />
          <Button fx:id="buttonSave" layoutX="395.0" layoutY="486.0" mnemonicParsing="false" onAction="#SwitchTogame" prefHeight="46.0" prefWidth="264.0" styleClass="Button" stylesheets="@application.css" text="Save" />
+         <Button fx:id="buttonGuest" layoutX="418.0" layoutY="540.0" mnemonicParsing="false" onAction="#SwitchTogameGuest" prefHeight="35.0" prefWidth="220.0" styleClass="Button" stylesheets="@application.css" text="Play as Guest" />
          <ImageView fitHeight="601.0" fitWidth="344.0" pickOnBounds="true">
             <image>
                <Image url="@registrationscreen.png" />

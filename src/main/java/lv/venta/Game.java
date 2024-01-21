@@ -44,7 +44,12 @@ public class Game extends Application {
     static int barrierX = 0;
     static int barrierY = 2;
     static int highScore = 0;
+    static int newscore = 0;
     static int bombsClaimedCounter = 0;
+    static int secondBest = 0;
+    static int thirdBest = 0;
+    static int fourthBest = 0;
+    static int fifthBest = 0;
 
     static List<Stage> openStages = new ArrayList<>();
     static List<SnakesBody> snake = new ArrayList<>();
@@ -271,11 +276,14 @@ public class Game extends Application {
                 gameOverSoundPlayed = false;
                 if (counter > highScore) {
                     highScore = counter;
+
                 }
+                newscore = counter;
 
             }
             return;
         }
+        System.out.println("new score: "+ Game.newscore);
 
         gc.drawImage(BackgroundsImage, 0, 0, 600, 600); // background
 
@@ -435,8 +443,11 @@ public class Game extends Application {
         gc.setFill(Color.WHITE);
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30);
         gc.setFont(customFont);
-        gc.fillText("Score: " + counter, 10, 30);
-
+        if (counter > highScore) {
+            gc.fillText("NEW High Score: " + counter, 10, 30);
+        } else {
+            gc.fillText("Score: " + counter, 10, 30);
+        }
         // ========================//
         // cuska galva un ķermenis //
         // ========================//

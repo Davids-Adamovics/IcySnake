@@ -148,9 +148,9 @@ public class Buttons {
                 backgroundMusic.PlayButtonSound();
                 break;
             case "Info":
-            	showTutorial(pauseBox, primaryStage);
-            	backgroundMusic.PlayButtonSound();
-            	break;
+                showTutorial(pauseBox, primaryStage);
+                backgroundMusic.PlayButtonSound();
+                break;
             case "Achievements":
 
                 showAchivements(pauseBox, primaryStage);
@@ -190,29 +190,51 @@ public class Buttons {
 
     static void showLeaderboard(Stage primaryStage, VBox pauseBox) {
         setPauseBoxBackground(pauseBox, "background1.png");
+        
         pauseBox.getChildren().clear();
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
-        Label valueLabel = new Label("Top 5 Leaderboard");
+        Label valueLabel = new Label("Last Attempts");
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
 
-        Label place1 = new Label("\nBest score: " + Game.highScore);
-        place1.setFont(customFont);
-        place1.setTextFill(Color.web("#4682b4"));
-        place1.setAlignment(Pos.CENTER);
-
-        Label place2 = new Label("Last attempt: " + Game.counter);
-        place2.setFont(customFont);
-        place2.setTextFill(Color.web("#4682b4"));
-        place2.setAlignment(Pos.CENTER);
-
+        if(Game.secondBest == 0){
+            Game.secondBest = Game.newscore;
+        }
+        else if(Game.secondBest != 0 && Game.thirdBest == 0){
+            Game.thirdBest = Game.newscore;
+        }
+        else if(Game.secondBest != 0 && Game.thirdBest != 0 && Game.fourthBest == 0){
+            Game.fourthBest = Game.newscore;
+        }
+        else if(Game.secondBest != 0 && Game.thirdBest != 0 && Game.fourthBest != 0 && Game.fifthBest == 0){
+            Game.fifthBest = Game.newscore;
+        }
+        
+        else if (Game.secondBest != 0 && Game.thirdBest != 0 && Game.fourthBest != 0 && Game.fifthBest != 0) {
+            Game.fifthBest = Game.fourthBest;
+            Game.fourthBest = Game.thirdBest;
+            Game.thirdBest = Game.secondBest;
+            Game.secondBest = Game.newscore;
+        }
+    
+        Label place1 = textSettings("\nBest score: " + Game.highScore, customFont, 1);
+        Label place2 = textSettings("2nd: " + (Game.secondBest > 0 ? Game.secondBest : "N/A"), customFont, 1);
+        Label place3 = textSettings("3rd: " + (Game.thirdBest > 0 ? Game.thirdBest : "N/A"), customFont, 1);
+        Label place4 = textSettings("4th: " + (Game.fourthBest > 0 ? Game.fourthBest : "N/A"), customFont, 5);
+        Label place5 = textSettings("5th: " + (Game.fifthBest > 0 ? Game.fifthBest : "N/A"), customFont, 1);
+        
+    
         pauseBox.getChildren().addAll(
                 valueLabel,
                 place1,
                 place2,
+                place3,
+                place4,
+                place5,
                 createButton("Back", primaryStage, pauseBox));
     }
+    
 
     static void showNewButtons(VBox pauseBox, Stage primaryStage) {
         setPauseBoxBackground(pauseBox, "background1.png");
@@ -230,7 +252,7 @@ public class Buttons {
 
     // volume slider
     static Slider createSlider(String text, Stage primaryStage, VBox pauseBox) {
-        Slider slider = new Slider(0, 100, 90);
+        Slider slider = new Slider(0, 100, 50);
         slider.setMaxWidth(150);
 
         Label valueLabel = new Label("Volume: " + (int) slider.getValue() + "%");
@@ -347,108 +369,107 @@ public class Buttons {
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
-        
+
         // Imports images into the Info panel section
         ImageView apple = new ImageView(Game.abols);
-        //ImageView banana = new ImageView(Game.banans);
-        //ImageView grapes = new ImageView(Game.vinogas);
-        //ImageView strawberry = new ImageView(Game.zemene);
+        // ImageView banana = new ImageView(Game.banans);
+        // ImageView grapes = new ImageView(Game.vinogas);
+        // ImageView strawberry = new ImageView(Game.zemene);
         ImageView bomba = new ImageView(Game.bomb);
         ImageView pluss5 = new ImageView(Game.plus5);
         ImageView star = new ImageView(Game.powerup);
         ImageView barrier = new ImageView(Game.barjera);
-        
+
         // Set the size and coordinates for an apple image
         apple.setFitWidth(40);
         apple.setFitHeight(40);
-        apple.setTranslateX(-230);	// Adjust X-coordinate as needed
-        apple.setTranslateY(-200);	// Adjust Y-coordinate as needed
-    
+        apple.setTranslateX(-230); // Adjust X-coordinate as needed
+        apple.setTranslateY(-200); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the banana image
-        //banana.setFitWidth(40);
-        //banana.setFitHeight(40);
-        //banana.setTranslateX(-190);  // Adjust X-coordinate as needed
-        //banana.setTranslateY(-200);  // Adjust Y-coordinate as needed
-    
+        // banana.setFitWidth(40);
+        // banana.setFitHeight(40);
+        // banana.setTranslateX(-190); // Adjust X-coordinate as needed
+        // banana.setTranslateY(-200); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the grapes image
-        //grapes.setFitWidth(40);
-        //grapes.setFitHeight(40);
-        //grapes.setTranslateX(-150);  // Adjust X-coordinate as needed
-        //grapes.setTranslateY(-200);  // Adjust Y-coordinate as needed
-        
+        // grapes.setFitWidth(40);
+        // grapes.setFitHeight(40);
+        // grapes.setTranslateX(-150); // Adjust X-coordinate as needed
+        // grapes.setTranslateY(-200); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the strawberry image
-        //strawberry.setFitWidth(40);
-        //strawberry.setFitHeight(40);
-        //strawberry.setTranslateX(-110);  // Adjust X-coordinate as needed
-        //strawberry.setTranslateY(-200);  // Adjust Y-coordinate as needed
-        
-        
+        // strawberry.setFitWidth(40);
+        // strawberry.setFitHeight(40);
+        // strawberry.setTranslateX(-110); // Adjust X-coordinate as needed
+        // strawberry.setTranslateY(-200); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the bomb image
         bomba.setFitWidth(40);
         bomba.setFitHeight(40);
-        bomba.setTranslateX(-190);  // Adjust X-coordinate as needed
-        bomba.setTranslateY(-160);  // Adjust Y-coordinate as needed
-        
+        bomba.setTranslateX(-190); // Adjust X-coordinate as needed
+        bomba.setTranslateY(-160); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the plus5 image
         pluss5.setFitWidth(40);
         pluss5.setFitHeight(40);
-        pluss5.setTranslateX(-190);  // Adjust X-coordinate as needed
-        pluss5.setTranslateY(-120);  // Adjust Y-coordinate as needed
-        
+        pluss5.setTranslateX(-190); // Adjust X-coordinate as needed
+        pluss5.setTranslateY(-120); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the star image
         star.setFitWidth(40);
         star.setFitHeight(40);
-        star.setTranslateX(-230);  // Adjust X-coordinate as needed
-        star.setTranslateY(-200);  // Adjust Y-coordinate as needed
-        
+        star.setTranslateX(-230); // Adjust X-coordinate as needed
+        star.setTranslateY(-200); // Adjust Y-coordinate as needed
+
         // Set the size and coordinates for the barrier image
         barrier.setFitWidth(40);
         barrier.setFitHeight(40);
-        barrier.setTranslateX(-190);  // Adjust X-coordinate as needed
-        barrier.setTranslateY(-40);  // Adjust Y-coordinate as needed
-        
+        barrier.setTranslateX(-190); // Adjust X-coordinate as needed
+        barrier.setTranslateY(-40); // Adjust Y-coordinate as needed
+
         // Adds informational text to each image
         Label abols = new Label("					Adds +1 point to the counter" + '\n' +
-        						"					Adds +1 speed to the Snake");
-        //Label banans = new Label("");
-        //Label vinogas = new Label("");
-        //Label zemene = new Label("");
-        Label bomb = new Label("					Mixes the fruits for 5s" + '\n' + 
-        					   "					While slowing the speed by -3");
+                "					Adds +1 speed to the Snake");
+        // Label banans = new Label("");
+        // Label vinogas = new Label("");
+        // Label zemene = new Label("");
+        Label bomb = new Label("					Mixes the fruits for 5s" + '\n' +
+                "					While slowing the speed by -3");
         Label plus5 = new Label("					Adds +5 points to the counter");
         Label powerup = new Label("					Removes -2 points from the counter");
         Label barjera = new Label("					Ends the game");
-        
-        //abols.setTranslateX(0);
-        //abols.setTranslateY(60);
-        //banans.setTranslateY(20);
-        //banans.setTranslateX(10);
-        //vinogas.setTranslateX(40);
-        //vinogas.setTranslateY(10);
-        //zemene.setTranslateX(60);
-        //zemene.setTranslateY(10);
-        //bomb.setTranslateX(0);
-        //bomb.setTranslateY(60);
-        //plus5.setTranslateX(0);
-        //plus5.setTranslateY(60);
-        //powerup.setTranslateX(0);
-        //powerup.setTranslateY(60);
-        //barjera.setTranslateX(0);
-        //barjera.setTranslateY(60);
+
+        // abols.setTranslateX(0);
+        // abols.setTranslateY(60);
+        // banans.setTranslateY(20);
+        // banans.setTranslateX(10);
+        // vinogas.setTranslateX(40);
+        // vinogas.setTranslateY(10);
+        // zemene.setTranslateX(60);
+        // zemene.setTranslateY(10);
+        // bomb.setTranslateX(0);
+        // bomb.setTranslateY(60);
+        // plus5.setTranslateX(0);
+        // plus5.setTranslateY(60);
+        // powerup.setTranslateX(0);
+        // powerup.setTranslateY(60);
+        // barjera.setTranslateX(0);
+        // barjera.setTranslateY(60);
         abols.setFont(customFont1);
-        //banans.setFont(customFont1);
-        //vinogas.setFont(customFont1);
-        //zemene.setFont(customFont1);
+        // banans.setFont(customFont1);
+        // vinogas.setFont(customFont1);
+        // zemene.setFont(customFont1);
         bomb.setFont(customFont1);
         plus5.setFont(customFont1);
         powerup.setFont(customFont1);
         barjera.setFont(customFont1);
-        
+
         pauseBox.getChildren().addAll(
                 valueLabel,
 
                 apple,
-                bomba, 
+                bomba,
                 pluss5,
                 star,
                 barrier,
@@ -471,7 +492,6 @@ public class Buttons {
         valueLabel.setFont(customFont);
         valueLabel.setTextFill(Color.web("#ffffff"));
         valueLabel.setAlignment(Pos.CENTER);
-
 
         ImageView i1 = new ImageView(Game.Achivement1);
         ImageView i2 = new ImageView(Game.Achivement2); // Add this line
@@ -498,17 +518,15 @@ public class Buttons {
         i3.setFitWidth(64);
         i3.setFitHeight(64);
 
+        i3.setTranslateX(-180); // Adjust X-coordinate as needed
+        i3.setTranslateY(-20); // Adjust Y-coordinate as needed
 
-        i3.setTranslateX(-180);  // Adjust X-coordinate as needed
-        i3.setTranslateY(-20);  // Adjust Y-coordinate as needed
-        
         // Adds informational text to each image
-
 
         Label Achivement1 = new Label("Reach 100 points");
         Label Achivement2 = new Label("Dodge 20 Barriers");
         Label Achivement3 = new Label("Claim 10 Bombs");
-//asdasdasd
+        // asdasdasd
         Achivement1.setTranslateX(0);
         Achivement1.setTranslateY(20);
         Achivement2.setTranslateX(0);
@@ -545,6 +563,14 @@ public class Buttons {
         String imageUrl = Buttons.class.getResource(backgroundImage).toExternalForm();
         pauseBox.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
                 "-fx-background-size: cover;");
+    }
+    private static Label textSettings(String text, Font font, int strokeWidth) {
+        Label label = new Label(text);
+        label.setFont(font);
+        label.setTextFill(Color.web("#ffffff"));
+        label.setStyle("-fx-stroke: black; -fx-stroke-width: " + strokeWidth + "px;");
+        label.setAlignment(Pos.CENTER);
+        return label;
     }
 
 }

@@ -15,9 +15,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class SecondaryController {
-	
-	@FXML
-	private Button optionsButton;
+
 
     @FXML
     private Button startButton;

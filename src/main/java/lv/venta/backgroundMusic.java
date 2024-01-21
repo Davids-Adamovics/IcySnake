@@ -10,7 +10,7 @@ public class backgroundMusic {
     private static MediaPlayer menuSong;
     
     private String[] musicFilePaths;
-    static double volume = 1;
+    static double volume = 0.5;
 
     public backgroundMusic(String[] strings) {
         musicFilePaths = strings;
