@@ -112,7 +112,7 @@ public class Game extends Application {
             kronis = cropImage(asdImage, 420, 350, 350, 350);
             abols = cropImage(asdImage, 460, 760, 250, 265);
             plus5 = cropImage(asdImage, 950, 70, 150, 150);
-            bomb = cropImage(asdImage, 950, 0430, 150, 150);
+            bomb = cropImage(asdImage, 950, 430, 150, 170);
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
