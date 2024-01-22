@@ -122,8 +122,8 @@ public class Game extends Application {
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
-            musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" }); // mainīgie audio faili
-            musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
+            musicPlayer = new backgroundMusic(new String[] { "game1.wav", "gameCrazy.wav","gameGopnik.wav","gameGTA.wav","gameHz.wav","gameMario.wav","gamePain.wav","gameRa.wav","gameRave.wav","gameUzi.wav","gameYeat.wav" }); // mainīgie audio faili
+            musicPlayer.BackgroundMusic(new String[] {"game1.wav", "gameCrazy.wav","gameGopnik.wav","gameGTA.wav","gameHz.wav","gameMario.wav","gamePain.wav","gameRa.wav","gameRave.wav","gameUzi.wav","gameYeat.wav" });
             Achivement1 = new Image(getClass().getResource("Achivement1.png").toExternalForm());
             Achivement2 = new Image(getClass().getResource("Achivement2.png").toExternalForm());
             Achivement3 = new Image(getClass().getResource("Achivement3.png").toExternalForm());

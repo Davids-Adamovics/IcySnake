@@ -108,12 +108,12 @@ public class Buttons {
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Blue Ark":
+            case "MidNight":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameHz.wav" });
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Yeat":
+            case "BeastMode":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" });
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
@@ -123,7 +123,7 @@ public class Buttons {
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Pain":
+            case "WaterFall":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gamePain.wav" });
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
@@ -138,7 +138,7 @@ public class Buttons {
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
                 break;
-            case "Uzi":
+            case "BlastOff":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameUzi.wav" });
                 showInitialButtons(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
@@ -331,15 +331,15 @@ public class Buttons {
                 createButton("Crazy", primaryStage, pauseBox),
                 createButton("Gopnik", primaryStage, pauseBox),
                 createButton("GTA", primaryStage, pauseBox),
-                createButton("Blue Ark", primaryStage, pauseBox),
-                createButton("Yeat", primaryStage, pauseBox));
+                createButton("MidNight", primaryStage, pauseBox),
+                createButton("BeastMode", primaryStage, pauseBox));
 
         List<Button> rightButtons = Arrays.asList(
                 createButton("Mario", primaryStage, pauseBox),
-                createButton("Pain", primaryStage, pauseBox),
+                createButton("WaterFall", primaryStage, pauseBox),
                 createButton("Ra", primaryStage, pauseBox),
                 createButton("Rave", primaryStage, pauseBox),
-                createButton("Uzi", primaryStage, pauseBox),
+                createButton("BlastOff", primaryStage, pauseBox),
                 createButton("Tropical", primaryStage, pauseBox));
 
         HBox leftButtonBox = new HBox(10, leftButtons.toArray(new Button[0]));

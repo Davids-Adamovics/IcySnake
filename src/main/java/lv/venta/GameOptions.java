@@ -62,9 +62,6 @@ public class GameOptions {
         Game.snake.add(new SnakesBody(10, 10)); // Reset cusku original laukuma
         Game.counter -= Game.counter;
         Game.gameOverSoundPlayed = false;
-
-        Game.musicPlayer = new backgroundMusic(new String[] { "game1.wav", "game4.wav" });
-        Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav", "game4.wav" });
     }
 
     //restart ar r
