@@ -62,6 +62,7 @@ public class Game extends Application {
     static boolean inGameOverState = false;
     static boolean powerUpPlayed = true;
 
+    static Image augli;
     static Image abols;
     static Image banans;
     static Image vinogas;
@@ -110,6 +111,7 @@ public class Game extends Application {
             Image asdImage = new Image(getClass().getResource("utilStileSheet.png").toExternalForm());
 
             // Crop the portions for different images
+            augli = new Image(getClass().getResource("augli.png").toExternalForm());
             banans = cropImage(asdImage, 0, 0, 250, 250);
             zemene = cropImage(asdImage, 0, 316, 350, 350);
             vinogas = cropImage(asdImage, 0, 690, 350, 350);
@@ -117,7 +119,7 @@ public class Game extends Application {
             kronis = cropImage(asdImage, 420, 350, 350, 350);
             abols = cropImage(asdImage, 460, 760, 250, 265);
             plus5 = cropImage(asdImage, 950, 70, 150, 150);
-            bomb = cropImage(asdImage, 950, 0430, 150, 150);
+            bomb = cropImage(asdImage, 950, 430, 150, 170);
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
