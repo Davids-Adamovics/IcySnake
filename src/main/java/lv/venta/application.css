@@ -1,3 +1,5 @@
+
+/* 90% no pogām izmato šo css kodu */
 .Button {
     -fx-font: 22px "Serif";
     -fx-padding: 10;
@@ -13,6 +15,7 @@
     -fx-background-color: #28565f; 
 }
 
+/* šo css kodu izmanto credits lapā */
 .CreditsButton {
     -fx-font: 22px "Serif";
     -fx-padding: 10;
@@ -29,24 +32,24 @@
 }
 
 
-
-.anchor-pane {
+/* anchor-pane izmanto start menu, lai viss pielāgotos ekrāna izmēram */
+ .anchor-pane {
     -fx-background-image: url('background3.png'); 
     -fx-background-size: cover; 
 }
 
-/* styles.css */
+
+/*
+=========== PROCESĀ ===============
 .transparent-background {
     -fx-background-color: rgba(255, 255, 255, 0.8);
     -fx-background-radius: 10;
 }
 
-/* application.css */
-
 .slider-blue {
     -fx-background-color: blue;
-}
-
+} 
+*/
 
 
 

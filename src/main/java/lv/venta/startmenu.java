@@ -29,7 +29,6 @@ public class startmenu extends Application {
            
             primaryStage.show();
         } catch (IOException e) {
-            // Handle FXML loading exception
             e.printStackTrace();
         }
     }
@@ -42,7 +41,6 @@ public class startmenu extends Application {
                 System.err.println("Image resource not found: " + resourceName);
             }
         } catch (IOException e) {
-            // Handle IO exception
             e.printStackTrace();
         }
         return null;

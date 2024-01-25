@@ -6,31 +6,33 @@ import javafx.util.Duration;
 
 public class backgroundMusic {
 
+    // mainīgie
     private static MediaPlayer mediaPlayer;
     private static MediaPlayer menuSong;
-    
     private String[] musicFilePaths;
     static double volume = 0.5;
 
+    
     public backgroundMusic(String[] strings) {
         musicFilePaths = strings;
     }
 
+    // atjaunina skaļumu
     public static void updateVolume() {
         if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume);
         }
     }
 
+    // palaiž background mūziku
     public void BackgroundMusic(String[] musicFilePathsInput) {
         musicFilePaths = musicFilePathsInput;
         playRandomMusic();
     }
 
+    // palaiž nejauši izvēlēto mūzikas failu
     private void playRandomMusic() {
-    	
     	stopMusic();
-
         String randomMusicFile = getRandomMusicFile();
         Media sound = new Media(getClass().getResource(randomMusicFile).toString());
         mediaPlayer = new MediaPlayer(sound);
@@ -40,6 +42,7 @@ public class backgroundMusic {
        
     }
 
+    // aptur mūziku
     public static void stopMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -49,10 +52,8 @@ public class backgroundMusic {
         }
     }
     
-    
+    // palaiž start menu/register mūziku
     public static void playMenuMusic() {
-        // menu music
-
         Media sound = new Media(backgroundMusic.class.getResource("gameHz.wav").toString());
         menuSong = new MediaPlayer(sound);
         menuSong.setVolume(volume * 0.2);
@@ -60,7 +61,7 @@ public class backgroundMusic {
         
     }
     
-   
+   // palaiž pogas nospiešanas skaņu
     public static void PlayButtonSound() {
     	Media sound = new Media(backgroundMusic.class.getResource("buttonSound.wav").toString());
         MediaPlayer buttonSoundPlayed = new MediaPlayer(sound);
@@ -69,46 +70,49 @@ public class backgroundMusic {
         buttonSoundPlayed.play();
     }
     
+    // // palaiž augļu pieskaršanās skaņu
     public static void playPickupSound() {
-        // Pickup sound for all fruits
         Media sound = new Media(backgroundMusic.class.getResource("pickupsound.wav").toString());
         MediaPlayer pickupSoundPlayer = new MediaPlayer(sound);
         pickupSoundPlayer.setVolume(volume * 0.5);
         pickupSoundPlayer.play();
     }
 
+    // palaiž zveigznes pieskaršanās skaņu
     public static void playStarSound() {
-        // Star powerUp sound
         Media sound = new Media(backgroundMusic.class.getResource("starSound2.wav").toString());
         MediaPlayer starSoundPlayer = new MediaPlayer(sound);
         starSoundPlayer.setVolume(volume * 0.5);
         starSoundPlayer.play();
     }
+
+    // // palaiž "bomb" pieskaršanās skaņu
     public static void playBombSound() {
-        // Bomb powerUp sound
         Media sound = new Media(backgroundMusic.class.getResource("bombSound.wav").toString());
         MediaPlayer bombSoundPlayer = new MediaPlayer(sound);
         bombSoundPlayer.setVolume(volume * 0.5);
         bombSoundPlayer.play();
     }
+
+    // palaiž monētas pieskaršanās skaņu
     public static void playCoinSound() {
-        // coin powerUp sound
         Media sound = new Media(backgroundMusic.class.getResource("coinSound.wav").toString());
         MediaPlayer coinSoundPlayer = new MediaPlayer(sound);
         coinSoundPlayer.setVolume(volume * 0.5);
         coinSoundPlayer.play();
     }
+
+    // palaiž barjeras pieskaršanās skaņu
     public static void playBarrierSound() {
-        // barrier hit sound
         Media sound = new Media(backgroundMusic.class.getResource("barrierSound.wav").toString());
         MediaPlayer barrierSoundPlayer = new MediaPlayer(sound);
         barrierSoundPlayer.setVolume(volume * 0.5);
         barrierSoundPlayer.play();
     }
     
+    // palaiž spēles beigu skaņu
     public static void playGameOverSound() {
     	stopMusic();
-
         Media sound = new Media(backgroundMusic.class.getResource("gameOver.wav").toString());
         MediaPlayer gameOverSoundPlayer = new MediaPlayer(sound);
         gameOverSoundPlayer.setVolume(volume * 0.5);
@@ -116,9 +120,8 @@ public class backgroundMusic {
         gameOverSoundPlayer.play();
     }
 
+    // palaiž nejaušu mūzikas failu
     private String getRandomMusicFile() {
-        // Your logic to get a random music file path
-        // For now, using the first path in the array
         return musicFilePaths[0];
     }
 }
