@@ -31,17 +31,14 @@ public class SecondaryController {
     public void openRegister(ActionEvent event) throws IOException {
         try {
         	backgroundMusic.PlayButtonSound();
-            // Create a new Register object
             register register1 = new register();
-            // Start the created object
             Stage primaryStage = new Stage();
             register1.start(primaryStage);
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
 
-            // For debugging purposes, print the stack trace in case of an exception
-        } catch (Exception e) { // new update
+        } catch (Exception e) { 
             e.printStackTrace();
         }
     }

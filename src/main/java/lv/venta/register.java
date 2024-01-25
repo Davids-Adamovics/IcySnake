@@ -24,7 +24,7 @@ public class register extends Application {
 
     }
 
-    // Method to register a new player
+    // register a new player
     public static void registerPlayer(String username, byte age, enumGender gender) {
         player newPlayer = new player(username, age, gender);
         allPlayers.add(newPlayer);

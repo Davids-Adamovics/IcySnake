@@ -84,7 +84,7 @@ public class PrimaryController {
 
 	}
 
-	// Getter method for currentPlayer
+
 	public player getCurrentPlayer() {
 		return currentPlayer;
 

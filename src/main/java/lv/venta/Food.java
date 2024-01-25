@@ -12,30 +12,30 @@ public class Food {
         start: while (true) {
             if (Buttons.dificulty == 2) {
                 Game.food1X = Game.rand.nextInt(23);
-                Game.food1Y = Game.rand.nextInt(19) + 2; // Adjusted range for food1
+                Game.food1Y = Game.rand.nextInt(19) + 2; 
 
                 Game.food2X = Game.rand.nextInt(23);
-                Game.food2Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.food2Y = Game.rand.nextInt(19) + 2; 
 
                 Game.food3X = Game.rand.nextInt(23);
-                Game.food3Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.food3Y = Game.rand.nextInt(19) + 2; 
 
                 Game.powerUpX = Game.rand.nextInt(23);
-                Game.powerUpY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.powerUpY = Game.rand.nextInt(19) + 2; 
 
                 Game.bombX = Game.rand.nextInt(23);
-                Game.bombY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.bombY = Game.rand.nextInt(19) + 2; 
 
                 Game.plus5X = Game.rand.nextInt(23);
-                Game.plus5Y = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                Game.plus5Y = Game.rand.nextInt(19) + 2; 
                 if (Game.willBarrierSpawn == 1) {
                     Game.barrierX = Game.rand.nextInt(23);
-                    Game.barrierY = Game.rand.nextInt(19) + 2; // Adjusted range for food2
+                    Game.barrierY = Game.rand.nextInt(19) + 2; 
                 }
             }
             else{
                 Game.food1X = Game.rand.nextInt(23);
-                Game.food1Y = Game.rand.nextInt(19) + 2; // Adjusted range for food1
+                Game.food1Y = Game.rand.nextInt(19) + 2; 
             }
 
             for (SnakesBody c : Game.snake) {
@@ -48,13 +48,13 @@ public class Food {
             Game.willBarrierSpawn = Game.random.nextInt(3) + 1;
             Game.currentFruit1 = Game.generateNewFruit();
             Game.currentFruit2 = Game.generateNewFruit();
-            Game.currentFruit3 = Game.generateNewFruit(); // spawn kadu no objektiem
-            Game.currentPowerUp = Game.generateNewPowerUp(); // spawn kadu no objektiem
-            Game.currentBomb = Game.generateNewBomb(); // spawn kadu no objektiem
-            Game.currentPlus5 = Game.generateNewPlus5(); // spawn kadu no objektiem
+            Game.currentFruit3 = Game.generateNewFruit(); 
+            Game.currentPowerUp = Game.generateNewPowerUp(); 
+            Game.currentBomb = Game.generateNewBomb(); 
+            Game.currentPlus5 = Game.generateNewPlus5(); 
 
             if (Game.willBarrierSpawn == 1) {
-                Game.currentBarrier = Game.generateNewBarrier(); // spawn kadu no objektiem
+                Game.currentBarrier = Game.generateNewBarrier(); 
                 System.out.println("Barrier spawned");
                 barriersDodgedCounter++;
 
