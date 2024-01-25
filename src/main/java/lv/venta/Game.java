@@ -285,7 +285,7 @@ public class Game extends Application {
             }
             return;
         }
-        System.out.println("new score: "+ Game.newscore);
+        
 
         gc.drawImage(BackgroundsImage, 0, 0, 600, 600); // background
 
@@ -533,7 +533,7 @@ public class Game extends Application {
     // reset game
     static void resetGame() {
         GameOptions.resetGame();
-        backgroundMusic.stopMusic();
+        //backgroundMusic.stopMusic();
 
         switch (Game.currentMusicPreference) {
             case 1:
