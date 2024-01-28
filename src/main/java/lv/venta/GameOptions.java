@@ -76,7 +76,7 @@ public class GameOptions {
 
     }
 
-    // cuskas galvas custom attēls
+    // cuskas galvas custom attēls, mainās atkarībā no kustības virziena
     public static Image headImage() {
         String headFileName = "headUp.png";
 

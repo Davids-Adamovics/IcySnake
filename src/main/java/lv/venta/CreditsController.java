@@ -12,7 +12,7 @@ public class CreditsController {
     @FXML
     private Button backButton;
 
-    @FXML
+    @FXML   // credits lapai piešķir BACK pogu, kas aizver esošo scene
     public void goBack(ActionEvent event) {
     	backgroundMusic.PlayButtonSound();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

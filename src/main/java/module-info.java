@@ -1,4 +1,6 @@
 module lv.venta {
+
+    //modulis priekš vscode
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;

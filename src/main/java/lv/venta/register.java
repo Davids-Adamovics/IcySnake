@@ -13,7 +13,7 @@ public class register extends Application {
     // Arraylist allplayers
     public static ArrayList<player> allPlayers = new ArrayList<player>();
 
-    @Override
+    @Override       // piešķir nepieciešamo dizainu
     public void start(Stage primaryStage) throws Exception {
         Image iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
     	Scene myScene = FXMLLoader.load(getClass().getResource("primary.fxml"));
@@ -24,7 +24,7 @@ public class register extends Application {
 
     }
 
-    // register a new player
+    // //saglabā lietoaju
     public static void registerPlayer(String username, byte age, enumGender gender) {
         player newPlayer = new player(username, age, gender);
         allPlayers.add(newPlayer);

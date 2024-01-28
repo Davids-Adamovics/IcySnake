@@ -1,27 +1,25 @@
-# IDE and editor files
+# IDE faili
 .vscode/
 .idea/
 
-# Compiled Java classes and JAR files
-#/target/
+# Java faili
 /bin/
 /out/
 
-# Maven files
+# Maven projekta faili
 /.mvn/
 pom.xml
 
 
-# Eclipse files
+# Eclipse faili
 .project
 .classpath
 .settings/
 
-# Git files
+# Git faili
 .gitattributes
 .gitignore
 
-# Miscellaneous
+# papildus
 README.md
-
 /target/

@@ -1,6 +1,6 @@
 package lv.venta;
 
 public enum enumGender {
-    // norada dzimumu
+    // norāda dzimumu
     male, female
 }

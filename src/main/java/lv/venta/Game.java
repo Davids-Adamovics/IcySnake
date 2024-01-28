@@ -100,32 +100,43 @@ public class Game extends Application {
     public static int currentMusicPreference = 0;
 
     static {
-        // Initialize BackgroundsImage with backgroundImage2
         BackgroundsImage = new Image(Game.class.getResource("background1.png").toExternalForm());
     }
 
     public void start(Stage primaryStage) {
         try {
 
-            // Mainigie/base canvas //
-            Image asdImage = new Image(getClass().getResource("utilStileSheet.png").toExternalForm());
+            // Mainigie/sprite sheet
+            Image augluSpriteSheet = new Image(getClass().getResource("utilStileSheet.png").toExternalForm());
 
-            // Crop the portions for different images
+            /*
+             * izgriez atsevišķus attēlus no sprite sheet
+             * x lokācija, y lokācija, platums, augstums
+             */
+            banans = cropImage(augluSpriteSheet, 0, 0, 250, 250);
+            zemene = cropImage(augluSpriteSheet, 0, 316, 350, 350);
+            vinogas = cropImage(augluSpriteSheet, 0, 690, 350, 350);
+            barjera = cropImage(augluSpriteSheet, 460, 0, 250, 250);
+            kronis = cropImage(augluSpriteSheet, 420, 350, 350, 350);
+            abols = cropImage(augluSpriteSheet, 460, 760, 250, 265);
+            plus5 = cropImage(augluSpriteSheet, 950, 70, 150, 150);
+            bomb = cropImage(augluSpriteSheet, 950, 430, 150, 170);
+
             augli = new Image(getClass().getResource("augli.png").toExternalForm());
-            banans = cropImage(asdImage, 0, 0, 250, 250);
-            zemene = cropImage(asdImage, 0, 316, 350, 350);
-            vinogas = cropImage(asdImage, 0, 690, 350, 350);
-            barjera = cropImage(asdImage, 460, 0, 250, 250);
-            kronis = cropImage(asdImage, 420, 350, 350, 350);
-            abols = cropImage(asdImage, 460, 760, 250, 265);
-            plus5 = cropImage(asdImage, 950, 70, 150, 150);
-            bomb = cropImage(asdImage, 950, 430, 150, 170);
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
+            // backgrounds
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
+            // speles ikona
             iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
-            musicPlayer = new backgroundMusic(new String[] { "game1.wav", "gameCrazy.wav","gameGopnik.wav","gameGTA.wav","gameHz.wav","gameMario.wav","gamePain.wav","gameRa.wav","gameRave.wav","gameUzi.wav","gameYeat.wav" }); // mainīgie audio faili
-            musicPlayer.BackgroundMusic(new String[] {"game1.wav", "gameCrazy.wav","gameGopnik.wav","gameGTA.wav","gameHz.wav","gameMario.wav","gamePain.wav","gameRa.wav","gameRave.wav","gameUzi.wav","gameYeat.wav" });
+            // audio faili
+            musicPlayer = new backgroundMusic(new String[] { "game1.wav", "gameCrazy.wav", "gameGopnik.wav",
+                    "gameGTA.wav", "gameHz.wav", "gameMario.wav", "gamePain.wav", "gameRa.wav", "gameRave.wav",
+                    "gameUzi.wav", "gameYeat.wav" });
+            musicPlayer.BackgroundMusic(new String[] { "game1.wav", "gameCrazy.wav", "gameGopnik.wav", "gameGTA.wav",
+                    "gameHz.wav", "gameMario.wav", "gamePain.wav", "gameRa.wav", "gameRave.wav", "gameUzi.wav",
+                    "gameYeat.wav" });
+            // Achivements
             Achivement1 = new Image(getClass().getResource("Achivement1.png").toExternalForm());
             Achivement2 = new Image(getClass().getResource("Achivement2.png").toExternalForm());
             Achivement3 = new Image(getClass().getResource("Achivement3.png").toExternalForm());
@@ -137,37 +148,44 @@ public class Game extends Application {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             vb.getChildren().add(canvas);
 
+            // Izveido JAVAFX Animation timer, kur definē tick skaitītāju nanosekundēs
             new AnimationTimer() {
-                long lastTick = 0;
+                long lastTick = 0; // sākumā tas ir definēts ar nulli
 
                 public void handle(long now) {
-                    if (!gameStarted || gamePaused) {
-                        if (showInstructions) {
-                            drawInstructions(gc);
+                    if (!gameStarted || gamePaused) { // Ja spēle vēl nav sākusies vai ir iepauzēta
+                        if (showInstructions) { // un showInstructions == True
+                            drawInstructions(gc); // parāda instrukcijas
                         } else {
-                            // gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                            gc.setFill(Color.web("#88b5d1"));
-                            gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-                            gc.setFill(Color.web("#ffffff"));
-                            Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30);
+                            // instrukcijas
+                            gc.setFill(Color.web("#88b5d1")); // canvas krāsa
+                            gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight()); // rectangle uz
+                                                                                                      // canvas
+                            gc.setFill(Color.web("#ffffff")); // teksta krāsa
+                            Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30); // teksta
+                                                                                                                       // fonts
                             gc.setFont(customFont);
                             gc.fillText("Press SPACE to Start", 115, 290);
-                        } // s
+                        }
                         return;
                     }
-
+                    // Ja funkcija iepriekš vēl nav notikusi, tad lasttick definē ar Animation timer
+                    // "now"
                     if (lastTick == 0) {
                         lastTick = now;
                         tick(gc);
                         return;
                     }
-
+                    // pārbauda, vai ir pagājis pietiekami daudz laika kopš iepriekšējā tick
+                    // Tas tiek pārbaudīts skatoties, vai esošais tick ir lielāks par 700'000'000
+                    // dalīts ar laiku nanosekudēs
                     if (now - lastTick > 700000000 / speed) {
+                        // ja ir, tad notiek nākošais tick un palaiž tick funkciju
                         lastTick = now;
                         tick(gc);
                     }
                 }
-            }.start();
+            }.start(); // starto animationTimer loop
 
             Scene scene = new Scene(vb, 590, 590); // set scene
             // =========//
@@ -175,8 +193,8 @@ public class Game extends Application {
             // =========//
             scene.addEventFilter(KeyEvent.KEY_PRESSED, key -> { // start game ar SPACE
                 if (key.getCode() == KeyCode.SPACE) {
-                    if (!gameStarted) {
-                        if (showInstructions) {
+                    if (!gameStarted) { // Ja spēle atrodas "Press space to start" režīmā
+                        if (showInstructions) { // Tad nospiežot space tas pazūd
                             showInstructions = false;
                         } else {
                             gameStarted = true;
@@ -184,15 +202,17 @@ public class Game extends Application {
                     }
                 } else if (key.getCode() == KeyCode.ESCAPE) { // Pause game ar ESC
                     gamePaused = true;
-                    pauseGame(primaryStage);
+                    pauseGame(primaryStage); // Palaiž pause ekrānu
                 } else if (key.getCode() == KeyCode.P || key.getCode() == KeyCode.R) { // Restart game ar R
                     backgroundMusic.stopMusic();
                     resetGame();
                 } else {
                     if (gameStarted) {
                         // WASD un bultinas
-                        if ((key.getCode() == KeyCode.W || key.getCode() == KeyCode.UP)
-                                && direction != enumDirections.down) {
+                        if ((key.getCode() == KeyCode.W || key.getCode() == KeyCode.UP) // nospiežot W vai bultiņa uz
+                                                                                        // augšu čūska dodas augšup
+                                && direction != enumDirections.down) { // Pārbauda, vai čūska necešās pagriezties pa 180
+                                                                       // grādiem ieskrienot sevī
                             direction = enumDirections.up;
                         } else if ((key.getCode() == KeyCode.A || key.getCode() == KeyCode.LEFT)
                                 && direction != enumDirections.right) {
@@ -219,19 +239,19 @@ public class Game extends Application {
             // ======================//
             // Game scene definesana //
             // ======================//
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("SNAKE GAME");
-            primaryStage.getIcons().add(iconImage);
-            primaryStage.setMinWidth(590);
-            primaryStage.setMaxWidth(590);
-            primaryStage.setMinHeight(590);
-            primaryStage.setMaxHeight(590);
+            primaryStage.setScene(scene); // Uzliek scene
+            primaryStage.setTitle("SNAKE GAME"); // Ekrāna nosaukums
+            primaryStage.getIcons().add(iconImage); // Ekrāna ikona
+            primaryStage.setMinWidth(scene.getWidth()); // Ekrāna min un max izmērs, lai nevarētu mainīt loga izmērus
+            primaryStage.setMaxWidth(scene.getWidth());
+            primaryStage.setMinHeight(scene.getHeight());
+            primaryStage.setMaxHeight(scene.getHeight());
             primaryStage.centerOnScreen();
             primaryStage.show();
             openStages.add(primaryStage);
 
         } catch (Exception exception1) {
-            exception1.printStackTrace();
+            exception1.printStackTrace(); // noķer kļūdas
         }
     }
 
@@ -243,15 +263,15 @@ public class Game extends Application {
         if (gameOver) {
             inGameOverState = true;
 
-            gc.setFill(Color.web("#5ac3d1", 0.1)); // fonta krasa un caurspidigums
+            gc.setFill(Color.web("#5ac3d1", 0.1)); // fonta krasa un caurspidigums, lai ar tick palīdzību izveidotu
+                                                   // gameover animāciju
             gc.fillRect(0, 0, 590, 590); // game over fons
 
             // Fonti
-            Font HEADER = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 80);
-            Font POINTS = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35);
-            Font INFO = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
-
-            gc.setGlobalAlpha(0.3); // caurspīdīgums
+            Font HEADER = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 80); // Game over teksts
+            Font POINTS = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 35); // Punktu un labākā
+                                                                                                   // rezultāta skaits
+            Font INFO = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25); // Info teksts
 
             // gameover
             gc.setFont(HEADER);
@@ -267,121 +287,111 @@ public class Game extends Application {
             gc.fillText(Integer.toString(counter), 170, 260, 35);
             gc.fillText(Integer.toString(highScore), 420, 260, 35);
 
-            // atteli
+            // atteli priekš punktiem un HIGH score
             gc.drawImage(abols, 110, 220, 55, 55);
             gc.drawImage(kronis, 350, 220, 55, 55);
 
-            gc.setGlobalAlpha(1.0); // reset caurspīdīgums
-
             if (gameOverSoundPlayed) {
-                backgroundMusic.playGameOverSound();
+                backgroundMusic.playGameOverSound(); // Ja game over skaņa ir noskanējusi, tā neatkārtojas
                 gameOverSoundPlayed = false;
                 if (counter > highScore) {
                     highScore = counter;
-
+                    // saglabā jauno highscore un iepriekšējo rezultātu, ko izmanto Leaderboard
                 }
                 newscore = counter;
 
             }
             return;
         }
-        
 
-        gc.drawImage(BackgroundsImage, 0, 0, 600, 600); // background
+        gc.drawImage(BackgroundsImage, 0, 0, 600, 600); // background attēls
 
-        for (int i = snake.size() - 1; i >= 1; i--) { // čūskas ķermenis
+        for (int i = snake.size() - 1; i >= 1; i--) { // For cikls, kas iet cauri visam čūskas garumam
             snake.get(i).x = snake.get(i - 1).x; // katrai čūskas daļai piešķir iepriekšējās daļas koordinātas (Izņemot
                                                  // galvai)
             snake.get(i).y = snake.get(i - 1).y;
         }
 
         // ============================//
-        // Cuska atrodas ieksa barjera //
+        // Cuska atrodas ieksa robežās //
         // ============================//
         switch (direction) {
             case up:
-                snake.get(0).y--;
-                if (snake.get(0).y < 3) {
-                    snake.get(0).y = 2; // augša
+                snake.get(0).y--; // cuskas galva visu laiku iet uz augšu
+                if (snake.get(0).y < 3) { // ja galvas koordinātas ir mazākas par 3, tad tām piešķir 2
+                    snake.get(0).y = 2; // nav 0, jo pirmajos 2 segmentos atrodas punktu lauks
                 }
                 break;
             case down:
-                snake.get(0).y++;
-                if (snake.get(0).y >= 22) {
-                    snake.get(0).y = 21; // apakša
+                snake.get(0).y++; // Y palielinās un iet uz leju
+                if (snake.get(0).y >= 22) { // Ja Y lielāks/vienāds ar 22, tad piešķir 21
+                    snake.get(0).y = 21;
                 }
                 break;
             case left:
                 snake.get(0).x--;
-                if (snake.get(0).x < 0) {
-                    snake.get(0).x = 0; // kreisā mala
+                if (snake.get(0).x < 0) { // dodas pa kreisi
+                    snake.get(0).x = 0; // nevar būt mazāks par nulli
                 }
                 break;
             case right:
-                snake.get(0).x++;
-                if (snake.get(0).x >= 23) {
-                    snake.get(0).x = 22; // labā mala
+                snake.get(0).x++; // dodas pa labi
+                if (snake.get(0).x >= 23) { // Ja X lielāks/vienāds ar 23, tad piešķir 22
+                    snake.get(0).x = 22;
                 }
                 break;
         }
 
+        // Ja cuska apēd augli
         if (food1X == snake.get(0).x && food1Y == snake.get(0).y || food2X == snake.get(0).x && food2Y == snake.get(0).y
-                || food3X == snake.get(0).x && food3Y == snake.get(0).y) { // food
-            snake.add(new SnakesBody(-1, -1));
-            newFood();
-            counter += 1;
+                || food3X == snake.get(0).x && food3Y == snake.get(0).y) {
+            snake.add(new SnakesBody(-1, -1)); // piešķir jaunu kubu -1 -1 lokācijā
+            newFood(); // Izveido jaunus ēdienus
+            counter++; // score palielina par +1
         }
 
-        // ==========//
-        // power up //
-        // ==========//
 
-        if (powerUpX == snake.get(0).x && powerUpY == snake.get(0).y) { // power up
-            snake.add(new SnakesBody(-1, -1));
-            newFood();
-            counter += 1;
+        if (powerUpX == snake.get(0).x && powerUpY == snake.get(0).y) { // Ja cuska apēd power up
+            newFood(); // Izveido jaunus ēdienus
 
             gc.setFill(Color.RED);
             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
             gc.setFont(customFont);
-            gc.fillText("FAKE POWER UP HAHA", 140, 290); // FAKE POWER UP
+            gc.fillText("FAKE POWER UP HAHA", 140, 290); // UZ ekrāna un konsolē parādas apēstā power up nosaukums
             System.out.println("FAKE POWER UP HAHA");
-            counter -= 2;
+            counter -= 2; // score samazina par -2
 
-            backgroundMusic.playStarSound();
+            backgroundMusic.playStarSound(); // atskaņo powerup skaņu
 
         }
-        if (bombX == snake.get(0).x && bombY == snake.get(0).y) { // power up
+
+        if (bombX == snake.get(0).x && bombY == snake.get(0).y) { // Bumbas power up
             snake.add(new SnakesBody(-1, -1));
             newFood();
-            counter += 1;
+            counter += 3;     // 3 punkti
 
-            // ==========//
-            // bomb //
-            // ==========//
-
-            speed -= 3;
+            speed -= 3;       // speed samazina par -3
             gc.setFill(Color.RED);
             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
             gc.setFont(customFont);
-            gc.fillText("-3 speed / mix", 140, 290); // -3 speed / mix
+            gc.fillText("-3 speed / mix", 140, 290); // UZ ekrāna un konsolē parādas apēstā power up nosaukums
             System.out.println("-3 speed / mix");
-            bombsClaimedCounter++;
+            bombsClaimedCounter++;  // saskaita apēstās bumbas priekš achivement
 
-            backgroundMusic.playBombSound();
+            backgroundMusic.playBombSound();    // noskan bumbas audio fails
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-                // This code will run every second
+                //kods atkārtojas ik pēc 5s
                 for (int i = 0; i < 5; i++) {
                     if (gameOver == false) {
-                        newFood();
-                        speed--;
+                        newFood();  // ēdieni maisās
+                        speed--;    // ātrums palēninās ar katru sekundi
                     }
                 }
             }));
 
-            timeline.setCycleCount(5);
-            timeline.setOnFinished(event -> {
+            timeline.setCycleCount(5);  // timeline darbojas tikai 5s
+            timeline.setOnFinished(event -> {   // kad pagājušas 5s, ātrums atgriežas un konsolē izvade powerup beigas
                 System.out.println("Five seconds have passed!");
                 powerUpPlayed = true;
                 speed += 3;
@@ -390,34 +400,26 @@ public class Game extends Application {
             timeline.play();
 
         }
-        if (plus5X == snake.get(0).x && plus5Y == snake.get(0).y) { // power up
+        if (plus5X == snake.get(0).x && plus5Y == snake.get(0).y) { // power up +5
             snake.add(new SnakesBody(-1, -1));
             newFood();
-            counter += 1;
-
-            // ======//
-            // plus5 //
-            // ======//
-
-            counter += 5;
-            speed += 0.1;
+            counter += 3;
+            speed -= 0.1;
             gc.setFill(Color.RED);
             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
             gc.setFont(customFont);
-            gc.fillText("+5 points", 140, 290);
-            System.out.println("+5 points");
+            gc.fillText("+3 points", 140, 290);
+            System.out.println("+3 points");
             powerUpPlayed = true;
 
             backgroundMusic.playCoinSound();
 
         }
-        // ========//
-        // barrier //
-        // ========//
-        if (willBarrierSpawn == 1 && Buttons.dificulty == 2) {
 
-            if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) {
-                gameOver = true;
+        if (willBarrierSpawn == 1 && Buttons.dificulty == 2) {  // barjera nespwanojas katru reizi, bet ja ir powerup režīms un willBarrierSpawn == 1
+
+            if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) { // cuskas galva saskarās ar barjeru
+                gameOver = true;    // spēles beigas
                 stopBackgroundMusic();
                 gameOverSoundPlayed = true;
                 backgroundMusic.playBarrierSound();
@@ -432,23 +434,22 @@ public class Game extends Application {
             }
         }
 
-        // Set the background rectangle color and size
-        Canvas canvas = new Canvas(590, 50);
+        // Punktu skaitītāja laukums
+        Canvas canvas = new Canvas(590, 50); // Vēlreiz definē canvas
         if (Buttons.color == 0) {
-            gc.setFill(Color.web("#0097B2"));
+            gc.setFill(Color.web("#0097B2"));   // Ja tiek izmantota zilā mape, lauks ir zils
         } else if (Buttons.color == 1) {
-            gc.setFill(Color.web("#8EA60F"));
+            gc.setFill(Color.web("#8EA60F"));   // Ja tiek izmantota dzltenā mape, lauks ir dzltens
         }
-        gc.fillRect(0, 0, canvas.getWidth(), 50);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight()); // piešķir laukam izmērus
 
-        // Set the text color, font, and draw the score text
-        gc.setFill(Color.WHITE);
-        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30);
+        gc.setFill(Color.WHITE); // teksta krāsa
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30); //teksta fonts
         gc.setFont(customFont);
         if (counter > highScore) {
-            gc.fillText("NEW High Score: " + counter, 10, 30);
+            gc.fillText("NEW High Score: " + counter, 10, 30);  // Ja rezultāts pārspēj esošo high score
         } else {
-            gc.fillText("Score: " + counter, 10, 30);
+            gc.fillText("Score: " + counter, 10, 30);   // ja erzultāts nepārspēj esošo high score
         }
         // ========================//
         // cuska galva un ķermenis //
@@ -456,39 +457,38 @@ public class Game extends Application {
 
         SnakesBody head = snake.get(0);
         double headSize = 25;
-        double cornerRadius = 10; // Adjust this value to control the roundness
+        double cornerRadius = 10;
 
-        gc.drawImage(headImage(), head.x * 25, head.y * 25, headSize, headSize);
+        gc.drawImage(headImage(), head.x * 25, head.y * 25, headSize, headSize);    // cuskas galva un tās izmēri
 
-        for (int i = 1; i < snake.size(); i++) {
+        for (int i = 1; i < snake.size(); i++) {    //Čūskas ķermeņa izmēri
             SnakesBody bodyPart = snake.get(i);
             double partSize = 25;
             double bodyPartX = bodyPart.x * 25;
             double bodyPartY = bodyPart.y * 25;
 
-            gc.setFill(snakeColor);
+            gc.setFill(snakeColor); // ķermeņa krāsa
 
             double rectWidth = partSize;
             double rectHeight = partSize;
 
-            // Draw filled rounded rectangle (tube)
             gc.fillRoundRect(bodyPartX, bodyPartY, rectWidth, rectHeight, cornerRadius, cornerRadius);
         }
 
         // =========================//
         // powerup, ediens, barjera //
         // =========================//
-        if (Buttons.dificulty == 2) {
+        if (Buttons.dificulty == 2) {   // Tiek uzzīmēti visi objekti tikai tad, kad ir aktivizēts powerUP režīms
             gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 25, 25);
             gc.drawImage(currentPlus5, plus5X * 25, plus5Y * 25, 25, 25);
             gc.drawImage(currentBomb, bombX * 25, bombY * 25, 25, 25);
             gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
             gc.drawImage(currentFruit2, food2X * 25, food2Y * 25, 25, 25);
             gc.drawImage(currentFruit3, food3X * 25, food3Y * 25, 25, 25);
-            if (willBarrierSpawn == 1) {
+            if (willBarrierSpawn == 1) {    // Ja barjerai ir atļauts nospawnoties, tad arī tā parādās
                 gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 23);
             }
-        } else {
+        } else {    // retro versiā palaižas tikai viens auglis
             gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
         }
     }
@@ -533,7 +533,7 @@ public class Game extends Application {
     // reset game
     static void resetGame() {
         GameOptions.resetGame();
-        //backgroundMusic.stopMusic();
+        backgroundMusic.stopMusic();
 
         switch (Game.currentMusicPreference) {
             case 1:
@@ -598,10 +598,10 @@ public class Game extends Application {
     static Image generateNewPowerUp() {
         return powerup;
     }
-
-    private Image cropImage(Image image, int x, int y, int width, int height) {
-        PixelReader pixelReader = image.getPixelReader();
-        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);
+    //apgriež sprite sheet attēlu    x lokācija, y lokācija, platums, augstums
+    private Image cropImage(Image image, int x, int y, int width, int height) { 
+        PixelReader pixelReader = image.getPixelReader();   //izmato pixel reader
+        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);   // izveido jaunu attēlu
         return croppedImage;
     }
 

@@ -1,14 +1,57 @@
+
+/* 90% no pogām izmato šo css kodu */
 .Button {
     -fx-font: 22px "Serif";
     -fx-padding: 10;
-    -fx-background-color: #ececec;
-    -fx-text-fill: #595858;
+    -fx-background-color: #3db2c7;
+    -fx-text-fill: #ffffff;
 }
 
 .Button:hover {
-    -fx-background-color: #969494; /* Darker color for hover effect */
+    -fx-background-color: #287f8f; 
 }
 
 .Button:pressed {
-    -fx-background-color: #4c4c4c; /* Even darker color for pressed effect */
+    -fx-background-color: #28565f; 
 }
+
+/* šo css kodu izmanto credits lapā */
+.CreditsButton {
+    -fx-font: 22px "Serif";
+    -fx-padding: 10;
+    -fx-background-color: #859294;
+    -fx-text-fill: #ffffff;
+}
+
+.CreditsButton:hover {
+    -fx-background-color: #515252; 
+}
+
+.CreditsButton:pressed {
+    -fx-background-color: #383838; 
+}
+
+
+/* anchor-pane izmanto start menu, lai viss pielāgotos ekrāna izmēram */
+ .anchor-pane {
+    -fx-background-image: url('background3.png'); 
+    -fx-background-size: cover; 
+}
+
+
+/*
+=========== PROCESĀ ===============
+.transparent-background {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 10;
+}
+
+.slider-blue {
+    -fx-background-color: blue;
+} 
+*/
+
+
+
+
+

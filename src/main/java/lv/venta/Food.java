@@ -7,12 +7,12 @@ import javafx.scene.image.Image;
 public class Food {
     static int barriersDodgedCounter = 0;
 
-    // spawn food, powerup, barrier
+    // spawn ēdienus, powerups, barjeras
     public static void newFood() {
         start: while (true) {
-            if (Buttons.dificulty == 2) {
+            if (Buttons.dificulty == 2) {          // Objekti atrodas 23x21 laukumā
                 Game.food1X = Game.rand.nextInt(23);
-                Game.food1Y = Game.rand.nextInt(19) + 2; 
+                Game.food1Y = Game.rand.nextInt(19) + 2; // nevar būt mazāks par 2, jo tur atrodas punktu lauks
 
                 Game.food2X = Game.rand.nextInt(23);
                 Game.food2Y = Game.rand.nextInt(19) + 2; 
@@ -28,23 +28,25 @@ public class Food {
 
                 Game.plus5X = Game.rand.nextInt(23);
                 Game.plus5Y = Game.rand.nextInt(19) + 2; 
+
                 if (Game.willBarrierSpawn == 1) {
                     Game.barrierX = Game.rand.nextInt(23);
                     Game.barrierY = Game.rand.nextInt(19) + 2; 
                 }
             }
-            else{
+            else{   //retro versijas auglis
                 Game.food1X = Game.rand.nextInt(23);
                 Game.food1Y = Game.rand.nextInt(19) + 2; 
             }
 
-            for (SnakesBody c : Game.snake) {
-                if (c.x == Game.food1X && c.y == Game.food1Y || c.x == Game.food2X && c.y == Game.food2Y
-                        || c.x == Game.food2X && c.y == Game.food2Y) {
+            for (SnakesBody snakeB : Game.snake) {
+                if (snakeB.x == Game.food1X && snakeB.y == Game.food1Y || snakeB.x == Game.food2X && snakeB.y == Game.food2Y
+                        || snakeB.x == Game.food2X && snakeB.y == Game.food2Y || snakeB.x == Game.food3X && snakeB.y == Game.food3Y) {
                     continue start;
                 }
             }
-            if(Buttons.dificulty == 2){
+
+            if(Buttons.dificulty == 2){             // power up režīmā spawnojas objektu robežas X Y
             Game.willBarrierSpawn = Game.random.nextInt(3) + 1;
             Game.currentFruit1 = Game.generateNewFruit();
             Game.currentFruit2 = Game.generateNewFruit();
@@ -53,20 +55,21 @@ public class Food {
             Game.currentBomb = Game.generateNewBomb(); 
             Game.currentPlus5 = Game.generateNewPlus5(); 
 
-            if (Game.willBarrierSpawn == 1) {
+            if (Game.willBarrierSpawn == 1) {      // Ja barjerai ir atļauts nospawnoties, konsolē to izvada 
                 Game.currentBarrier = Game.generateNewBarrier(); 
                 System.out.println("Barrier spawned");
-                barriersDodgedCounter++;
+                barriersDodgedCounter++;          // Pieskaita +1 pie barriersDodgedCounter priekš achivement
 
             } else {
-                System.out.println("Barrier not spawned!");
+                System.out.println("Barrier not spawned!");   // savādāk barjera nespawnojas
             }
         }
+
         else{
             Game.currentFruit1 = Game.generateNewFruit();
         }
-            Game.speed++; // speed
-            backgroundMusic.playPickupSound(); // background music
+            Game.speed++; // speed palielinās par +1
+            backgroundMusic.playPickupSound(); // augļa apēšanas skaņa
             break;
         }
     }

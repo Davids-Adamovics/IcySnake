@@ -1,6 +1,6 @@
 package lv.venta;
 
-public class SnakesBody {
+public class SnakesBody {   // čūskas ķermeņa XY apzīmēšana
     int x;
     int y;
 

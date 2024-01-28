@@ -1,15 +1,8 @@
 package lv.venta;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
@@ -28,7 +21,7 @@ public class SecondaryController {
     
   
 
-    public void openRegister(ActionEvent event) throws IOException {
+    public void openRegister(ActionEvent event) throws IOException {    // start poga
         try {
         	backgroundMusic.PlayButtonSound();
             register register1 = new register();
@@ -43,7 +36,7 @@ public class SecondaryController {
         }
     }
 
-    public void openCredits(ActionEvent event) throws Exception {
+    public void openCredits(ActionEvent event) throws Exception {   //credits poga
     	backgroundMusic.PlayButtonSound();
         credits credits1 = new credits();
 
@@ -55,7 +48,7 @@ public class SecondaryController {
    
 
 
-    public void exitOut(ActionEvent event) {
+    public void exitOut(ActionEvent event) {    // exit poga
     	backgroundMusic.PlayButtonSound();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();

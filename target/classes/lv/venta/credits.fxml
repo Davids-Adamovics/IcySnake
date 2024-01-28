@@ -46,7 +46,7 @@
                <Font size="13.0" />
             </font>
          </Text>
-         <Text fill="WHITE" layoutX="125.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Testing" textAlignment="CENTER" wrappingWidth="205.02587890625">
+         <Text fill="WHITE" layoutX="125.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Testing, Game functions" textAlignment="CENTER" wrappingWidth="205.02587890625">
             <font>
                <Font size="13.0" />
             </font>

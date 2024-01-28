@@ -39,33 +39,33 @@ public class PrimaryController {
 
 	public static player currentPlayer;
 
-	public void SwitchTogame(ActionEvent event) throws IOException {
+	public void SwitchTogame(ActionEvent event) throws IOException {		// nospiežot register 
 		try {
-			backgroundMusic.stopMusic();
+			backgroundMusic.stopMusic();	// apstājas mūzika
 
-			String username = usernameInput.getText();
+			String username = usernameInput.getText();				// saglabā player datus
 			byte age = Byte.parseByte(ageInput.getText());
 			enumGender gender = malePick.isSelected() ? enumGender.male : enumGender.female;
 
 			currentPlayer = new player(username, age, gender);
 
-			System.out.println("Player Information: \n" + currentPlayer);
+			System.out.println("Player Information: \n" + currentPlayer);		// izvada player datus konsolē
 
-			backgroundMusic.PlayButtonSound();
+			backgroundMusic.PlayButtonSound();	// noskan pogas skaņa
 
-			Game game = new Game();
+			Game game = new Game();			// palaiž spēli
 			Stage gameStage = new Stage();
 			game.start(gameStage);
 
-			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		// aizver esošo scene
 			currentStage.close();
 
-		} catch (Exception e) {
+		} catch (Exception e) {			// noķer ķļudas
 			e.printStackTrace();
 		}
 	}
 
-	public void SwitchTogameGuest(ActionEvent event) throws IOException {
+	public void SwitchTogameGuest(ActionEvent event) throws IOException {		// Līdzīgi kā register, bet bez player saglabāšanas
 
 		backgroundMusic.stopMusic();
 
