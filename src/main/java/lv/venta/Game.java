@@ -568,8 +568,10 @@ public class Game extends Application {
                 break;
 
             default:
-
                 Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                if (Buttons.musicChoice != ""){
+                    Game.musicPlayer.BackgroundMusic(new String[] { Buttons.musicChoice });
+                }
                 break;
         }
     }

@@ -20,6 +20,7 @@ public class Buttons {
 
     public static int color = 0;
     public static int dificulty = 1;
+    public static String musicChoice = "";
 
     /*
      * ==============================================================
@@ -112,56 +113,67 @@ public class Buttons {
                 Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "game1.wav";
                 break;
             case "Crazy":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameCrazy.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameCrazy.wav";
                 break;
             case "Gopnik":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameGopnik.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameGopnik.wav";
                 break;
             case "GTA":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameGTA.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameGTA.wav";
                 break;
             case "MidNight":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameHz.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameHz.wav";
                 break;
             case "BeastMode":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameYeat.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameYeat.wav";
                 break;
             case "Mario":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameMario.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameMario.wav";
                 break;
             case "WaterFall":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gamePain.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gamePain.wav";
                 break;
             case "Ra":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameRa.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameRa.wav";
                 break;
             case "Rave":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameRave.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameRave.wav";
                 break;
             case "BlastOff":
                 Game.musicPlayer.BackgroundMusic(new String[] { "gameUzi.wav" });
                 Game.options(pauseBox, primaryStage);
                 backgroundMusic.PlayButtonSound();
+                musicChoice = "gameUzi.wav";
                 break;
             // atver leaderboard lapu
             case "Leaderboard":
