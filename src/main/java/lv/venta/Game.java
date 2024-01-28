@@ -403,13 +403,13 @@ public class Game extends Application {
         if (plus5X == snake.get(0).x && plus5Y == snake.get(0).y) { // power up +5
             snake.add(new SnakesBody(-1, -1));
             newFood();
-            counter += 3;
+            counter += 5;
             speed -= 0.1;
             gc.setFill(Color.RED);
             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
             gc.setFont(customFont);
-            gc.fillText("+3 points", 140, 290);
-            System.out.println("+3 points");
+            gc.fillText("+5 points", 140, 290);
+            System.out.println("+5 points");
             powerUpPlayed = true;
 
             backgroundMusic.playCoinSound();
@@ -568,10 +568,8 @@ public class Game extends Application {
                 break;
 
             default:
+
                 Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
-                if (Buttons.musicChoice != ""){
-                    Game.musicPlayer.BackgroundMusic(new String[] { Buttons.musicChoice });
-                }
                 break;
         }
     }
