@@ -15,8 +15,8 @@ Welcome to IcySnake! Immerse yourself in Snake game experience implemented in Ja
 
 ## Preview
 
-<img src="src/main/resources/lv/venta/readme1.PNG" alt="Start Screen" height="300" width="500"/>
-<img src="src/main/resources/lv/venta/readme2.PNG" alt="Registration Screen" height="300" width="400"/>
+<img src="src/main/resources/lv/venta/readme1.png" alt="Start Screen" height="300" width="500"/>
+<img src="src/main/resources/lv/venta/readme2.png" alt="Registration Screen" height="300" width="400"/>
 <img src="src/main/resources/lv/venta/readme3.gif" alt="Game" height="300" width="300"/>
 
 
