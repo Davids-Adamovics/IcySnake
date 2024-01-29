@@ -53,11 +53,7 @@ public class SecondaryController {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }
-    public void openOptions(ActionEvent event) {
-    
-        backgroundMusic.PlayButtonSound();
-       
-    }
+
 
  
 

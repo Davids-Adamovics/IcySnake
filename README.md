@@ -53,6 +53,8 @@ Welcome to IcySnake! Immerse yourself in Snake game experience implemented in Ja
 - **D or RIGHT ARROW:** Move the snake to the right.
 - **R or P:** Restart the game.
 - **SPACE:** Start the game, pause, or resume.
+- **I:** See current game settings.
+
 
 ## Scoring
 

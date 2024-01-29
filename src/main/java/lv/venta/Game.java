@@ -44,8 +44,8 @@ public class Game extends Application {
     static int barrierX = 0;
     static int barrierY = 2;
     static int highScore = 0;
-    static int newscore = 0;
-    static int bombsClaimedCounter = 0;
+    static int newscore = 0; 
+    static int bombsClaimedCounter = 0; // achivement
     static int secondBest = 0;
     static int thirdBest = 0;
     static int fourthBest = 0;
@@ -72,10 +72,10 @@ public class Game extends Application {
     static Image barjera;
     static Image powerup;
     static Image bomb;
+    static Image plus5;
     static Image Achivement1;
     static Image Achivement2;
     static Image Achivement3;
-    static Image plus5;
     static Image backgroundImage1;
     static Image backgroundImage2;
     static Image iconImage;
@@ -99,9 +99,9 @@ public class Game extends Application {
     static Random rand = new Random();
     static Random random = new Random();
     static Stage pauseStage;
-    public static Color snakeColor = Color.GREEN;
+    public static Color snakeColor = Color.GREEN; // default cuskas krasa
 
-    public static Image BackgroundsImage = backgroundImage2;
+    public static Image BackgroundsImage = backgroundImage2; 
     public static int willBarrierSpawn = 0;
 
     public static int currentMusicPreference = 0;
@@ -120,7 +120,7 @@ public class Game extends Application {
              * izgriez atsevišķus attēlus no sprite sheet
              * x lokācija, y lokācija, platums, augstums
              */
-            banans = cropImage(augluSpriteSheet, 0, 0, 250, 250);
+            banans = cropImage(augluSpriteSheet, 0, 0, 250, 250); // X Y koordinātas un izmērs
             zemene = cropImage(augluSpriteSheet, 0, 316, 350, 350);
             vinogas = cropImage(augluSpriteSheet, 0, 690, 350, 350);
             barjera = cropImage(augluSpriteSheet, 460, 0, 250, 250);
@@ -153,12 +153,12 @@ public class Game extends Application {
             Achivement2 = new Image(getClass().getResource("Achivement2.png").toExternalForm());
             Achivement3 = new Image(getClass().getResource("Achivement3.png").toExternalForm());
 
-            newFood();
+            newFood(); // nospawno ēdienu
 
             VBox vb = new VBox(); // izveido main canvas, scene pamats
             Canvas canvas = new Canvas(590, 590);
-            GraphicsContext gc = canvas.getGraphicsContext2D();
-            vb.getChildren().add(canvas);
+            GraphicsContext gc = canvas.getGraphicsContext2D(); // definē Graphics Context (JAVAfx bibliotēka)
+            vb.getChildren().add(canvas); // Vboxam pievieno visu gc rediģēto utt.
 
             // Izveido JAVAFX Animation timer, kur definē tick skaitītāju nanosekundēs
             new AnimationTimer() {
@@ -168,7 +168,7 @@ public class Game extends Application {
                     if (!gameStarted || gamePaused) { // Ja spēle vēl nav sākusies vai ir iepauzēta
                         if (showInstructions) { // un showInstructions == True
                             drawInstructions(gc); // parāda instrukcijas
-                        } else {
+                        } else { // ja "USE arrow keys" ir nospiests, parādās "Press SPACE to Start"
                             // instrukcijas
                             gc.setFill(Color.web("#88b5d1")); // canvas krāsa
                             gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight()); // rectangle uz
@@ -191,7 +191,7 @@ public class Game extends Application {
                     // pārbauda, vai ir pagājis pietiekami daudz laika kopš iepriekšējā tick
                     // Tas tiek pārbaudīts skatoties, vai esošais tick ir lielāks par 700'000'000
                     // dalīts ar laiku nanosekudēs
-                    if (now - lastTick > 700000000 / speed) {
+                    if (now - lastTick > 700000000 / speed) { // 0.7s / speed
                         // ja ir, tad notiek nākošais tick un palaiž tick funkciju
                         lastTick = now;
                         tick(gc);
@@ -252,7 +252,7 @@ public class Game extends Application {
             // ===================//
             // Cuskas kermena X/Y //
             // ===================//
-            snake.add(new SnakesBody(10, 10));
+            snake.add(new SnakesBody(10, 10)); // cuskas pirmie 3
             snake.add(new SnakesBody(10, 10));
             snake.add(new SnakesBody(10, 10));
             // ======================//
@@ -376,8 +376,8 @@ public class Game extends Application {
             gc.setFill(Color.RED);
             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
             gc.setFont(customFont);
-            gc.fillText("FAKE POWER UP HAHA", 140, 290); // UZ ekrāna un konsolē parādas apēstā power up nosaukums
-            System.out.println("FAKE POWER UP HAHA");
+            gc.fillText("POWER UP", 140, 290); // UZ ekrāna un konsolē parādas apēstā power up nosaukums
+            System.out.println("POWER UP");
             counter -= 2; // score samazina par -2
 
             backgroundMusic.playStarSound(); // atskaņo powerup skaņu
@@ -415,10 +415,9 @@ public class Game extends Application {
                 powerUpPlayed = true;
                 speed += 3;
             });
-
             timeline.play();
-
         }
+
         if (plus5X == snake.get(0).x && plus5Y == snake.get(0).y) { // power up +5
             snake.add(new SnakesBody(-1, -1));
             newFood();
@@ -437,7 +436,6 @@ public class Game extends Application {
 
         if (willBarrierSpawn == 1 && Buttons.dificulty == 2) { // barjera nespwanojas katru reizi, bet ja ir powerup
                                                                // režīms un willBarrierSpawn == 1
-
             if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) { // cuskas galva saskarās ar barjeru
                 gameOver = true; // spēles beigas
                 stopBackgroundMusic();

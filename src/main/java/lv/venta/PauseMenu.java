@@ -1,14 +1,7 @@
 package lv.venta;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,13 +11,11 @@ import javafx.stage.Stage;
 
 public class PauseMenu {
 
-    public static int color = 0;
+    public static int color = 0; // mape
     public static int dificulty = 1;
     public static String musicChoice = "";
     static byte achivementCounter = 0;
 
-
-   
 
     /*
      * ==============================================================

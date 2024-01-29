@@ -26,23 +26,9 @@ public class startmenu extends Application {
             primaryStage.setTitle("IcySnake");
             primaryStage.setScene(myScene);
 
-           
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private Image loadImage(String resourceName) {
-        try (InputStream stream = getClass().getResourceAsStream(resourceName)) {
-            if (stream != null) {
-                return new Image(stream);
-            } else {
-                System.err.println("Image resource not found: " + resourceName);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

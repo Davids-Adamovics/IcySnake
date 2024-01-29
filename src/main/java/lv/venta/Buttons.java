@@ -10,9 +10,9 @@ import javafx.stage.Stage;
 
 public class Buttons {
 
-    public static int color = 0;
-    public static int dificulty = 1;
-    public static String musicChoice = "";
+    public static int color = 0; // lai noteiktu kāda mape
+    public static int dificulty = 1; // lai noteiktu dificulty
+    public static String musicChoice = ""; // lai nomainītu music
 
 
      /*
@@ -21,7 +21,7 @@ public class Buttons {
      * ==============================================================
      */
     static Button createButton(String text, Stage primaryStage, VBox pauseBox) {
-        Button button = new Button(text);
+        Button button = new Button(text); // izveido button
         button.setStyle(
                 "-fx-background-color: linear-gradient(#aeefff, #87cefa), #ffffff; " +
                         "-fx-background-insets: 0, 0 0 1 0; " +
@@ -29,10 +29,10 @@ public class Buttons {
                         "-fx-font-weight: bold; " +
                         "-fx-font-size: 1.5em; " +
                         "-fx-text-fill: #4682b4; " +
-                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 0, 1);");
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 0, 1);"); // button style ar CSS
 
-        button.setOnAction(e -> Game.handleButtonAction(text, primaryStage, pauseBox));
-        return button;
+        button.setOnAction(e -> Game.handleButtonAction(text, primaryStage, pauseBox)); // lai poga veiktu noteiktu darbību
+        return button; // atgriež pogu
     }
 
     /*
@@ -106,7 +106,7 @@ public class Buttons {
             // Nomaina mūziku un atver options pogas
             case "Tropical":
                 Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
-                Game.options(pauseBox, primaryStage);
+                Game.options(pauseBox, primaryStage); // atver options
                 backgroundMusic.PlayButtonSound();
                 musicChoice = "game1.wav";
                 break;
@@ -211,18 +211,18 @@ public class Buttons {
      * ==================== BACKGROUND UN TEXT SETTINGS =============
      * ==============================================================
      */
-    static void setPauseBoxBackground(VBox pauseBox, String backgroundImage) {
-        String imageUrl = PauseMenu.class.getResource(backgroundImage).toExternalForm();
-        pauseBox.setStyle("-fx-background-image: url('" + imageUrl + "'); " +
+    static void setPauseBoxBackground(VBox pauseBox, String backgroundImage) { // background visiem settings
+        String bildesURL = PauseMenu.class.getResource(backgroundImage).toExternalForm(); // saņem background image nosaukumu kā string un pārvērš kā URL
+        pauseBox.setStyle("-fx-background-image: url('" + bildesURL + "'); " + // uzliek background kā url
                 "-fx-background-size: cover;");
     }
 
     static Label textSettings(String text, Font font, int strokeWidth) {
-        Label label = new Label(text);
-        label.setFont(font);
-        label.setTextFill(Color.web("#ffffff"));
-        label.setStyle("-fx-stroke: black; -fx-stroke-width: " + strokeWidth + "px;");
-        label.setAlignment(Pos.CENTER);
+        Label label = new Label(text); // jauns teksts
+        label.setFont(font); // uzliek fontu
+        label.setTextFill(Color.web("#ffffff")); // nomaina krāsu
+        label.setStyle("-fx-stroke: black; -fx-stroke-width: " + strokeWidth + "px;"); // css stils
+        label.setAlignment(Pos.CENTER); // pozīcija
         return label;
     }
 }

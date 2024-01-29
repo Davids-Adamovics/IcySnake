@@ -9,11 +9,9 @@ import javafx.scene.image.Image;
 
 public class credits extends Application {
 
-
-    @Override           // Palaiž credits lapu un tai piešķir nepieciešamo dizainu
     public void start(Stage primaryStage) throws Exception {
-        Image iconImage = new Image(getClass().getResource("logologo.png").toExternalForm());
-    	Scene myScene = FXMLLoader.load(getClass().getResource("credits.fxml"));
+        Image iconImage = new Image(getClass().getResource("logologo.png").toExternalForm()); // uzliek window ikonu logologo.png
+    	Scene myScene = FXMLLoader.load(getClass().getResource("credits.fxml")); // palaiž credits.fxml
         primaryStage.setTitle("IcySnake");
         primaryStage.setScene(myScene);
         primaryStage.getIcons().add(iconImage);
