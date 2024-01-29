@@ -53,8 +53,11 @@ public class OptionsMenu {
         if ((int) slider.getValue() == currentMusicVolume) {
             valueLabel = new Label("Volume: " + (int) slider.getValue() + "%");
         }
-        else{
+        else if(currentMusicVolume > 0.1){
             valueLabel = new Label("Volume: " + currentMusicVolume + "%");
+        }
+        else{
+            valueLabel = new Label("Volume: 50 %");
         }
 
         Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 25);
