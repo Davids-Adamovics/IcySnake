@@ -16,18 +16,20 @@ import javafx.stage.StageStyle;
 
 public class GameOptions {
 
+    public static String currentHeadPosition; // atlasa patreizējo galvas virzienu
+
     //pause speli
     static void pauseGame(Stage primaryStage) {
         if (Game.pauseStage == null) { // ja pause ekrans jau nepastāv, tad to izveido
             Game.pauseStage = new Stage();
-            Game.pauseStage.initModality(Modality.APPLICATION_MODAL);
-            Game.pauseStage.initStyle(StageStyle.UNDECORATED);
+            Game.pauseStage.initModality(Modality.APPLICATION_MODAL); // nevar divas programmas reizē būt atvērtas
+            Game.pauseStage.initStyle(StageStyle.UNDECORATED); // noņem visus dekorācijas elementus no loga
 
             VBox pauseBox = new VBox(20); // izveido background / pogas
             pauseBox.setAlignment(Pos.CENTER);
             pauseBox.setPadding(new Insets(20));
             pauseBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.8);");
-            Buttons.showInitialButtons(pauseBox, primaryStage);
+            PauseMenu.showInitialButtons(pauseBox, primaryStage);
             Scene pauseScene = new Scene(pauseBox, 590, 590);
             Game.pauseStage.setScene(pauseScene);
 
@@ -79,18 +81,23 @@ public class GameOptions {
     // cuskas galvas custom attēls, mainās atkarībā no kustības virziena
     public static Image headImage() {
         String headFileName = "headUp.png";
+        currentHeadPosition = "Up";
 
         if (Game.direction == Game.direction.up){
             headFileName = "headUp.png";
+            currentHeadPosition = "Up";
         }
         else if (Game.direction == Game.direction.left){
             headFileName = "headLeft.png";
+            currentHeadPosition = "Left";
         }
         else if (Game.direction == Game.direction.right){
             headFileName = "headRight.png";
+            currentHeadPosition = "Right";
         }
         else {
             headFileName = "headDown.png";
+            currentHeadPosition = "Down";
         }
 
         return new Image(Game.class.getResource(headFileName).toExternalForm());

@@ -51,8 +51,9 @@ public class Game extends Application {
     static int fourthBest = 0;
     static int fifthBest = 0;
 
-    static List<Stage> openStages = new ArrayList<>();
-    static List<SnakesBody> snake = new ArrayList<>();
+    static List<Stage> openStages = new ArrayList<>();// saglabā stages
+    static List<SnakesBody> snake = new ArrayList<>();// saglabā čūskas gabalus
+    static List<player> allplayers = new ArrayList<>(); // saglabā spēlētājus
 
     static boolean gameOver = false;
     static boolean gameStarted = false;
@@ -89,6 +90,12 @@ public class Game extends Application {
 
     static enumDirections direction = enumDirections.left;
     static backgroundMusic musicPlayer;
+    private static Food edieni;     //izveido saikni ar klasēm
+    private static Buttons pogas;//izveido saikni ar klasēm
+    private static OptionsMenu opcijuLapa;//izveido saikni ar klasēm
+    private static GameOptions spelesOpcijas;//izveido saikni ar klasēm
+    private static PauseMenu pauzesLapa;//izveido saikni ar klasēm
+
     static Random rand = new Random();
     static Random random = new Random();
     static Stage pauseStage;
@@ -124,6 +131,11 @@ public class Game extends Application {
 
             augli = new Image(getClass().getResource("augli.png").toExternalForm());
             powerup = new Image(getClass().getResource("powerup.gif").toExternalForm());
+            Image[] fruits = { abols, banans, vinogas, zemene }; // array ar bildēm, kas iet uz Food
+            Food edieni = new Food(fruits);
+
+            allplayers.add(new player()); // pievieno player pie array
+
             // backgrounds
             backgroundImage1 = new Image(getClass().getResource("background4.png").toExternalForm());
             backgroundImage2 = new Image(getClass().getResource("background1.png").toExternalForm());
@@ -188,6 +200,7 @@ public class Game extends Application {
             }.start(); // starto animationTimer loop
 
             Scene scene = new Scene(vb, 590, 590); // set scene
+
             // =========//
             // KEYBINDS //
             // =========//
@@ -223,22 +236,29 @@ public class Game extends Application {
                         } else if ((key.getCode() == KeyCode.D || key.getCode() == KeyCode.RIGHT)
                                 && direction != enumDirections.left) {
                             direction = enumDirections.right;
+                        } else if (key.getCode() == KeyCode.I) {    // ja musicChoice ir tukšs, tad to definē kā Tropical.wav
+                            printFramedText("Music playing: " + (pogas.musicChoice.isEmpty() ? "Tropical.wav" : pogas.musicChoice));
+                            printFramedText("Current Map: " + (opcijuLapa.currentMap != null ? opcijuLapa.currentMap : "Blue"));
+                            printFramedText("Current skin: " + (opcijuLapa.currentSkin != null ? opcijuLapa.currentSkin : "Green"));
+                            printFramedText("Current volume: " + (opcijuLapa.currentMusicVolume != 0.0 ? opcijuLapa.currentMusicVolume : "50"));
+                            printFramedText("Current direction: " + spelesOpcijas.currentHeadPosition);
+                            printFramedText("Completed Achievements: " + pauzesLapa.achivementCounter);
                         }
                     }
                 }
-
+                
             });
-
+            
             // ===================//
             // Cuskas kermena X/Y //
             // ===================//
             snake.add(new SnakesBody(10, 10));
             snake.add(new SnakesBody(10, 10));
             snake.add(new SnakesBody(10, 10));
-
             // ======================//
             // Game scene definesana //
             // ======================//
+
             primaryStage.setScene(scene); // Uzliek scene
             primaryStage.setTitle("SNAKE GAME"); // Ekrāna nosaukums
             primaryStage.getIcons().add(iconImage); // Ekrāna ikona
@@ -350,7 +370,6 @@ public class Game extends Application {
             counter++; // score palielina par +1
         }
 
-
         if (powerUpX == snake.get(0).x && powerUpY == snake.get(0).y) { // Ja cuska apēd power up
             newFood(); // Izveido jaunus ēdienus
 
@@ -368,30 +387,30 @@ public class Game extends Application {
         if (bombX == snake.get(0).x && bombY == snake.get(0).y) { // Bumbas power up
             snake.add(new SnakesBody(-1, -1));
             newFood();
-            counter += 3;     // 3 punkti
+            counter += 3; // 3 punkti
 
-            speed -= 3;       // speed samazina par -3
+            speed -= 3; // speed samazina par -3
             gc.setFill(Color.RED);
             Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 50);
             gc.setFont(customFont);
             gc.fillText("-3 speed / mix", 140, 290); // UZ ekrāna un konsolē parādas apēstā power up nosaukums
             System.out.println("-3 speed / mix");
-            bombsClaimedCounter++;  // saskaita apēstās bumbas priekš achivement
+            bombsClaimedCounter++; // saskaita apēstās bumbas priekš achivement
 
-            backgroundMusic.playBombSound();    // noskan bumbas audio fails
+            backgroundMusic.playBombSound(); // noskan bumbas audio fails
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-                //kods atkārtojas ik pēc 5s
+                // kods atkārtojas ik pēc 5s
                 for (int i = 0; i < 5; i++) {
                     if (gameOver == false) {
-                        newFood();  // ēdieni maisās
-                        speed--;    // ātrums palēninās ar katru sekundi
+                        newFood(); // ēdieni maisās
+                        speed--; // ātrums palēninās ar katru sekundi
                     }
                 }
             }));
 
-            timeline.setCycleCount(5);  // timeline darbojas tikai 5s
-            timeline.setOnFinished(event -> {   // kad pagājušas 5s, ātrums atgriežas un konsolē izvade powerup beigas
+            timeline.setCycleCount(5); // timeline darbojas tikai 5s
+            timeline.setOnFinished(event -> { // kad pagājušas 5s, ātrums atgriežas un konsolē izvade powerup beigas
                 System.out.println("Five seconds have passed!");
                 powerUpPlayed = true;
                 speed += 3;
@@ -416,10 +435,11 @@ public class Game extends Application {
 
         }
 
-        if (willBarrierSpawn == 1 && Buttons.dificulty == 2) {  // barjera nespwanojas katru reizi, bet ja ir powerup režīms un willBarrierSpawn == 1
+        if (willBarrierSpawn == 1 && Buttons.dificulty == 2) { // barjera nespwanojas katru reizi, bet ja ir powerup
+                                                               // režīms un willBarrierSpawn == 1
 
             if (barrierX == snake.get(0).x && barrierY == snake.get(0).y) { // cuskas galva saskarās ar barjeru
-                gameOver = true;    // spēles beigas
+                gameOver = true; // spēles beigas
                 stopBackgroundMusic();
                 gameOverSoundPlayed = true;
                 backgroundMusic.playBarrierSound();
@@ -437,19 +457,19 @@ public class Game extends Application {
         // Punktu skaitītāja laukums
         Canvas canvas = new Canvas(590, 50); // Vēlreiz definē canvas
         if (Buttons.color == 0) {
-            gc.setFill(Color.web("#0097B2"));   // Ja tiek izmantota zilā mape, lauks ir zils
+            gc.setFill(Color.web("#0097B2")); // Ja tiek izmantota zilā mape, lauks ir zils
         } else if (Buttons.color == 1) {
-            gc.setFill(Color.web("#8EA60F"));   // Ja tiek izmantota dzltenā mape, lauks ir dzltens
+            gc.setFill(Color.web("#8EA60F")); // Ja tiek izmantota dzltenā mape, lauks ir dzltens
         }
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight()); // piešķir laukam izmērus
 
         gc.setFill(Color.WHITE); // teksta krāsa
-        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30); //teksta fonts
+        Font customFont = Font.loadFont(Game.class.getResourceAsStream("zorque.regular.ttf"), 30); // teksta fonts
         gc.setFont(customFont);
         if (counter > highScore) {
-            gc.fillText("NEW High Score: " + counter, 10, 30);  // Ja rezultāts pārspēj esošo high score
+            gc.fillText("NEW High Score: " + counter, 10, 30); // Ja rezultāts pārspēj esošo high score
         } else {
-            gc.fillText("Score: " + counter, 10, 30);   // ja erzultāts nepārspēj esošo high score
+            gc.fillText("Score: " + counter, 10, 30); // ja erzultāts nepārspēj esošo high score
         }
         // ========================//
         // cuska galva un ķermenis //
@@ -459,9 +479,9 @@ public class Game extends Application {
         double headSize = 25;
         double cornerRadius = 10;
 
-        gc.drawImage(headImage(), head.x * 25, head.y * 25, headSize, headSize);    // cuskas galva un tās izmēri
+        gc.drawImage(headImage(), head.x * 25, head.y * 25, headSize, headSize); // cuskas galva un tās izmēri
 
-        for (int i = 1; i < snake.size(); i++) {    //Čūskas ķermeņa izmēri
+        for (int i = 1; i < snake.size(); i++) { // Čūskas ķermeņa izmēri
             SnakesBody bodyPart = snake.get(i);
             double partSize = 25;
             double bodyPartX = bodyPart.x * 25;
@@ -478,17 +498,17 @@ public class Game extends Application {
         // =========================//
         // powerup, ediens, barjera //
         // =========================//
-        if (Buttons.dificulty == 2) {   // Tiek uzzīmēti visi objekti tikai tad, kad ir aktivizēts powerUP režīms
+        if (Buttons.dificulty == 2) { // Tiek uzzīmēti visi objekti tikai tad, kad ir aktivizēts powerUP režīms
             gc.drawImage(currentPowerUp, powerUpX * 25, powerUpY * 25, 25, 25);
             gc.drawImage(currentPlus5, plus5X * 25, plus5Y * 25, 25, 25);
             gc.drawImage(currentBomb, bombX * 25, bombY * 25, 25, 25);
             gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
             gc.drawImage(currentFruit2, food2X * 25, food2Y * 25, 25, 25);
             gc.drawImage(currentFruit3, food3X * 25, food3Y * 25, 25, 25);
-            if (willBarrierSpawn == 1) {    // Ja barjerai ir atļauts nospawnoties, tad arī tā parādās
+            if (willBarrierSpawn == 1) { // Ja barjerai ir atļauts nospawnoties, tad arī tā parādās
                 gc.drawImage(currentBarrier, barrierX * 25, barrierY * 25, 25, 23);
             }
-        } else {    // retro versiā palaižas tikai viens auglis
+        } else { // retro versiā palaižas tikai viens auglis
             gc.drawImage(currentFruit1, food1X * 25, food1Y * 25, 25, 25);
         }
     }
@@ -500,12 +520,12 @@ public class Game extends Application {
 
     // parāda originalas pogas
     static void showInitialButtons(VBox pauseBox, Stage primaryStage) {
-        Buttons.showInitialButtons(pauseBox, primaryStage);
+        PauseMenu.showInitialButtons(pauseBox, primaryStage);
     }
 
     // parada jaunas pogas
     private static void showNewButtons(VBox pauseBox, Stage primaryStage) {
-        Buttons.showNewButtons(pauseBox, primaryStage);
+        OptionsMenu.showNewButtons(pauseBox, primaryStage);
     }
 
     // izveido pogas
@@ -535,41 +555,44 @@ public class Game extends Application {
         GameOptions.resetGame();
         backgroundMusic.stopMusic();
 
-        switch (Game.currentMusicPreference) {
+        switch (currentMusicPreference) {
             case 1:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameCrazy.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameCrazy.wav" });
                 break;
             case 2:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameGopnik.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameGopnik.wav" });
                 break;
             case 3:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameGTA.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameGTA.wav" });
                 break;
             case 4:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameHz.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameHz.wav" });
                 break;
             case 5:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameMario.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameMario.wav" });
                 break;
             case 6:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gamePain.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gamePain.wav" });
                 break;
             case 7:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameRa.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameRa.wav" });
                 break;
             case 8:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameRave.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameRave.wav" });
                 break;
             case 9:
-                Game.musicPlayer.BackgroundMusic(new String[] { "gameUzi.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "gameUzi.wav" });
                 break;
             case 10:
-                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
                 break;
 
             default:
 
-                Game.musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                musicPlayer.BackgroundMusic(new String[] { "game1.wav" });
+                if (Buttons.musicChoice != "") {
+                    Game.musicPlayer.BackgroundMusic(new String[] { Buttons.musicChoice });
+                }
                 break;
         }
     }
@@ -586,7 +609,7 @@ public class Game extends Application {
 
     // spawn food, powerup, barrier
     public static void newFood() {
-        Food.newFood();
+        edieni.newFood();
     }
 
     // izveido jaunu barjeru
@@ -598,10 +621,11 @@ public class Game extends Application {
     static Image generateNewPowerUp() {
         return powerup;
     }
-    //apgriež sprite sheet attēlu    x lokācija, y lokācija, platums, augstums
-    private Image cropImage(Image image, int x, int y, int width, int height) { 
-        PixelReader pixelReader = image.getPixelReader();   //izmato pixel reader
-        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height);   // izveido jaunu attēlu
+
+    // apgriež sprite sheet attēlu x lokācija, y lokācija, platums, augstums
+    private Image cropImage(Image image, int x, int y, int width, int height) {
+        PixelReader pixelReader = image.getPixelReader(); // izmato pixel reader
+        WritableImage croppedImage = new WritableImage(pixelReader, x, y, width, height); // izveido jaunu attēlu
         return croppedImage;
     }
 
@@ -635,4 +659,12 @@ public class Game extends Application {
     public SnakesBody get(int i) {
         return null;
     }
+
+    private static void printFramedText(String text) { // saņem tekstu 
+        int length = text.length() + 3; // teksta garums + 4 rakstzīmes
+        System.out.println("O" + "-".repeat(length) + "O"); // virsējais rāmis
+        System.out.println("| " + text + " |"); // centra teksts
+        System.out.println("O" + "-".repeat(length) + "O");// apakšējais rāmis
+    }
+
 }

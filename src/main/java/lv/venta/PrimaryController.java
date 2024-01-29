@@ -69,7 +69,7 @@ public class PrimaryController {
 
 		backgroundMusic.stopMusic();
 
-		currentPlayer = new player("Guest", (byte)1, enumGender.male);
+		currentPlayer = new player();
 
 		System.out.println("Player Information: \n" + currentPlayer);
 
