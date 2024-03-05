@@ -657,7 +657,7 @@ public class Game extends Application {
     public SnakesBody get(int i) {
         return null;
     }
-
+//asdasdasdasasdasd
     private static void printFramedText(String text) { // saņem tekstu 
         int length = text.length() + 3; // teksta garums + 4 rakstzīmes
         System.out.println("O" + "-".repeat(length) + "O"); // virsējais rāmis
